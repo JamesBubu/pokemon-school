@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "grade": "grade3",
+    "subject": "english",
+    "description": "小學三年級 英文",
+    "version": "1.0",
+    "count": 16
+  },
+  "questions": [
+    {
+      "type": "mcq",
+      "q": "I ___ to school every day.（我每天去上學）",
+      "opts": [
+        "go",
+        "goes",
+        "going",
+        "went"
+      ],
+      "a": 0,
+      "tags": [
+        "grammar",
+        "present-tense"
+      ],
+      "id": "g3e0001"
+    },
+    {
+      "type": "mcq",
+      "q": "She ___ cats.（她喜歡貓）",
+      "opts": [
+        "like",
+        "likes",
+        "liked",
+        "liking"
+      ],
+      "a": 1,
+      "tags": [
+        "grammar",
+        "present-tense"
+      ],
+      "id": "g3e0002"
+    },
+    {
+      "type": "mcq",
+      "q": "They ___ soccer.（他們踢足球）",
+      "opts": [
+        "play",
+        "plays",
+        "played",
+        "playing"
+      ],
+      "a": 0,
+      "tags": [
+        "grammar",
+        "present-tense"
+      ],
+      "id": "g3e0003"
+    },
+    {
+      "type": "mcq",
+      "q": "He ___ breakfast every morning.（他每天早上吃早餐）",
+      "opts": [
+        "eat",
+        "eats",
+        "ate",
+        "eating"
+      ],
+      "a": 1,
+      "tags": [
+        "grammar",
+        "present-tense"
+      ],
+      "id": "g3e0004"
+    },
+    {
+      "type": "mcq",
+      "q": "We ___ English at school.（我們在學校學英文）",
+      "opts": [
+        "learn",
+        "learns",
+        "learned",
+        "learning"
+      ],
+      "a": 0,
+      "tags": [
+        "grammar",
+        "present-tense"
+      ],
+      "id": "g3e0005"
+    },
+    {
+      "type": "mcq",
+      "q": "___ is your name?（你叫什麼名字？）",
+      "opts": [
+        "What",
+        "Who",
+        "Where",
+        "When"
+      ],
+      "a": 0,
+      "tags": [
+        "grammar",
+        "question-words"
+      ],
+      "id": "g3e0006"
+    },
+    {
+      "type": "mcq",
+      "q": "___ are you?（你在哪裡？）",
+      "opts": [
+        "What",
+        "Who",
+        "Where",
+        "When"
+      ],
+      "a": 2,
+      "tags": [
+        "grammar",
+        "question-words"
+      ],
+      "id": "g3e0007"
+    },
+    {
+      "type": "mcq",
+      "q": "___ is your birthday?（你的生日是什麼時候？）",
+      "opts": [
+        "What",
+        "Who",
+        "Where",
+        "When"
+      ],
+      "a": 3,
+      "tags": [
+        "grammar",
+        "question-words"
+      ],
+      "id": "g3e0008"
+    },
+    {
+      "type": "mcq",
+      "q": "___ is your best friend?（誰是你最好的朋友？）",
+      "opts": [
+        "What",
+        "Who",
+        "Where",
+        "When"
+      ],
+      "a": 1,
+      "tags": [
+        "grammar",
+        "question-words"
+      ],
+      "id": "g3e0009"
+    },
+    {
+      "type": "mcq",
+      "q": "___ old are you?（你幾歲？）",
+      "opts": [
+        "What",
+        "How",
+        "Where",
+        "When"
+      ],
+      "a": 1,
+      "tags": [
+        "grammar",
+        "question-words"
+      ],
+      "id": "g3e0010"
+    },
+    {
+      "type": "tf",
+      "q": "Monday 是星期一，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "vocabulary",
+        "tf"
+      ],
+      "id": "g3e0011"
+    },
+    {
+      "type": "tf",
+      "q": "Friday 是星期三，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "vocabulary",
+        "tf"
+      ],
+      "id": "g3e0012"
+    },
+    {
+      "type": "tf",
+      "q": "January 是一月份，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "vocabulary",
+        "tf"
+      ],
+      "id": "g3e0013"
+    },
+    {
+      "type": "tf",
+      "q": "Summer 是冬天，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "vocabulary",
+        "tf"
+      ],
+      "id": "g3e0014"
+    },
+    {
+      "type": "tf",
+      "q": "Pencil 是鉛筆，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "vocabulary",
+        "tf"
+      ],
+      "id": "g3e0015"
+    },
+    {
+      "type": "tf",
+      "q": "Table 是椅子，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "vocabulary",
+        "tf"
+      ],
+      "id": "g3e0016"
+    }
+  ]
+}

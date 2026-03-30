@@ -1,0 +1,346 @@
+{
+  "meta": {
+    "grade": "kinder",
+    "subject": "english",
+    "description": "幼稚園大班 英文",
+    "version": "1.0"
+  },
+  "questions": [
+    {
+      "id": "ke001",
+      "type": "mcq",
+      "q": "蘋果的英文怎麼說？",
+      "opts": ["Orange", "Banana", "Apple", "Grape"],
+      "a": 2,
+      "tags": ["fruits", "vocabulary"]
+    },
+    {
+      "id": "ke002",
+      "type": "mcq",
+      "q": "貓的英文怎麼說？",
+      "opts": ["Dog", "Bird", "Cat", "Fish"],
+      "a": 2,
+      "tags": ["animals", "vocabulary"]
+    },
+    {
+      "id": "ke003",
+      "type": "mcq",
+      "q": "狗的英文怎麼說？",
+      "opts": ["Cat", "Dog", "Fish", "Bird"],
+      "a": 1,
+      "tags": ["animals", "vocabulary"]
+    },
+    {
+      "id": "ke004",
+      "type": "mcq",
+      "q": "紅色的英文怎麼說？",
+      "opts": ["Blue", "Green", "Yellow", "Red"],
+      "a": 3,
+      "tags": ["colors", "vocabulary"]
+    },
+    {
+      "id": "ke005",
+      "type": "mcq",
+      "q": "藍色的英文怎麼說？",
+      "opts": ["Red", "Blue", "Green", "Yellow"],
+      "a": 1,
+      "tags": ["colors", "vocabulary"]
+    },
+    {
+      "id": "ke006",
+      "type": "mcq",
+      "q": "黃色的英文怎麼說？",
+      "opts": ["Red", "Blue", "Green", "Yellow"],
+      "a": 3,
+      "tags": ["colors", "vocabulary"]
+    },
+    {
+      "id": "ke007",
+      "type": "mcq",
+      "q": "英文「一」怎麼寫？",
+      "opts": ["Two", "Three", "One", "Four"],
+      "a": 2,
+      "tags": ["numbers", "vocabulary"]
+    },
+    {
+      "id": "ke008",
+      "type": "mcq",
+      "q": "英文「二」怎麼寫？",
+      "opts": ["One", "Two", "Three", "Four"],
+      "a": 1,
+      "tags": ["numbers", "vocabulary"]
+    },
+    {
+      "id": "ke009",
+      "type": "mcq",
+      "q": "英文「三」怎麼寫？",
+      "opts": ["One", "Two", "Three", "Four"],
+      "a": 2,
+      "tags": ["numbers", "vocabulary"]
+    },
+    {
+      "id": "ke010",
+      "type": "mcq",
+      "q": "太陽的英文怎麼說？",
+      "opts": ["Moon", "Star", "Sun", "Cloud"],
+      "a": 2,
+      "tags": ["nature", "vocabulary"]
+    },
+    {
+      "id": "ke011",
+      "type": "mcq",
+      "q": "月亮的英文怎麼說？",
+      "opts": ["Sun", "Moon", "Star", "Sky"],
+      "a": 1,
+      "tags": ["nature", "vocabulary"]
+    },
+    {
+      "id": "ke012",
+      "type": "mcq",
+      "q": "魚的英文怎麼說？",
+      "opts": ["Bird", "Cat", "Dog", "Fish"],
+      "a": 3,
+      "tags": ["animals", "vocabulary"]
+    },
+    {
+      "id": "ke013",
+      "type": "mcq",
+      "q": "鳥的英文怎麼說？",
+      "opts": ["Fish", "Bird", "Cat", "Dog"],
+      "a": 1,
+      "tags": ["animals", "vocabulary"]
+    },
+    {
+      "id": "ke014",
+      "type": "mcq",
+      "q": "書的英文怎麼說？",
+      "opts": ["Pen", "Book", "Bag", "Box"],
+      "a": 1,
+      "tags": ["school-supplies", "vocabulary"]
+    },
+    {
+      "id": "ke015",
+      "type": "mcq",
+      "q": "手的英文怎麼說？",
+      "opts": ["Foot", "Eye", "Nose", "Hand"],
+      "a": 3,
+      "tags": ["body-parts", "vocabulary"]
+    },
+    {
+      "id": "ke016",
+      "type": "mcq",
+      "q": "眼睛的英文怎麼說？",
+      "opts": ["Nose", "Hand", "Eye", "Foot"],
+      "a": 2,
+      "tags": ["body-parts", "vocabulary"]
+    },
+    {
+      "id": "ke017",
+      "type": "mcq",
+      "q": "鼻子的英文怎麼說？",
+      "opts": ["Eye", "Nose", "Hand", "Foot"],
+      "a": 1,
+      "tags": ["body-parts", "vocabulary"]
+    },
+    {
+      "id": "ke018",
+      "type": "mcq",
+      "q": "水的英文怎麼說？",
+      "opts": ["Fire", "Air", "Water", "Earth"],
+      "a": 2,
+      "tags": ["nature", "vocabulary"]
+    },
+    {
+      "id": "ke019",
+      "type": "mcq",
+      "q": "英文「四」怎麼寫？",
+      "opts": ["Three", "Four", "Five", "Six"],
+      "a": 1,
+      "tags": ["numbers", "vocabulary"]
+    },
+    {
+      "id": "ke020",
+      "type": "mcq",
+      "q": "英文「五」怎麼寫？",
+      "opts": ["Four", "Six", "Five", "Seven"],
+      "a": 2,
+      "tags": ["numbers", "vocabulary"]
+    },
+    {
+      "id": "ke021",
+      "type": "tf",
+      "q": "「Cat」是貓的英文，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["animals", "true-false"]
+    },
+    {
+      "id": "ke022",
+      "type": "tf",
+      "q": "「Apple」是香蕉的英文，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 1,
+      "tags": ["fruits", "true-false"]
+    },
+    {
+      "id": "ke023",
+      "type": "tf",
+      "q": "「Red」是紅色的英文，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["colors", "true-false"]
+    },
+    {
+      "id": "ke024",
+      "type": "tf",
+      "q": "「Sun」是月亮的英文，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 1,
+      "tags": ["nature", "true-false"]
+    },
+    {
+      "id": "ke025",
+      "type": "tf",
+      "q": "「Dog」是狗的英文，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["animals", "true-false"]
+    },
+    {
+      "id": "ke026",
+      "type": "tf",
+      "q": "「Two」是英文的「三」，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 1,
+      "tags": ["numbers", "true-false"]
+    },
+    {
+      "id": "ke027",
+      "type": "mcq",
+      "q": "綠色的英文怎麼說？",
+      "opts": ["Red", "Blue", "Green", "Yellow"],
+      "a": 2,
+      "tags": ["colors", "vocabulary"]
+    },
+    {
+      "id": "ke028",
+      "type": "mcq",
+      "q": "香蕉的英文怎麼說？",
+      "opts": ["Apple", "Orange", "Grape", "Banana"],
+      "a": 3,
+      "tags": ["fruits", "vocabulary"]
+    },
+    {
+      "id": "ke029",
+      "type": "mcq",
+      "q": "腳的英文怎麼說？",
+      "opts": ["Hand", "Eye", "Foot", "Nose"],
+      "a": 2,
+      "tags": ["body-parts", "vocabulary"]
+    },
+    {
+      "id": "ke030",
+      "type": "mcq",
+      "q": "英文「六」怎麼寫？",
+      "opts": ["Five", "Six", "Seven", "Eight"],
+      "a": 1,
+      "tags": ["numbers", "vocabulary"]
+    },
+    {
+      "id": "ke031",
+      "type": "mcq",
+      "q": "嘴巴的英文怎麼說？",
+      "opts": ["Eye", "Ear", "Nose", "Mouth"],
+      "a": 3,
+      "tags": ["body-parts", "vocabulary"]
+    },
+    {
+      "id": "ke032",
+      "type": "mcq",
+      "q": "耳朵的英文怎麼說？",
+      "opts": ["Eye", "Ear", "Nose", "Mouth"],
+      "a": 1,
+      "tags": ["body-parts", "vocabulary"]
+    },
+    {
+      "id": "ke033",
+      "type": "tf",
+      "q": "「Book」是書的英文，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["school-supplies", "true-false"]
+    },
+    {
+      "id": "ke034",
+      "type": "tf",
+      "q": "「Water」是火的英文，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 1,
+      "tags": ["nature", "true-false"]
+    },
+    {
+      "id": "ke035",
+      "type": "mcq",
+      "q": "星星的英文怎麼說？",
+      "opts": ["Sun", "Moon", "Cloud", "Star"],
+      "a": 3,
+      "tags": ["nature", "vocabulary"]
+    },
+    {
+      "id": "ke036",
+      "type": "mcq",
+      "q": "橘色的英文怎麼說？",
+      "opts": ["Red", "Orange", "Yellow", "Purple"],
+      "a": 1,
+      "tags": ["colors", "vocabulary"]
+    },
+    {
+      "id": "ke037",
+      "type": "tf",
+      "q": "「One」是英文的「一」，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["numbers", "true-false"]
+    },
+    {
+      "id": "ke038",
+      "type": "mcq",
+      "q": "英文「七」怎麼寫？",
+      "opts": ["Five", "Six", "Seven", "Eight"],
+      "a": 2,
+      "tags": ["numbers", "vocabulary"]
+    },
+    {
+      "id": "ke039",
+      "type": "mcq",
+      "q": "球的英文怎麼說？",
+      "opts": ["Box", "Bag", "Ball", "Book"],
+      "a": 2,
+      "tags": ["objects", "vocabulary"]
+    },
+    {
+      "id": "ke040",
+      "type": "tf",
+      "q": "「Fish」是魚的英文，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["animals", "true-false"]
+    },
+    {
+      "id": "ke041",
+      "type": "mcq",
+      "q": "樹的英文怎麼說？",
+      "opts": ["Flower", "Grass", "Tree", "Leaf"],
+      "a": 2,
+      "tags": ["nature", "vocabulary"]
+    },
+    {
+      "id": "ke042",
+      "type": "mcq",
+      "q": "花的英文怎麼說？",
+      "opts": ["Tree", "Grass", "Leaf", "Flower"],
+      "a": 3,
+      "tags": ["nature", "vocabulary"]
+    }
+  ]
+}

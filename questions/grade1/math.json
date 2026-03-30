@@ -1,0 +1,1371 @@
+{
+  "meta": {
+    "grade": "grade1",
+    "subject": "math",
+    "description": "小學一年級 數學",
+    "version": "1.0",
+    "count": 87
+  },
+  "questions": [
+    {
+      "id": "g1m001",
+      "type": "mcq",
+      "q": "8 + 7 = ?",
+      "opts": [
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "two-digit"
+      ]
+    },
+    {
+      "id": "g1m002",
+      "type": "mcq",
+      "q": "15 - 6 = ?",
+      "opts": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "two-digit"
+      ]
+    },
+    {
+      "id": "g1m003",
+      "type": "mcq",
+      "q": "9 + 6 = ?",
+      "opts": [
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "g1m004",
+      "type": "mcq",
+      "q": "17 - 8 = ?",
+      "opts": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "two-digit"
+      ]
+    },
+    {
+      "id": "g1m005",
+      "type": "mcq",
+      "q": "6 + 7 = ?",
+      "opts": [
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "g1m006",
+      "type": "mcq",
+      "q": "14 - 5 = ?",
+      "opts": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "two-digit"
+      ]
+    },
+    {
+      "id": "g1m007",
+      "type": "mcq",
+      "q": "2, 4, 6, ___ 下一個數字是？",
+      "opts": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "a": 1,
+      "tags": [
+        "number-sequence",
+        "skip-counting"
+      ]
+    },
+    {
+      "id": "g1m008",
+      "type": "mcq",
+      "q": "5, 10, 15, ___ 下一個數字是？",
+      "opts": [
+        "18",
+        "20",
+        "22",
+        "25"
+      ],
+      "a": 1,
+      "tags": [
+        "number-sequence",
+        "skip-counting"
+      ]
+    },
+    {
+      "id": "g1m009",
+      "type": "mcq",
+      "q": "10 + 10 = ?",
+      "opts": [
+        "15",
+        "18",
+        "20",
+        "22"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "tens"
+      ]
+    },
+    {
+      "id": "g1m010",
+      "type": "mcq",
+      "q": "20 - 10 = ?",
+      "opts": [
+        "5",
+        "8",
+        "10",
+        "12"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "tens"
+      ]
+    },
+    {
+      "id": "g1m011",
+      "type": "mcq",
+      "q": "哪個數最大？",
+      "opts": [
+        "13",
+        "7",
+        "19",
+        "11"
+      ],
+      "a": 2,
+      "tags": [
+        "comparison",
+        "number-size"
+      ]
+    },
+    {
+      "id": "g1m012",
+      "type": "mcq",
+      "q": "哪個數最小？",
+      "opts": [
+        "15",
+        "8",
+        "20",
+        "12"
+      ],
+      "a": 1,
+      "tags": [
+        "comparison",
+        "number-size"
+      ]
+    },
+    {
+      "id": "g1m013",
+      "type": "mcq",
+      "q": "3 + 5 + 2 = ?",
+      "opts": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "three-numbers"
+      ]
+    },
+    {
+      "id": "g1m014",
+      "type": "mcq",
+      "q": "18 - 9 = ?",
+      "opts": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "g1m015",
+      "type": "mcq",
+      "q": "7 + 8 = ?",
+      "opts": [
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "g1m016",
+      "type": "mcq",
+      "q": "12 - 4 = ?",
+      "opts": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "g1m017",
+      "type": "mcq",
+      "q": "一週有幾天？",
+      "opts": [
+        "5天",
+        "6天",
+        "7天",
+        "8天"
+      ],
+      "a": 2,
+      "tags": [
+        "time",
+        "calendar"
+      ]
+    },
+    {
+      "id": "g1m018",
+      "type": "mcq",
+      "q": "一天有幾個小時？",
+      "opts": [
+        "12小時",
+        "20小時",
+        "24小時",
+        "48小時"
+      ],
+      "a": 2,
+      "tags": [
+        "time",
+        "clock"
+      ]
+    },
+    {
+      "id": "g1m019",
+      "type": "mcq",
+      "q": "10 + 5 = ?",
+      "opts": [
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "tens"
+      ]
+    },
+    {
+      "id": "g1m020",
+      "type": "mcq",
+      "q": "11 + 9 = ?",
+      "opts": [
+        "18",
+        "19",
+        "20",
+        "21"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "two-digit"
+      ]
+    },
+    {
+      "id": "g1m021",
+      "type": "mcq",
+      "q": "16 - 7 = ?",
+      "opts": [
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "g1m022",
+      "type": "mcq",
+      "q": "5 × 2 = ?",
+      "opts": [
+        "7",
+        "8",
+        "10",
+        "12"
+      ],
+      "a": 2,
+      "tags": [
+        "multiplication",
+        "times-table"
+      ]
+    },
+    {
+      "id": "g1m023",
+      "type": "mcq",
+      "q": "2 × 4 = ?",
+      "opts": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "a": 2,
+      "tags": [
+        "multiplication",
+        "times-table"
+      ]
+    },
+    {
+      "id": "g1m024",
+      "type": "mcq",
+      "q": "3 × 3 = ?",
+      "opts": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "a": 3,
+      "tags": [
+        "multiplication",
+        "times-table"
+      ]
+    },
+    {
+      "id": "g1m025",
+      "type": "tf",
+      "q": "8 + 7 = 15，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "true-false"
+      ]
+    },
+    {
+      "id": "g1m026",
+      "type": "tf",
+      "q": "一週有 7 天，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "time",
+        "true-false"
+      ]
+    },
+    {
+      "id": "g1m027",
+      "type": "tf",
+      "q": "20 - 10 = 5，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "true-false"
+      ]
+    },
+    {
+      "id": "g1m028",
+      "type": "tf",
+      "q": "19 比 11 大，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "comparison",
+        "true-false"
+      ]
+    },
+    {
+      "id": "g1m029",
+      "type": "tf",
+      "q": "3 × 3 = 9，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "multiplication",
+        "true-false"
+      ]
+    },
+    {
+      "id": "g1m030",
+      "type": "mcq",
+      "q": "13 + 6 = ?",
+      "opts": [
+        "17",
+        "18",
+        "19",
+        "20"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "two-digit"
+      ]
+    },
+    {
+      "id": "g1m031",
+      "type": "mcq",
+      "q": "一個月有幾天？（以最常見的月份為準）",
+      "opts": [
+        "28天",
+        "29天",
+        "30天",
+        "31天"
+      ],
+      "a": 3,
+      "tags": [
+        "time",
+        "calendar"
+      ]
+    },
+    {
+      "id": "g1m032",
+      "type": "mcq",
+      "q": "4, 8, 12, ___ 下一個數字是？",
+      "opts": [
+        "14",
+        "15",
+        "16",
+        "17"
+      ],
+      "a": 2,
+      "tags": [
+        "number-sequence",
+        "skip-counting"
+      ]
+    },
+    {
+      "id": "g1m033",
+      "type": "mcq",
+      "q": "20 - 7 = ?",
+      "opts": [
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "two-digit"
+      ]
+    },
+    {
+      "id": "g1m034",
+      "type": "mcq",
+      "q": "2 × 5 = ?",
+      "opts": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "a": 2,
+      "tags": [
+        "multiplication",
+        "times-table"
+      ]
+    },
+    {
+      "id": "g1m035",
+      "type": "tf",
+      "q": "5 × 2 = 10，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "multiplication",
+        "true-false"
+      ]
+    },
+    {
+      "id": "g1m036",
+      "type": "mcq",
+      "q": "9 + 4 = ?",
+      "opts": [
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "g1m037",
+      "type": "mcq",
+      "q": "17 - 9 = ?",
+      "opts": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "g1m038",
+      "type": "tf",
+      "q": "一天有 24 小時，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "time",
+        "true-false"
+      ]
+    },
+    {
+      "id": "g1m039",
+      "type": "mcq",
+      "q": "6 + 4 + 3 = ?",
+      "opts": [
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "three-numbers"
+      ]
+    },
+    {
+      "id": "g1m040",
+      "type": "mcq",
+      "q": "2 × 6 = ?",
+      "opts": [
+        "10",
+        "11",
+        "12",
+        "13"
+      ],
+      "a": 2,
+      "tags": [
+        "multiplication",
+        "times-table"
+      ]
+    },
+    {
+      "id": "g1m041",
+      "type": "tf",
+      "q": "15 比 20 大，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "comparison",
+        "true-false"
+      ]
+    },
+    {
+      "id": "g1m042",
+      "type": "mcq",
+      "q": "一年有幾個月？",
+      "opts": [
+        "10個月",
+        "11個月",
+        "12個月",
+        "13個月"
+      ],
+      "a": 2,
+      "tags": [
+        "time",
+        "calendar"
+      ]
+    },
+    {
+      "type": "mcq",
+      "q": "8 + 7 = ?",
+      "opts": [
+        "14",
+        "13",
+        "16",
+        "15"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0043"
+    },
+    {
+      "type": "mcq",
+      "q": "9 + 6 = ?",
+      "opts": [
+        "13",
+        "14",
+        "16",
+        "15"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0044"
+    },
+    {
+      "type": "mcq",
+      "q": "6 + 7 = ?",
+      "opts": [
+        "12",
+        "11",
+        "13",
+        "14"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0045"
+    },
+    {
+      "type": "mcq",
+      "q": "7 + 8 = ?",
+      "opts": [
+        "13",
+        "15",
+        "16",
+        "14"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0046"
+    },
+    {
+      "type": "mcq",
+      "q": "9 + 5 = ?",
+      "opts": [
+        "13",
+        "15",
+        "14",
+        "12"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0047"
+    },
+    {
+      "type": "mcq",
+      "q": "8 + 6 = ?",
+      "opts": [
+        "12",
+        "13",
+        "14",
+        "15"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0048"
+    },
+    {
+      "type": "mcq",
+      "q": "5 + 9 = ?",
+      "opts": [
+        "14",
+        "15",
+        "13",
+        "12"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0049"
+    },
+    {
+      "type": "mcq",
+      "q": "7 + 6 = ?",
+      "opts": [
+        "14",
+        "13",
+        "12",
+        "11"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0050"
+    },
+    {
+      "type": "mcq",
+      "q": "8 + 5 = ?",
+      "opts": [
+        "13",
+        "14",
+        "11",
+        "12"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0051"
+    },
+    {
+      "type": "mcq",
+      "q": "9 + 4 = ?",
+      "opts": [
+        "14",
+        "12",
+        "11",
+        "13"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "within-20"
+      ],
+      "id": "g1m0052"
+    },
+    {
+      "type": "mcq",
+      "q": "15 - 6 = ?",
+      "opts": [
+        "10",
+        "11",
+        "8",
+        "9"
+      ],
+      "a": 3,
+      "tags": [
+        "subtraction",
+        "within-20"
+      ],
+      "id": "g1m0053"
+    },
+    {
+      "type": "mcq",
+      "q": "17 - 8 = ?",
+      "opts": [
+        "9",
+        "10",
+        "8",
+        "11"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "within-20"
+      ],
+      "id": "g1m0054"
+    },
+    {
+      "type": "mcq",
+      "q": "14 - 5 = ?",
+      "opts": [
+        "9",
+        "10",
+        "8",
+        "11"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "within-20"
+      ],
+      "id": "g1m0055"
+    },
+    {
+      "type": "mcq",
+      "q": "16 - 7 = ?",
+      "opts": [
+        "11",
+        "10",
+        "9",
+        "8"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "within-20"
+      ],
+      "id": "g1m0056"
+    },
+    {
+      "type": "mcq",
+      "q": "13 - 4 = ?",
+      "opts": [
+        "8",
+        "10",
+        "9",
+        "11"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "within-20"
+      ],
+      "id": "g1m0057"
+    },
+    {
+      "type": "mcq",
+      "q": "18 - 9 = ?",
+      "opts": [
+        "11",
+        "10",
+        "9",
+        "8"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "within-20"
+      ],
+      "id": "g1m0058"
+    },
+    {
+      "type": "mcq",
+      "q": "12 - 5 = ?",
+      "opts": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "within-20"
+      ],
+      "id": "g1m0059"
+    },
+    {
+      "type": "mcq",
+      "q": "11 - 4 = ?",
+      "opts": [
+        "6",
+        "7",
+        "9",
+        "8"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "within-20"
+      ],
+      "id": "g1m0060"
+    },
+    {
+      "type": "mcq",
+      "q": "2 × 2 = ?",
+      "opts": [
+        "6",
+        "2",
+        "4",
+        "5"
+      ],
+      "a": 2,
+      "tags": [
+        "multiplication",
+        "times-2"
+      ],
+      "id": "g1m0061"
+    },
+    {
+      "type": "mcq",
+      "q": "2 × 3 = ?",
+      "opts": [
+        "7",
+        "6",
+        "8",
+        "4"
+      ],
+      "a": 1,
+      "tags": [
+        "multiplication",
+        "times-2"
+      ],
+      "id": "g1m0062"
+    },
+    {
+      "type": "mcq",
+      "q": "2 × 4 = ?",
+      "opts": [
+        "9",
+        "10",
+        "6",
+        "8"
+      ],
+      "a": 3,
+      "tags": [
+        "multiplication",
+        "times-2"
+      ],
+      "id": "g1m0063"
+    },
+    {
+      "type": "mcq",
+      "q": "2 × 5 = ?",
+      "opts": [
+        "12",
+        "8",
+        "10",
+        "11"
+      ],
+      "a": 2,
+      "tags": [
+        "multiplication",
+        "times-2"
+      ],
+      "id": "g1m0064"
+    },
+    {
+      "type": "mcq",
+      "q": "3 × 2 = ?",
+      "opts": [
+        "6",
+        "3",
+        "7",
+        "9"
+      ],
+      "a": 0,
+      "tags": [
+        "multiplication",
+        "times-3"
+      ],
+      "id": "g1m0065"
+    },
+    {
+      "type": "mcq",
+      "q": "3 × 3 = ?",
+      "opts": [
+        "10",
+        "12",
+        "6",
+        "9"
+      ],
+      "a": 3,
+      "tags": [
+        "multiplication",
+        "times-3"
+      ],
+      "id": "g1m0066"
+    },
+    {
+      "type": "mcq",
+      "q": "3 × 4 = ?",
+      "opts": [
+        "15",
+        "13",
+        "12",
+        "9"
+      ],
+      "a": 2,
+      "tags": [
+        "multiplication",
+        "times-3"
+      ],
+      "id": "g1m0067"
+    },
+    {
+      "type": "mcq",
+      "q": "3 × 5 = ?",
+      "opts": [
+        "15",
+        "18",
+        "16",
+        "12"
+      ],
+      "a": 0,
+      "tags": [
+        "multiplication",
+        "times-3"
+      ],
+      "id": "g1m0068"
+    },
+    {
+      "type": "mcq",
+      "q": "4 × 2 = ?",
+      "opts": [
+        "9",
+        "12",
+        "8",
+        "4"
+      ],
+      "a": 2,
+      "tags": [
+        "multiplication",
+        "times-4"
+      ],
+      "id": "g1m0069"
+    },
+    {
+      "type": "mcq",
+      "q": "4 × 3 = ?",
+      "opts": [
+        "8",
+        "16",
+        "13",
+        "12"
+      ],
+      "a": 3,
+      "tags": [
+        "multiplication",
+        "times-4"
+      ],
+      "id": "g1m0070"
+    },
+    {
+      "type": "mcq",
+      "q": "4 × 4 = ?",
+      "opts": [
+        "12",
+        "16",
+        "17",
+        "20"
+      ],
+      "a": 1,
+      "tags": [
+        "multiplication",
+        "times-4"
+      ],
+      "id": "g1m0071"
+    },
+    {
+      "type": "mcq",
+      "q": "4 × 5 = ?",
+      "opts": [
+        "20",
+        "21",
+        "16",
+        "24"
+      ],
+      "a": 0,
+      "tags": [
+        "multiplication",
+        "times-4"
+      ],
+      "id": "g1m0072"
+    },
+    {
+      "type": "mcq",
+      "q": "5 × 2 = ?",
+      "opts": [
+        "11",
+        "10",
+        "15",
+        "5"
+      ],
+      "a": 1,
+      "tags": [
+        "multiplication",
+        "times-5"
+      ],
+      "id": "g1m0073"
+    },
+    {
+      "type": "mcq",
+      "q": "5 × 3 = ?",
+      "opts": [
+        "20",
+        "15",
+        "16",
+        "10"
+      ],
+      "a": 1,
+      "tags": [
+        "multiplication",
+        "times-5"
+      ],
+      "id": "g1m0074"
+    },
+    {
+      "type": "mcq",
+      "q": "5 × 4 = ?",
+      "opts": [
+        "20",
+        "21",
+        "15",
+        "25"
+      ],
+      "a": 0,
+      "tags": [
+        "multiplication",
+        "times-5"
+      ],
+      "id": "g1m0075"
+    },
+    {
+      "type": "mcq",
+      "q": "5 × 5 = ?",
+      "opts": [
+        "26",
+        "25",
+        "20",
+        "30"
+      ],
+      "a": 1,
+      "tags": [
+        "multiplication",
+        "times-5"
+      ],
+      "id": "g1m0076"
+    },
+    {
+      "type": "mcq",
+      "q": "2, 4, 6, 8, ___ 下一個是？",
+      "opts": [
+        "8",
+        "14",
+        "12",
+        "10"
+      ],
+      "a": 3,
+      "tags": [
+        "patterns",
+        "count-by-2"
+      ],
+      "id": "g1m0077"
+    },
+    {
+      "type": "mcq",
+      "q": "5, 10, 15, 20, ___ 下一個是？",
+      "opts": [
+        "20",
+        "35",
+        "30",
+        "25"
+      ],
+      "a": 3,
+      "tags": [
+        "patterns",
+        "count-by-5"
+      ],
+      "id": "g1m0078"
+    },
+    {
+      "type": "mcq",
+      "q": "10, 20, 30, 40, ___ 下一個是？",
+      "opts": [
+        "50",
+        "60",
+        "40",
+        "70"
+      ],
+      "a": 0,
+      "tags": [
+        "patterns",
+        "count-by-10"
+      ],
+      "id": "g1m0079"
+    },
+    {
+      "type": "tf",
+      "q": "10 + 10 = 20，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "g1m0080"
+    },
+    {
+      "type": "tf",
+      "q": "10 + 10 = 22，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "g1m0081"
+    },
+    {
+      "type": "tf",
+      "q": "7 + 8 = 15，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "g1m0082"
+    },
+    {
+      "type": "tf",
+      "q": "7 + 8 = 16，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "g1m0083"
+    },
+    {
+      "type": "tf",
+      "q": "15 + 6 = 21，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "g1m0084"
+    },
+    {
+      "type": "tf",
+      "q": "15 + 6 = 20，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "g1m0085"
+    },
+    {
+      "type": "tf",
+      "q": "3 + 3 = 6，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "g1m0086"
+    },
+    {
+      "type": "tf",
+      "q": "3 + 3 = 7，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "g1m0087"
+    }
+  ]
+}

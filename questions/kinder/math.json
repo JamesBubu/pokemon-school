@@ -1,0 +1,1715 @@
+{
+  "meta": {
+    "grade": "kinder",
+    "subject": "math",
+    "description": "幼稚園大班 數學",
+    "version": "1.0",
+    "count": 109
+  },
+  "questions": [
+    {
+      "id": "km001",
+      "type": "mcq",
+      "q": "2 + 1 = ?",
+      "opts": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km002",
+      "type": "mcq",
+      "q": "3 + 2 = ?",
+      "opts": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km003",
+      "type": "mcq",
+      "q": "5 - 2 = ?",
+      "opts": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km004",
+      "type": "mcq",
+      "q": "4 - 1 = ?",
+      "opts": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km005",
+      "type": "mcq",
+      "q": "1 + 1 = ?",
+      "opts": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km006",
+      "type": "mcq",
+      "q": "🍎🍎🍎 有幾個蘋果？",
+      "opts": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "a": 2,
+      "tags": [
+        "counting",
+        "objects"
+      ]
+    },
+    {
+      "id": "km007",
+      "type": "mcq",
+      "q": "🐱🐱 有幾隻貓？",
+      "opts": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "a": 1,
+      "tags": [
+        "counting",
+        "objects"
+      ]
+    },
+    {
+      "id": "km008",
+      "type": "mcq",
+      "q": "4 + 1 = ?",
+      "opts": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km009",
+      "type": "mcq",
+      "q": "6 - 3 = ?",
+      "opts": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km010",
+      "type": "mcq",
+      "q": "數字 3 之後是哪個數字？",
+      "opts": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "a": 2,
+      "tags": [
+        "number-sequence",
+        "counting"
+      ]
+    },
+    {
+      "id": "km011",
+      "type": "mcq",
+      "q": "數字 5 之後是哪個數字？",
+      "opts": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "a": 2,
+      "tags": [
+        "number-sequence",
+        "counting"
+      ]
+    },
+    {
+      "id": "km012",
+      "type": "mcq",
+      "q": "○ 是什麼形狀？",
+      "opts": [
+        "三角形",
+        "正方形",
+        "圓形",
+        "長方形"
+      ],
+      "a": 2,
+      "tags": [
+        "shapes",
+        "geometry"
+      ]
+    },
+    {
+      "id": "km013",
+      "type": "mcq",
+      "q": "△ 是什麼形狀？",
+      "opts": [
+        "圓形",
+        "正方形",
+        "長方形",
+        "三角形"
+      ],
+      "a": 3,
+      "tags": [
+        "shapes",
+        "geometry"
+      ]
+    },
+    {
+      "id": "km014",
+      "type": "mcq",
+      "q": "□ 是什麼形狀？",
+      "opts": [
+        "圓形",
+        "三角形",
+        "正方形",
+        "菱形"
+      ],
+      "a": 2,
+      "tags": [
+        "shapes",
+        "geometry"
+      ]
+    },
+    {
+      "id": "km015",
+      "type": "mcq",
+      "q": "哪個數字比較大？",
+      "opts": [
+        "3",
+        "5",
+        "2",
+        "4"
+      ],
+      "a": 1,
+      "tags": [
+        "comparison",
+        "number-size"
+      ]
+    },
+    {
+      "id": "km016",
+      "type": "mcq",
+      "q": "哪個數字比較小？",
+      "opts": [
+        "7",
+        "8",
+        "2",
+        "6"
+      ],
+      "a": 2,
+      "tags": [
+        "comparison",
+        "number-size"
+      ]
+    },
+    {
+      "id": "km017",
+      "type": "mcq",
+      "q": "2 + 3 = ?",
+      "opts": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km018",
+      "type": "mcq",
+      "q": "7 - 4 = ?",
+      "opts": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km019",
+      "type": "mcq",
+      "q": "1 + 2 + 1 = ?",
+      "opts": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "three-numbers"
+      ]
+    },
+    {
+      "id": "km020",
+      "type": "mcq",
+      "q": "🌟🌟🌟🌟🌟 有幾顆星？",
+      "opts": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": 2,
+      "tags": [
+        "counting",
+        "objects"
+      ]
+    },
+    {
+      "id": "km021",
+      "type": "tf",
+      "q": "2 + 2 = 4，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km022",
+      "type": "tf",
+      "q": "5 比 3 大，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "comparison",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km023",
+      "type": "tf",
+      "q": "1 + 1 = 3，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km024",
+      "type": "tf",
+      "q": "10 比 5 大，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "comparison",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km025",
+      "type": "tf",
+      "q": "3 - 3 = 0，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km026",
+      "type": "tf",
+      "q": "△ 是圓形，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "shapes",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km027",
+      "type": "tf",
+      "q": "4 比 6 小，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "comparison",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km028",
+      "type": "tf",
+      "q": "5 + 1 = 7，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km029",
+      "type": "mcq",
+      "q": "🐶🐶🐶🐶 有幾隻狗？",
+      "opts": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": 1,
+      "tags": [
+        "counting",
+        "objects"
+      ]
+    },
+    {
+      "id": "km030",
+      "type": "mcq",
+      "q": "3 + 3 = ?",
+      "opts": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km031",
+      "type": "mcq",
+      "q": "8 - 5 = ?",
+      "opts": [
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km032",
+      "type": "mcq",
+      "q": "數字 7 之前是哪個數字？",
+      "opts": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "a": 1,
+      "tags": [
+        "number-sequence",
+        "counting"
+      ]
+    },
+    {
+      "id": "km033",
+      "type": "mcq",
+      "q": "🌸🌸🌸🌸🌸🌸 有幾朵花？",
+      "opts": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "a": 2,
+      "tags": [
+        "counting",
+        "objects"
+      ]
+    },
+    {
+      "id": "km034",
+      "type": "mcq",
+      "q": "哪個數字比較大？",
+      "opts": [
+        "6",
+        "4",
+        "9",
+        "7"
+      ],
+      "a": 2,
+      "tags": [
+        "comparison",
+        "number-size"
+      ]
+    },
+    {
+      "id": "km035",
+      "type": "mcq",
+      "q": "哪個形狀有 3 個角？",
+      "opts": [
+        "圓形",
+        "正方形",
+        "三角形",
+        "長方形"
+      ],
+      "a": 2,
+      "tags": [
+        "shapes",
+        "geometry"
+      ]
+    },
+    {
+      "id": "km036",
+      "type": "mcq",
+      "q": "2 + 2 + 2 = ?",
+      "opts": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "three-numbers"
+      ]
+    },
+    {
+      "id": "km037",
+      "type": "mcq",
+      "q": "9 - 4 = ?",
+      "opts": [
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km038",
+      "type": "mcq",
+      "q": "🦋🦋 有幾隻蝴蝶？",
+      "opts": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "a": 1,
+      "tags": [
+        "counting",
+        "objects"
+      ]
+    },
+    {
+      "id": "km039",
+      "type": "tf",
+      "q": "○ 是圓形，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "shapes",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km040",
+      "type": "tf",
+      "q": "2 比 9 大，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "comparison",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km041",
+      "type": "mcq",
+      "q": "5 + 3 = ?",
+      "opts": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km042",
+      "type": "mcq",
+      "q": "10 - 3 = ?",
+      "opts": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ]
+    },
+    {
+      "id": "km043",
+      "type": "tf",
+      "q": "6 - 2 = 4，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "true-false"
+      ]
+    },
+    {
+      "id": "km044",
+      "type": "mcq",
+      "q": "🍊🍊🍊🍊🍊🍊🍊 有幾個橘子？",
+      "opts": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "a": 2,
+      "tags": [
+        "counting",
+        "objects"
+      ]
+    },
+    {
+      "type": "mcq",
+      "q": "1 + 1 = ?",
+      "opts": [
+        "3",
+        "4",
+        "1",
+        "2"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0045"
+    },
+    {
+      "type": "mcq",
+      "q": "1 + 2 = ?",
+      "opts": [
+        "5",
+        "2",
+        "4",
+        "3"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0046"
+    },
+    {
+      "type": "mcq",
+      "q": "1 + 3 = ?",
+      "opts": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0047"
+    },
+    {
+      "type": "mcq",
+      "q": "1 + 4 = ?",
+      "opts": [
+        "5",
+        "7",
+        "4",
+        "6"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0048"
+    },
+    {
+      "type": "mcq",
+      "q": "1 + 5 = ?",
+      "opts": [
+        "6",
+        "8",
+        "7",
+        "5"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0049"
+    },
+    {
+      "type": "mcq",
+      "q": "2 + 1 = ?",
+      "opts": [
+        "5",
+        "4",
+        "2",
+        "3"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0050"
+    },
+    {
+      "type": "mcq",
+      "q": "2 + 2 = ?",
+      "opts": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0051"
+    },
+    {
+      "type": "mcq",
+      "q": "2 + 3 = ?",
+      "opts": [
+        "6",
+        "4",
+        "7",
+        "5"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0052"
+    },
+    {
+      "type": "mcq",
+      "q": "2 + 4 = ?",
+      "opts": [
+        "7",
+        "8",
+        "6",
+        "5"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0053"
+    },
+    {
+      "type": "mcq",
+      "q": "2 + 5 = ?",
+      "opts": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0054"
+    },
+    {
+      "type": "mcq",
+      "q": "3 + 1 = ?",
+      "opts": [
+        "4",
+        "6",
+        "5",
+        "3"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0055"
+    },
+    {
+      "type": "mcq",
+      "q": "3 + 2 = ?",
+      "opts": [
+        "7",
+        "4",
+        "6",
+        "5"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0056"
+    },
+    {
+      "type": "mcq",
+      "q": "3 + 3 = ?",
+      "opts": [
+        "8",
+        "7",
+        "5",
+        "6"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0057"
+    },
+    {
+      "type": "mcq",
+      "q": "3 + 4 = ?",
+      "opts": [
+        "8",
+        "9",
+        "6",
+        "7"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0058"
+    },
+    {
+      "type": "mcq",
+      "q": "3 + 5 = ?",
+      "opts": [
+        "7",
+        "9",
+        "8",
+        "10"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0059"
+    },
+    {
+      "type": "mcq",
+      "q": "4 + 1 = ?",
+      "opts": [
+        "4",
+        "5",
+        "7",
+        "6"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0060"
+    },
+    {
+      "type": "mcq",
+      "q": "4 + 2 = ?",
+      "opts": [
+        "5",
+        "8",
+        "7",
+        "6"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0061"
+    },
+    {
+      "type": "mcq",
+      "q": "4 + 3 = ?",
+      "opts": [
+        "9",
+        "6",
+        "7",
+        "8"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0062"
+    },
+    {
+      "type": "mcq",
+      "q": "4 + 4 = ?",
+      "opts": [
+        "10",
+        "8",
+        "7",
+        "9"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0063"
+    },
+    {
+      "type": "mcq",
+      "q": "4 + 5 = ?",
+      "opts": [
+        "11",
+        "10",
+        "8",
+        "9"
+      ],
+      "a": 3,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0064"
+    },
+    {
+      "type": "mcq",
+      "q": "5 + 1 = ?",
+      "opts": [
+        "8",
+        "7",
+        "6",
+        "5"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0065"
+    },
+    {
+      "type": "mcq",
+      "q": "5 + 2 = ?",
+      "opts": [
+        "8",
+        "6",
+        "7",
+        "9"
+      ],
+      "a": 2,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0066"
+    },
+    {
+      "type": "mcq",
+      "q": "5 + 3 = ?",
+      "opts": [
+        "9",
+        "8",
+        "10",
+        "7"
+      ],
+      "a": 1,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0067"
+    },
+    {
+      "type": "mcq",
+      "q": "5 + 4 = ?",
+      "opts": [
+        "9",
+        "10",
+        "11",
+        "8"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0068"
+    },
+    {
+      "type": "mcq",
+      "q": "5 + 5 = ?",
+      "opts": [
+        "10",
+        "9",
+        "11",
+        "12"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "single-digit"
+      ],
+      "id": "km0069"
+    },
+    {
+      "type": "mcq",
+      "q": "3 - 1 = ?",
+      "opts": [
+        "4",
+        "2",
+        "3",
+        "1"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0070"
+    },
+    {
+      "type": "mcq",
+      "q": "3 - 2 = ?",
+      "opts": [
+        "3",
+        "2",
+        "0",
+        "1"
+      ],
+      "a": 3,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0071"
+    },
+    {
+      "type": "mcq",
+      "q": "4 - 1 = ?",
+      "opts": [
+        "3",
+        "5",
+        "4",
+        "2"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0072"
+    },
+    {
+      "type": "mcq",
+      "q": "4 - 2 = ?",
+      "opts": [
+        "3",
+        "2",
+        "1",
+        "4"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0073"
+    },
+    {
+      "type": "mcq",
+      "q": "4 - 3 = ?",
+      "opts": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0074"
+    },
+    {
+      "type": "mcq",
+      "q": "5 - 1 = ?",
+      "opts": [
+        "6",
+        "4",
+        "5",
+        "3"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0075"
+    },
+    {
+      "type": "mcq",
+      "q": "5 - 2 = ?",
+      "opts": [
+        "4",
+        "2",
+        "3",
+        "5"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0076"
+    },
+    {
+      "type": "mcq",
+      "q": "5 - 3 = ?",
+      "opts": [
+        "2",
+        "1",
+        "4",
+        "3"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0077"
+    },
+    {
+      "type": "mcq",
+      "q": "5 - 4 = ?",
+      "opts": [
+        "0",
+        "3",
+        "1",
+        "2"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0078"
+    },
+    {
+      "type": "mcq",
+      "q": "6 - 1 = ?",
+      "opts": [
+        "5",
+        "4",
+        "7",
+        "6"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0079"
+    },
+    {
+      "type": "mcq",
+      "q": "6 - 2 = ?",
+      "opts": [
+        "4",
+        "6",
+        "3",
+        "5"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0080"
+    },
+    {
+      "type": "mcq",
+      "q": "6 - 3 = ?",
+      "opts": [
+        "3",
+        "2",
+        "4",
+        "5"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0081"
+    },
+    {
+      "type": "mcq",
+      "q": "6 - 4 = ?",
+      "opts": [
+        "2",
+        "4",
+        "1",
+        "3"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0082"
+    },
+    {
+      "type": "mcq",
+      "q": "6 - 5 = ?",
+      "opts": [
+        "0",
+        "3",
+        "1",
+        "2"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0083"
+    },
+    {
+      "type": "mcq",
+      "q": "7 - 1 = ?",
+      "opts": [
+        "8",
+        "7",
+        "5",
+        "6"
+      ],
+      "a": 3,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0084"
+    },
+    {
+      "type": "mcq",
+      "q": "7 - 2 = ?",
+      "opts": [
+        "7",
+        "5",
+        "6",
+        "4"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0085"
+    },
+    {
+      "type": "mcq",
+      "q": "7 - 3 = ?",
+      "opts": [
+        "5",
+        "6",
+        "3",
+        "4"
+      ],
+      "a": 3,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0086"
+    },
+    {
+      "type": "mcq",
+      "q": "7 - 4 = ?",
+      "opts": [
+        "5",
+        "4",
+        "3",
+        "2"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0087"
+    },
+    {
+      "type": "mcq",
+      "q": "7 - 5 = ?",
+      "opts": [
+        "4",
+        "3",
+        "2",
+        "1"
+      ],
+      "a": 2,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0088"
+    },
+    {
+      "type": "mcq",
+      "q": "7 - 6 = ?",
+      "opts": [
+        "3",
+        "0",
+        "2",
+        "1"
+      ],
+      "a": 3,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0089"
+    },
+    {
+      "type": "mcq",
+      "q": "8 - 1 = ?",
+      "opts": [
+        "7",
+        "9",
+        "6",
+        "8"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0090"
+    },
+    {
+      "type": "mcq",
+      "q": "8 - 2 = ?",
+      "opts": [
+        "5",
+        "6",
+        "8",
+        "7"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0091"
+    },
+    {
+      "type": "mcq",
+      "q": "8 - 3 = ?",
+      "opts": [
+        "5",
+        "4",
+        "6",
+        "7"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0092"
+    },
+    {
+      "type": "mcq",
+      "q": "8 - 4 = ?",
+      "opts": [
+        "5",
+        "4",
+        "6",
+        "3"
+      ],
+      "a": 1,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0093"
+    },
+    {
+      "type": "mcq",
+      "q": "8 - 5 = ?",
+      "opts": [
+        "4",
+        "5",
+        "2",
+        "3"
+      ],
+      "a": 3,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0094"
+    },
+    {
+      "type": "mcq",
+      "q": "8 - 6 = ?",
+      "opts": [
+        "3",
+        "1",
+        "4",
+        "2"
+      ],
+      "a": 3,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0095"
+    },
+    {
+      "type": "mcq",
+      "q": "8 - 7 = ?",
+      "opts": [
+        "1",
+        "0",
+        "3",
+        "2"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "single-digit"
+      ],
+      "id": "km0096"
+    },
+    {
+      "type": "tf",
+      "q": "2 + 3 = 5，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "km0097"
+    },
+    {
+      "type": "tf",
+      "q": "3 + 4 = 7，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "km0098"
+    },
+    {
+      "type": "tf",
+      "q": "1 + 5 = 6，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "km0099"
+    },
+    {
+      "type": "tf",
+      "q": "4 + 2 = 6，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "km0100"
+    },
+    {
+      "type": "tf",
+      "q": "3 + 3 = 6，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "addition",
+        "tf"
+      ],
+      "id": "km0101"
+    },
+    {
+      "type": "tf",
+      "q": "5 - 2 = 3，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "tf"
+      ],
+      "id": "km0102"
+    },
+    {
+      "type": "tf",
+      "q": "7 - 3 = 4，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "tf"
+      ],
+      "id": "km0103"
+    },
+    {
+      "type": "tf",
+      "q": "6 - 4 = 2，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "tf"
+      ],
+      "id": "km0104"
+    },
+    {
+      "type": "tf",
+      "q": "4 - 1 = 3，這是正確的嗎？",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "subtraction",
+        "tf"
+      ],
+      "id": "km0105"
+    },
+    {
+      "type": "mcq",
+      "q": "🍎🍎🍎 有幾個？",
+      "opts": [
+        "5",
+        "3",
+        "4",
+        "2"
+      ],
+      "a": 1,
+      "tags": [
+        "counting",
+        "emoji"
+      ],
+      "id": "km0106"
+    },
+    {
+      "type": "mcq",
+      "q": "⭐⭐⭐⭐ 有幾個？",
+      "opts": [
+        "4",
+        "5",
+        "3",
+        "6"
+      ],
+      "a": 0,
+      "tags": [
+        "counting",
+        "emoji"
+      ],
+      "id": "km0107"
+    },
+    {
+      "type": "mcq",
+      "q": "🌸🌸🌸🌸🌸 有幾個？",
+      "opts": [
+        "6",
+        "7",
+        "4",
+        "5"
+      ],
+      "a": 3,
+      "tags": [
+        "counting",
+        "emoji"
+      ],
+      "id": "km0108"
+    },
+    {
+      "type": "mcq",
+      "q": "🐶🐶 有幾個？",
+      "opts": [
+        "3",
+        "4",
+        "2",
+        "1"
+      ],
+      "a": 2,
+      "tags": [
+        "counting",
+        "emoji"
+      ],
+      "id": "km0109"
+    }
+  ]
+}

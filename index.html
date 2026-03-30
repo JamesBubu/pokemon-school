@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>寶可夢學習大冒險 🎮 大湖國小</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    html,body{width:100%;height:100%;overflow:hidden;
+      font-family:'Noto Sans TC','微軟正黑體','Microsoft JhengHei',sans-serif;
+      background:#1a1a2e}
+    #game{width:100vw;height:100vh;background:#fff;position:relative;overflow:hidden}
+
+    /* ── screens ── */
+    .screen{position:absolute;top:0;left:0;width:100%;height:100%;
+      display:none;flex-direction:column;align-items:center;justify-content:center}
+    .screen.active{display:flex}
+
+    /* ── animations ── */
+    @keyframes bounce  {0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+    @keyframes spin    {from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    @keyframes shake   {0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+    @keyframes flash   {0%,100%{opacity:1}50%{opacity:.15}}
+    @keyframes slideR  {from{transform:translateX(160px);opacity:0}to{transform:translateX(0);opacity:1}}
+    @keyframes slideL  {from{transform:translateX(-160px);opacity:0}to{transform:translateX(0);opacity:1}}
+    @keyframes popIn   {from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+    @keyframes glowG   {0%,100%{box-shadow:0 0 10px #FFD700}50%{box-shadow:0 0 30px #FFD700,0 0 60px #FF6600}}
+    .anim-shake{animation:shake .45s ease}
+    .anim-flash{animation:flash .18s 4}
+    .anim-slideR{animation:slideR .55s ease}
+    .anim-slideL{animation:slideL .55s ease}
+    .anim-popIn{animation:popIn .35s ease}
+
+    /* ── buttons ── */
+    .btn{border:3px solid #222;border-radius:28px;
+      padding:clamp(10px,1.5vh,16px) clamp(22px,3vw,38px);
+      font-size:clamp(16px,2.2vw,24px);font-weight:700;
+      cursor:pointer;font-family:inherit;
+      transition:transform .08s,box-shadow .08s;user-select:none}
+    .btn:active{transform:translateY(3px)!important;box-shadow:none!important}
+    .btn-red  {background:#FF4444;color:#fff;border-color:#AA0000;box-shadow:0 5px 0 #880000}
+    .btn-blue {background:#4488FF;color:#fff;border-color:#0055BB;box-shadow:0 5px 0 #003399}
+    .btn-green{background:#44BB44;color:#fff;border-color:#226622;box-shadow:0 5px 0 #114411}
+    .btn-gold {background:#FFD700;color:#333;border-color:#AA8800;box-shadow:0 5px 0 #886600}
+    .btn-gray {background:#888;color:#fff;border-color:#444;box-shadow:0 5px 0 #333}
+    .kb-hint{font-size:11px;color:#aaa;font-weight:400;background:rgba(0,0,0,.12);
+      border-radius:4px;padding:1px 5px;margin-left:5px;font-family:monospace}
+
+    /* ── TITLE ── */
+    #s-title{background:linear-gradient(170deg,#0f3460 0%,#16213e 45%,#1a1a2e 100%);gap:clamp(6px,1.5vh,16px)}
+    .title-logo{font-size:clamp(34px,5.5vw,68px);font-weight:900;color:#FFD700;
+      text-shadow:4px 4px 0 #FF6600,-2px -2px 0 #FF4400;text-align:center;line-height:1.15}
+    .title-school{font-size:clamp(13px,1.8vw,20px);color:#aac;text-align:center}
+    .title-mascot{font-size:clamp(70px,13vw,160px);animation:bounce 1.2s infinite ease-in-out}
+    .title-desc{font-size:clamp(13px,1.7vw,19px);color:#9ad;text-align:center;
+      line-height:1.7;padding:0 20px}
+    .gear-btn{position:absolute;top:clamp(10px,2vh,18px);right:clamp(10px,2vw,18px);
+      background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.4);
+      border-radius:50%;width:clamp(44px,6vw,58px);height:clamp(44px,6vw,58px);
+      font-size:clamp(20px,2.8vw,30px);cursor:pointer;color:#fff;display:flex;
+      align-items:center;justify-content:center}
+    .gear-btn:hover{background:rgba(255,255,255,.28)}
+    /* ── FILE BAR ── */
+    .file-bar{display:flex;flex-direction:column;align-items:center;
+      gap:8px;width:min(96vw,560px)}
+    .file-bar-status{font-size:clamp(11px,1.4vw,14px);color:#99c;text-align:center;min-height:18px}
+    .file-bar-btns{display:flex;gap:clamp(6px,1.2vw,12px);flex-wrap:wrap;justify-content:center}
+    .file-btn{background:rgba(255,255,255,.14);border:2px solid rgba(255,255,255,.38);
+      border-radius:22px;padding:clamp(7px,1.2vh,12px) clamp(14px,2.2vw,24px);
+      font-size:clamp(13px,1.7vw,17px);font-weight:700;color:#fff;cursor:pointer;
+      font-family:inherit;transition:background .15s,transform .1s}
+    .file-btn:hover{background:rgba(255,255,255,.26);transform:translateY(-2px)}
+    .file-btn.reconnect{border-color:#FFD700;color:#FFD700}
+    .file-loaded{font-size:clamp(12px,1.5vw,15px);color:#ade;
+      background:rgba(255,255,255,.1);border-radius:20px;
+      padding:5px 16px;display:flex;align-items:center;gap:10px}
+    .file-loaded span{color:#8be;font-size:.85em}
+    .file-fallback-warn{font-size:clamp(11px,1.3vw,13px);color:#fa8;text-align:center;
+      background:rgba(255,150,0,.15);border-radius:8px;padding:6px 14px}
+
+    .slot-grid{display:flex;gap:clamp(8px,1.5vw,16px);justify-content:center;flex-wrap:wrap;
+      width:min(98vw,640px)}
+    .slot-card{background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.28);
+      border-radius:16px;padding:clamp(10px,1.6vh,18px) clamp(10px,1.8vw,18px);
+      text-align:center;cursor:pointer;flex:1 1 clamp(120px,25vw,180px);
+      max-width:200px;min-width:110px;transition:transform .1s,background .15s;position:relative}
+    .slot-card:hover{background:rgba(255,255,255,.24);transform:translateY(-3px)}
+    .slot-card.empty{border-style:dashed;opacity:.82}
+    .slot-card.filled{border-color:#FFD700}
+    .slot-num{font-size:clamp(10px,1.2vw,13px);color:#99b;margin-bottom:4px;font-weight:700;
+      letter-spacing:.06em;text-transform:uppercase}
+    .slot-empty-icon{font-size:clamp(28px,5vw,44px)}
+    .slot-empty-text{font-size:clamp(13px,1.7vw,17px);color:#ccd;margin-top:4px;font-weight:700}
+    .slot-party{display:flex;gap:2px;justify-content:center;margin-bottom:4px}
+    .slot-party img{width:clamp(30px,4.5vw,48px);image-rendering:pixelated}
+    .slot-pname{font-size:clamp(13px,1.8vw,18px);font-weight:900;color:#FFD700}
+    .slot-info{font-size:clamp(9px,1.1vw,12px);color:#aac;margin-top:2px;line-height:1.5}
+    .slot-del{position:absolute;top:5px;right:6px;background:rgba(255,60,60,.7);
+      border:none;border-radius:50%;width:22px;height:22px;font-size:13px;
+      cursor:pointer;color:#fff;line-height:1;padding:0;display:flex;
+      align-items:center;justify-content:center}
+    .slot-del:hover{background:#ff2222}
+
+    /* ── NAME ── */
+    #s-name{background:linear-gradient(135deg,#667eea,#764ba2);gap:clamp(10px,2vh,20px);padding:30px}
+    #s-name h2{color:#fff;font-size:clamp(20px,3vw,32px);text-align:center}
+    #s-name p {color:#ddd;font-size:clamp(13px,1.6vw,18px);text-align:center}
+    .input-field{background:#fff;border:3px solid #333;border-radius:12px;
+      padding:clamp(12px,1.8vh,18px) 22px;font-size:clamp(20px,3vw,32px);
+      width:100%;max-width:360px;text-align:center;font-family:inherit;outline:none}
+    .input-field:focus{border-color:#FFD700}
+
+    /* ── SETTINGS ── */
+    #s-settings{background:linear-gradient(160deg,#2c3e50,#3498db);padding:clamp(16px,3vh,30px);overflow-y:auto}
+    .settings-panel{background:#fff;border-radius:20px;padding:clamp(16px,3vh,28px);
+      width:min(95vw,580px);max-height:90vh;overflow-y:auto}
+    .settings-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+    .settings-header h2{font-size:clamp(18px,2.5vw,28px);color:#333}
+    .settings-section{margin-bottom:16px;border-bottom:1px solid #eee;padding-bottom:14px}
+    .settings-section:last-child{border-bottom:none;margin-bottom:0}
+    .settings-label{font-size:clamp(13px,1.8vw,18px);font-weight:700;color:#444;margin-bottom:8px}
+    .settings-row{display:flex;flex-wrap:wrap;gap:8px}
+    .setting-opt{background:#f0f0f0;border:2px solid #ccc;border-radius:20px;
+      padding:clamp(5px,.8vh,9px) clamp(12px,1.8vw,20px);
+      font-size:clamp(13px,1.6vw,17px);cursor:pointer;font-family:inherit;transition:all .15s}
+    .setting-opt:hover{border-color:#4488FF}
+    .setting-opt.active{background:#4488FF;color:#fff;border-color:#003399}
+    .settings-toggle-row{display:flex;justify-content:space-between;align-items:center}
+    .toggle-btn{background:#ccc;border:none;border-radius:20px;
+      padding:clamp(6px,1vh,10px) clamp(18px,2.5vw,26px);
+      font-size:clamp(14px,1.8vw,18px);cursor:pointer;font-family:inherit;min-width:64px;
+      font-weight:700;transition:background .2s}
+    .toggle-btn.on{background:#44BB44;color:#fff}
+    .toggle-btn.off{background:#ccc;color:#555}
+
+    /* ── PARTY SELECT ── */
+    #s-party-select{background:linear-gradient(160deg,#e8f5e9,#f3e5f5);
+      padding:clamp(12px,2vh,20px);gap:clamp(8px,1.5vh,14px)}
+    #s-party-select h2{font-size:clamp(20px,3vw,32px);color:#333;text-align:center}
+    #s-party-select p {font-size:clamp(12px,1.5vw,17px);color:#666;text-align:center}
+    .ps-counter{font-size:clamp(16px,2vw,22px);font-weight:700;color:#333;
+      background:rgba(255,255,255,.8);border-radius:20px;padding:6px 20px}
+    .poke-grid{display:grid;grid-template-columns:repeat(6,1fr);
+      gap:clamp(5px,.8vw,10px);overflow-y:auto;max-height:48vh;
+      width:min(98vw,760px);padding:6px}
+    @media(max-width:600px){.poke-grid{grid-template-columns:repeat(4,1fr)}}
+    .party-card{background:#fff;border:2px solid #ccc;border-radius:12px;
+      padding:clamp(5px,.8vh,10px) 4px;text-align:center;cursor:pointer;
+      position:relative;transition:all .15s}
+    .party-card:hover{border-color:#FFD700;transform:scale(1.05)}
+    .party-card.selected{border-color:#FF4444;background:#fff8e1;animation:glowG 1.2s infinite}
+    .party-card img{width:clamp(46px,7vw,72px);height:clamp(46px,7vw,72px);image-rendering:pixelated}
+    .party-card .pc-name{font-size:clamp(9px,1.1vw,13px);font-weight:700;margin-top:3px;color:#333}
+    .pc-check{position:absolute;top:2px;right:4px;font-size:clamp(14px,2vw,18px);display:none}
+    .party-card.selected .pc-check{display:block}
+
+    /* ── BATTLE SCREEN ── */
+    #s-battle{justify-content:flex-start}
+    .status-bar{background:#2c2c2c;color:#fff;
+      padding:clamp(4px,.8vh,9px) clamp(10px,1.8vw,20px);
+      font-size:clamp(12px,1.5vw,17px);display:flex;justify-content:space-between;
+      align-items:center;width:100%;flex-shrink:0;gap:6px}
+    .party-strip{display:flex;gap:5px;align-items:center}
+    .ps-dot{width:clamp(18px,2.5vw,28px);height:clamp(18px,2.5vw,28px);
+      border-radius:50%;display:flex;align-items:center;justify-content:center;
+      font-size:10px;border:2px solid transparent;transition:all .3s}
+    .mute-btn{background:none;border:2px solid #888;border-radius:20px;
+      color:#fff;padding:2px 9px;font-size:clamp(11px,1.3vw,15px);cursor:pointer;
+      font-family:inherit;white-space:nowrap}
+    .mute-btn:hover{border-color:#FFD700;color:#FFD700}
+
+    .battle-field{width:100%;flex:1;min-height:0;
+      background:linear-gradient(180deg,#87CEEB 0%,#87CEEB 55%,#7CFC00 55%,#228B22 100%);
+      position:relative;overflow:hidden}
+    .battle-field::before{content:'';position:absolute;bottom:clamp(48px,8vh,86px);
+      left:6%;right:54%;height:clamp(5px,.8vh,10px);background:#8B6914;border-radius:50%;opacity:.55}
+    .battle-field::after{content:'';position:absolute;bottom:clamp(66px,10.5vh,115px);
+      right:4%;width:clamp(100px,18vw,190px);height:clamp(4px,.7vh,9px);
+      background:#8B6914;border-radius:50%;opacity:.55}
+
+    .enemy-info-box,.player-info-box{
+      position:absolute;background:rgba(255,255,255,.96);
+      border:3px solid #333;border-radius:12px;
+      padding:clamp(6px,1vh,13px) clamp(9px,1.3vw,16px);
+      min-width:clamp(140px,23vw,270px)}
+    .enemy-info-box{top:clamp(8px,1.5vh,16px);left:clamp(8px,1.5vw,16px)}
+    .player-info-box{bottom:clamp(52px,8.5vh,105px);right:clamp(8px,1.5vw,16px)}
+    .poke-info-name{font-size:clamp(14px,2vw,24px);font-weight:700;color:#222}
+    .poke-info-lv  {font-size:clamp(11px,1.4vw,17px);color:#666}
+    .hp-row{display:flex;justify-content:space-between;font-size:clamp(10px,1.2vw,14px);color:#555;margin-top:2px}
+    .hp-bar{height:clamp(7px,1.1vh,13px);background:#ddd;border-radius:5px;border:2px solid #aaa;overflow:hidden;margin-top:2px}
+    .hp-fill{height:100%;border-radius:5px;transition:width .5s;background:#44BB44}
+    .hp-fill.hp-yellow{background:#FFD700}
+    .hp-fill.hp-red   {background:#FF4444}
+    .xp-bar{height:clamp(4px,.7vh,8px);background:#ddd;border-radius:3px;border:1px solid #aaa;overflow:hidden;margin-top:3px}
+    .xp-fill{height:100%;border-radius:3px;background:#4488FF;transition:width .5s}
+
+    .enemy-sprite{position:absolute;right:clamp(14px,4.5vw,55px);top:clamp(8px,2vh,28px);
+      width:clamp(110px,19vw,210px);height:clamp(110px,19vw,210px);image-rendering:pixelated}
+    .player-sprite{position:absolute;left:clamp(8px,2.5vw,36px);
+      bottom:clamp(56px,9.5vh,125px);
+      width:clamp(120px,21vw,230px);height:clamp(120px,21vw,230px);image-rendering:pixelated}
+
+    .battle-textbox{background:#fff;border-top:3px solid #333;border-bottom:3px solid #333;
+      padding:clamp(9px,1.4vh,16px) clamp(13px,1.8vw,22px);
+      font-size:clamp(15px,2vw,23px);color:#333;
+      min-height:clamp(58px,9.5vh,96px);display:flex;align-items:center;
+      cursor:pointer;width:100%;flex-shrink:0;line-height:1.5}
+    .battle-menu{display:grid;grid-template-columns:1fr 1fr;
+      border-top:2px solid #333;width:100%;flex-shrink:0}
+    .battle-btn{background:#fff;border:none;border-right:2px solid #333;border-bottom:2px solid #333;
+      padding:clamp(11px,1.8vh,20px) 6px;
+      font-size:clamp(15px,2vw,24px);font-weight:700;
+      cursor:pointer;font-family:inherit;transition:background .1s;line-height:1.3}
+    .battle-btn:nth-child(even){border-right:none}
+    .battle-btn:nth-child(3),.battle-btn:nth-child(4){border-bottom:none}
+    .battle-btn:hover {background:#f0f0f0}
+    .battle-btn:active{background:#e0e0e0}
+    .battle-btn:disabled{opacity:.35;cursor:not-allowed}
+
+    /* ── QUESTION OVERLAY ── */
+    #q-overlay{position:absolute;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,.8);z-index:200;
+      display:none;align-items:center;justify-content:center}
+    #q-overlay.active{display:flex}
+    .q-box{background:#fff;border:4px solid #333;border-radius:20px;
+      padding:clamp(15px,2.4vh,26px) clamp(15px,2.2vw,26px);
+      width:min(93vw,600px);animation:popIn .3s ease}
+    .q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+    .q-badge{font-size:clamp(12px,1.6vw,18px);font-weight:700;
+      padding:3px 12px;border-radius:20px;display:inline-block}
+    .badge-math    {background:#FFE0E0;color:#CC0000}
+    .badge-chinese {background:#E0F0FF;color:#0044CC}
+    .badge-english {background:#E0FFE0;color:#006600}
+    .badge-special {background:#FFF0E0;color:#CC6600}
+    .timer-bar{height:clamp(7px,1.1vh,13px);background:#ddd;border-radius:5px;
+      overflow:hidden;margin-bottom:10px;border:2px solid #bbb}
+    .timer-fill{height:100%;background:#4488FF;border-radius:5px}
+    .q-text{font-size:clamp(19px,2.8vw,34px);font-weight:700;color:#222;
+      text-align:center;min-height:clamp(52px,8vh,86px);
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:clamp(10px,1.8vh,18px);line-height:1.4}
+    .opts-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(8px,1.3vh,14px)}
+    .opt-btn{background:#f5f5f5;border:2px solid #ccc;border-radius:11px;
+      padding:clamp(11px,1.8vh,19px) 6px;
+      font-size:clamp(15px,2vw,24px);font-weight:700;
+      cursor:pointer;font-family:inherit;color:#333;transition:background .1s,border-color .1s}
+    .opt-btn:hover:not(:disabled) {background:#e8f0ff;border-color:#4488FF}
+    .opt-btn:active:not(:disabled){transform:scale(.97)}
+    .opt-btn.correct{background:#ccffcc!important;border-color:#44BB44!important;color:#006600}
+    .opt-btn.wrong  {background:#ffcccc!important;border-color:#FF4444!important;color:#CC0000}
+    .opt-btn.tf-true {border-color:#44BB44;background:#f0fff0}
+    .opt-btn.tf-false{border-color:#FF4444;background:#fff0f0}
+    .q-result{text-align:center;font-size:clamp(15px,2vw,23px);font-weight:700;
+      margin-top:clamp(7px,1.2vh,13px);min-height:clamp(22px,3.4vh,34px)}
+    .r-correct{color:#44BB44}
+    .r-wrong  {color:#FF4444}
+
+    /* ── BATTLE-CHOOSE SCREEN ── */
+    #s-battle-choose{background:linear-gradient(160deg,#1a1a2e,#0f3460);
+      gap:clamp(10px,2vh,20px);padding:clamp(18px,3vh,32px)}
+    #s-battle-choose h2{color:#FFD700;font-size:clamp(20px,3vw,34px);font-weight:900;text-align:center}
+    #s-battle-choose p {color:#aad;font-size:clamp(13px,1.7vw,19px);text-align:center}
+    .party-choose-grid{display:flex;gap:clamp(10px,2vw,22px);justify-content:center;flex-wrap:wrap}
+    .bc-card{background:#fff;border:3px solid #ccc;border-radius:16px;
+      padding:clamp(10px,1.5vh,18px);width:clamp(120px,20vw,200px);
+      cursor:pointer;text-align:center;position:relative;transition:all .15s}
+    .bc-card:hover:not(.fainted){border-color:#FFD700;transform:scale(1.05)}
+    .bc-card.fainted{opacity:.3;cursor:not-allowed;filter:grayscale(1)}
+    .bc-card.is-active{border-color:#FF4444;background:#fff8e1}
+    .bc-sprite{width:clamp(65px,11vw,115px);height:clamp(65px,11vw,115px);image-rendering:pixelated}
+    .bc-name{font-size:clamp(14px,1.9vw,20px);font-weight:700;color:#333;margin-top:4px}
+    .bc-lv  {font-size:clamp(11px,1.4vw,16px);color:#888}
+    .bc-hp  {font-size:clamp(11px,1.3vw,15px);color:#555;margin-top:2px}
+    .bc-active-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+      background:#FF4444;color:#fff;border-radius:12px;
+      padding:2px 10px;font-size:12px;font-weight:700;display:none;white-space:nowrap}
+    .bc-card.is-active .bc-active-badge{display:block}
+    .bc-num-hint{position:absolute;bottom:4px;right:6px;
+      font-size:11px;color:#aaa;font-family:monospace}
+
+    /* ── EVOLUTION ── */
+    #s-evo{background:radial-gradient(ellipse at center,#fffde7 0%,#fff9c4 60%,#fff3e0 100%);
+      padding:clamp(14px,2.5vh,28px);gap:clamp(8px,1.4vh,15px)}
+    .evo-title{font-size:clamp(22px,3.8vw,46px);font-weight:900;color:#FF8C00;
+      text-align:center;text-shadow:3px 3px 0 #FFD700}
+    .evo-sprites{display:flex;align-items:center;gap:clamp(14px,2.5vw,32px);justify-content:center}
+    .evo-sprites img{width:clamp(85px,15vw,170px);height:clamp(85px,15vw,170px);
+      image-rendering:pixelated;transition:all 1.2s ease}
+    #evo-to-img{opacity:.3;filter:brightness(.2)}
+    .evo-arrow{font-size:clamp(26px,3.8vw,48px);animation:bounce .6s infinite alternate}
+
+    /* ── VICTORY ── */
+    #s-victory{background:linear-gradient(135deg,#FFD700,#FFA500,#FF6600);
+      gap:clamp(8px,1.6vh,18px);padding:clamp(18px,3.5vh,36px);text-align:center;overflow-y:auto}
+    .v-icon {font-size:clamp(50px,8vw,95px);animation:bounce 1s infinite}
+    .v-title{font-size:clamp(26px,4.2vw,50px);font-weight:900;color:#fff;text-shadow:3px 3px 0 #AA5500}
+    .v-msg  {font-size:clamp(13px,1.9vw,22px);color:rgba(255,255,255,.85)}
+    .v-stats{display:flex;gap:clamp(12px,2.5vw,28px);justify-content:center}
+    .v-stat {text-align:center;background:rgba(255,255,255,.3);border-radius:12px;
+      padding:clamp(7px,1.2vh,14px) clamp(13px,2.2vw,26px)}
+    .v-stat-num{font-size:clamp(24px,3.8vw,46px);font-weight:900;color:#fff}
+    .v-stat-lbl{font-size:clamp(10px,1.2vw,15px);color:rgba(255,255,255,.8)}
+    .v-party{display:flex;gap:clamp(8px,1.5vw,16px);justify-content:center;flex-wrap:wrap}
+    .v-poke{background:rgba(255,255,255,.28);border-radius:12px;
+      padding:clamp(6px,1vh,12px) clamp(10px,1.5vw,16px);text-align:center}
+    .v-poke img{width:clamp(44px,7vw,70px);image-rendering:pixelated}
+    .v-poke-name{font-size:clamp(11px,1.4vw,15px);font-weight:700;color:#fff}
+    .v-poke-info{font-size:clamp(10px,1.2vw,13px);color:rgba(255,255,255,.8)}
+
+    /* ── GAME OVER ── */
+    #s-gameover{background:linear-gradient(160deg,#1a1a2e,#16213e,#0f3460);
+      color:#fff;text-align:center;gap:clamp(10px,2vh,20px);padding:clamp(20px,4vh,40px)}
+    .go-icon {font-size:clamp(58px,9.5vw,105px)}
+    .go-title{font-size:clamp(24px,3.8vw,48px);font-weight:900;color:#FF4444}
+    .go-msg  {font-size:clamp(13px,1.9vw,21px);color:#aaa}
+    .go-score{font-size:clamp(15px,2vw,24px);color:#FFD700;font-weight:700}
+
+    /* ── HELP BUTTON ── */
+    #help-btn{position:absolute;bottom:clamp(12px,2vh,20px);right:clamp(12px,2vw,20px);
+      z-index:900;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.45);
+      border-radius:50%;width:clamp(38px,5.5vw,52px);height:clamp(38px,5.5vw,52px);
+      font-size:clamp(18px,2.5vw,26px);font-weight:900;color:#fff;cursor:pointer;
+      display:flex;align-items:center;justify-content:center;
+      transition:background .15s,transform .1s;font-family:inherit;line-height:1}
+    #help-btn:hover{background:rgba(255,255,255,.34);transform:scale(1.1)}
+
+    /* ── HELP OVERLAY ── */
+    #help-overlay{position:absolute;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,.72);z-index:980;display:none;
+      align-items:center;justify-content:center}
+    #help-overlay.active{display:flex}
+    .help-panel{background:#1e2a3a;border:2px solid #4a90d9;border-radius:20px;
+      padding:clamp(16px,3vh,28px) clamp(18px,3.5vw,32px);
+      width:min(94vw,520px);max-height:88vh;overflow-y:auto;
+      color:#fff;position:relative}
+    .help-close{position:absolute;top:10px;right:14px;background:none;border:none;
+      color:#aaa;font-size:clamp(20px,2.8vw,28px);cursor:pointer;line-height:1}
+    .help-close:hover{color:#fff}
+    .help-screen-title{font-size:clamp(17px,2.3vw,24px);font-weight:900;
+      color:#FFD700;margin-bottom:14px;text-align:center}
+    .help-section{margin-bottom:16px}
+    .help-section-label{font-size:clamp(12px,1.6vw,16px);font-weight:700;
+      color:#7ec8f7;margin-bottom:6px;border-bottom:1px solid #2e4060;padding-bottom:4px}
+    .help-row{display:flex;align-items:baseline;gap:10px;
+      font-size:clamp(12px,1.5vw,15px);color:#cde;padding:3px 0}
+    .help-key{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);
+      border-radius:5px;padding:1px 7px;font-family:monospace;
+      font-size:clamp(11px,1.4vw,14px);color:#fff;white-space:nowrap;flex-shrink:0}
+    .help-tip{font-size:clamp(11px,1.4vw,14px);color:#99b;
+      margin-top:10px;text-align:center;line-height:1.6}
+    .help-hint-bar{text-align:center;margin-top:14px;
+      font-size:clamp(11px,1.3vw,13px);color:#667;border-top:1px solid #2e4060;padding-top:10px}
+
+    /* ── LOADING ── */
+    #loading{position:absolute;top:0;left:0;width:100%;height:100%;
+      background:rgba(255,255,255,.93);z-index:999;
+      display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px}
+    #loading.active{display:flex}
+    .load-ball{font-size:clamp(38px,6.5vw,68px);animation:spin 1s linear infinite}
+    .load-text{font-size:clamp(15px,2vw,22px);color:#555}
+  </style>
+</head>
+<body>
+<div id="game">
+
+  <!-- LOADING -->
+  <div id="loading">
+    <div class="load-ball">⚽</div>
+    <div class="load-text" id="load-text">載入中...</div>
+  </div>
+
+  <!-- HELP BUTTON (always visible) -->
+  <button id="help-btn" onclick="App.openHelp()" title="說明 [?]">？</button>
+
+  <!-- HELP OVERLAY -->
+  <div id="help-overlay" onclick="if(event.target===this)App.closeHelp()">
+    <div class="help-panel">
+      <button class="help-close" onclick="App.closeHelp()">✕</button>
+      <div class="help-screen-title" id="help-title"></div>
+      <div id="help-body"></div>
+      <div class="help-hint-bar">按 <span class="help-key">Esc</span> 或點外側關閉說明</div>
+    </div>
+  </div>
+
+  <!-- ══ TITLE ══ -->
+  <div id="s-title" class="screen active">
+    <button class="gear-btn" onclick="App.openSettings()" title="設定 [S]">⚙️</button>
+    <div class="title-logo">⚡ 寶可夢學習大冒險 ⚡</div>
+    <div class="title-school">大湖國小 ｜ 國語・英文・數學</div>
+    <div class="title-mascot">⚡</div>
+    <div class="title-desc">答對題目才能攻擊！打倒寶可夢讓夥伴升級進化！</div>
+
+    <!-- file bar -->
+    <div class="file-bar" id="file-bar"></div>
+
+    <!-- 3-slot grid (hidden until file loaded) -->
+    <div class="slot-grid" id="slot-grid" style="display:none"></div>
+    <div style="font-size:clamp(10px,1.2vw,13px);color:#557;margin-top:4px">Powered by PokéAPI（免費開源）</div>
+  </div>
+
+  <!-- ══ SETTINGS ══ -->
+  <div id="s-settings" class="screen">
+    <div class="settings-panel">
+      <div class="settings-header">
+        <h2>⚙️ 設定</h2>
+        <button class="btn btn-gray" onclick="App.closeSettings()"
+                style="padding:8px 18px;font-size:clamp(13px,1.6vw,17px)">
+          ✕ 關閉 <span class="kb-hint">[Esc]</span>
+        </button>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label">📚 年級／課程</div>
+        <div class="settings-row">
+          <button class="setting-opt" data-k="grade" data-v="kinder"
+                  onclick="App.setSetting('grade','kinder')">大班</button>
+          <button class="setting-opt" data-k="grade" data-v="grade1"
+                  onclick="App.setSetting('grade','grade1')">小學一年級</button>
+          <button class="setting-opt" data-k="grade" data-v="grade2"
+                  onclick="App.setSetting('grade','grade2')">小學二年級</button>
+          <button class="setting-opt active" data-k="grade" data-v="grade3"
+                  onclick="App.setSetting('grade','grade3')">小學三年級</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label">⏳ 答題時間</div>
+        <div class="settings-row">
+          <button class="setting-opt" data-k="timerSec" data-v="0"
+                  onclick="App.setSetting('timerSec',0)">停用</button>
+          <button class="setting-opt" data-k="timerSec" data-v="10"
+                  onclick="App.setSetting('timerSec',10)">10秒</button>
+          <button class="setting-opt active" data-k="timerSec" data-v="15"
+                  onclick="App.setSetting('timerSec',15)">15秒</button>
+          <button class="setting-opt" data-k="timerSec" data-v="20"
+                  onclick="App.setSetting('timerSec',20)">20秒</button>
+          <button class="setting-opt" data-k="timerSec" data-v="30"
+                  onclick="App.setSetting('timerSec',30)">30秒</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-label">⚔️ 難度</div>
+        <div class="settings-row">
+          <button class="setting-opt" data-k="difficulty" data-v="easy"
+                  onclick="App.setSetting('difficulty','easy')">簡單（敵人弱）</button>
+          <button class="setting-opt active" data-k="difficulty" data-v="normal"
+                  onclick="App.setSetting('difficulty','normal')">普通</button>
+          <button class="setting-opt" data-k="difficulty" data-v="hard"
+                  onclick="App.setSetting('difficulty','hard')">困難（敵人強）</button>
+        </div>
+      </div>
+
+      <div class="settings-section settings-toggle-row">
+        <div class="settings-label">🔊 朗讀題目（TTS）</div>
+        <button class="toggle-btn off" id="tts-toggle" onclick="App.toggleSetting('tts')">關</button>
+      </div>
+
+      <div class="settings-section settings-toggle-row">
+        <div class="settings-label">🎵 背景音樂</div>
+        <button class="toggle-btn on" id="bgm-toggle" onclick="App.toggleSetting('bgm')">開</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ NAME ══ -->
+  <div id="s-name" class="screen">
+    <div style="font-size:clamp(48px,8vw,88px)">🧑‍🎓</div>
+    <h2 style="color:#fff;font-size:clamp(20px,3vw,32px);text-align:center">請輸入你的名字！</h2>
+    <input id="name-input" class="input-field" type="text"
+           placeholder="你的名字" maxlength="8"
+           onkeydown="if(event.key==='Enter')App.confirmName()">
+    <p>（最多8個字）</p>
+    <button class="btn btn-green" onclick="App.confirmName()">確認 ✅</button>
+    <button class="btn btn-gray" onclick="App.showTitleScreen()"
+            style="margin-top:8px;font-size:clamp(13px,1.6vw,18px)">返回</button>
+  </div>
+
+  <!-- ══ PARTY SELECT ══ -->
+  <div id="s-party-select" class="screen">
+    <div style="font-size:clamp(32px,5.5vw,66px)">🌟</div>
+    <h2>選擇你的三隻夥伴！</h2>
+    <p>從下方選3隻寶可夢組成你的隊伍</p>
+    <div class="ps-counter">已選：<span id="ps-count">0</span> / 3</div>
+    <div class="poke-grid" id="party-grid"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
+      <button id="ps-confirm-btn" class="btn btn-red" onclick="App.confirmParty()" disabled>
+        出發！🎉
+      </button>
+      <button class="btn btn-gray" onclick="App.goName()"
+              style="font-size:clamp(13px,1.6vw,17px)">返回</button>
+    </div>
+  </div>
+
+  <!-- ══ BATTLE ══ -->
+  <div id="s-battle" class="screen" style="justify-content:flex-start">
+    <div class="status-bar">
+      <span id="st-name">訓練師</span>
+      <div class="party-strip" id="party-strip"></div>
+      <span>🏆 <span id="st-wins">0</span></span>
+      <button class="mute-btn" onclick="BGM.toggle()" id="mute-btn">🔊</button>
+    </div>
+
+    <div class="battle-field">
+      <div class="enemy-info-box">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <span class="poke-info-name" id="e-name">???</span>
+          <span class="poke-info-lv">Lv.<span id="e-lv">1</span></span>
+        </div>
+        <div class="hp-row"><span>HP</span><span id="e-hp-text">—/—</span></div>
+        <div class="hp-bar"><div class="hp-fill" id="e-hp-fill" style="width:100%"></div></div>
+      </div>
+
+      <img id="e-sprite" class="enemy-sprite" src="" alt="enemy">
+      <img id="p-sprite" class="player-sprite" src="" alt="player">
+
+      <div class="player-info-box">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <span class="poke-info-name" id="p-name">---</span>
+          <span class="poke-info-lv">Lv.<span id="p-lv">1</span></span>
+        </div>
+        <div class="hp-row"><span>HP</span><span id="p-hp-text">—/—</span></div>
+        <div class="hp-bar"><div class="hp-fill" id="p-hp-fill" style="width:100%"></div></div>
+        <div class="xp-bar"><div class="xp-fill" id="p-xp-fill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="battle-textbox" id="battle-text" onclick="App.advanceText()">
+      野生的寶可夢出現了！▼
+    </div>
+
+    <div class="battle-menu" id="battle-menu" style="display:none">
+      <button class="battle-btn" id="btn-attack"  onclick="App.doAttack('normal')">
+        ⚔️ 攻擊<br><span class="kb-hint">[1/Z]</span>
+      </button>
+      <button class="battle-btn" id="btn-special" onclick="App.doAttack('special')">
+        ✨ 特技<br><span class="kb-hint">[2/X]</span>
+      </button>
+      <button class="battle-btn" id="btn-item" onclick="App.doItem()">
+        🎒 道具<br><span class="kb-hint">[3/C]</span>
+      </button>
+      <button class="battle-btn" id="btn-switch" onclick="App.showBattleChoose('mid-battle')">
+        🔄 換人<br><span class="kb-hint">[4/P]</span>
+      </button>
+    </div>
+
+    <!-- Question overlay -->
+    <div id="q-overlay">
+      <div class="q-box">
+        <div class="q-header">
+          <span class="q-badge" id="q-badge">數學</span>
+          <span style="font-size:clamp(11px,1.4vw,15px);color:#888" id="q-timer-label">⏳ 限時</span>
+        </div>
+        <div class="timer-bar" id="q-timer-bar">
+          <div class="timer-fill" id="q-timer" style="width:100%"></div>
+        </div>
+        <div class="q-text" id="q-text">題目</div>
+        <div class="opts-grid" id="q-opts"></div>
+        <div class="q-result" id="q-result"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ BATTLE-CHOOSE ══ -->
+  <div id="s-battle-choose" class="screen">
+    <h2 id="bc-title">出戰哪一隻？</h2>
+    <p id="bc-subtitle">選擇你的出戰寶可夢</p>
+    <div class="party-choose-grid" id="bc-grid"></div>
+    <button class="btn btn-gray" id="bc-cancel-btn" onclick="App.cancelPartySwitch()"
+            style="display:none;font-size:clamp(13px,1.6vw,17px)">
+      取消 <span class="kb-hint">[Esc]</span>
+    </button>
+  </div>
+
+  <!-- ══ EVOLUTION ══ -->
+  <div id="s-evo" class="screen">
+    <div class="evo-title">✨ 要進化了！✨</div>
+    <div style="font-size:clamp(13px,1.7vw,19px);color:#888;text-align:center">
+      答對特別題目就能進化！
+    </div>
+    <div class="evo-sprites">
+      <img id="evo-from-img" src="" alt="from">
+      <div class="evo-arrow">⚡</div>
+      <img id="evo-to-img"   src="" alt="to">
+    </div>
+    <div class="q-box" style="width:min(93vw,560px)">
+      <div class="q-header">
+        <span class="q-badge badge-special" id="evo-q-badge">⭐ 進化題目</span>
+      </div>
+      <div class="q-text" id="evo-q-text">題目</div>
+      <div class="opts-grid" id="evo-q-opts"></div>
+      <div class="q-result" id="evo-q-result"></div>
+    </div>
+  </div>
+
+  <!-- ══ VICTORY ══ -->
+  <div id="s-victory" class="screen">
+    <div class="v-icon">🏆</div>
+    <div class="v-title">勝利！</div>
+    <div class="v-msg" id="v-msg">打倒了野生寶可夢！</div>
+    <div class="v-stats">
+      <div class="v-stat"><div class="v-stat-num" id="v-wins">0</div><div class="v-stat-lbl">連勝</div></div>
+      <div class="v-stat"><div class="v-stat-num" id="v-correct">0</div><div class="v-stat-lbl">答對</div></div>
+    </div>
+    <div class="v-party" id="v-party"></div>
+    <button class="btn btn-red" onclick="App.nextBattle()">
+      繼續戰鬥！⚔️ <span class="kb-hint">[Enter]</span>
+    </button>
+    <div style="font-size:clamp(11px,1.4vw,15px);color:rgba(255,255,255,.7);margin-top:4px"
+         id="v-heal-msg"></div>
+  </div>
+
+  <!-- ══ GAME OVER ══ -->
+  <div id="s-gameover" class="screen">
+    <div class="go-icon">😵</div>
+    <div class="go-title">全滅了...</div>
+    <div class="go-msg">別灰心！再試一次！</div>
+    <div class="go-score" id="go-score">最終 0 連勝</div>
+    <div style="font-size:clamp(12px,1.6vw,18px);color:#88aaff;margin:4px 0" id="go-stats"></div>
+    <button class="btn btn-red" onclick="App.restart()">
+      再次挑戰！🔥 <span class="kb-hint">[Enter]</span>
+    </button>
+    <button class="btn btn-gray" onclick="App.showTitleScreen()"
+            style="margin-top:8px;font-size:clamp(13px,1.6vw,17px)">回首頁</button>
+  </div>
+
+</div><!-- #game -->
+
+<script>
+'use strict';
+
+// ================================================================
+// BGM  — looping chiptune (Web Audio API)
+// ================================================================
+const BGM = (() => {
+  let ctx=null, masterGain=null, muted=false, started=false;
+  let melodyIdx=0, bassIdx=0, melodyNext=0, bassNext=0, rafID=null;
+  const BPM=138, B=60/BPM, S=.5, Q=.25;
+
+  const MELODY=[
+    [659,S,.18],[587,Q,.15],[523,Q,.15],[587,S,.15],[0,S,0],
+    [659,S,.18],[784,S,.20],[880,1,.22],[0,S,0],
+    [784,S,.18],[699,Q,.15],[659,Q,.15],[784,S,.18],[0,S,0],
+    [880,S,.18],[1047,S,.20],[784,1,.20],[0,S,0],
+    [880,S,.18],[784,Q,.15],[699,Q,.15],[784,S,.15],[0,S,0],
+    [699,S,.18],[659,Q,.15],[587,Q,.15],[523,1,.20],[0,S,0],
+    [587,S,.18],[523,Q,.15],[494,Q,.15],[523,S,.15],[0,S,0],
+    [659,S,.18],[784,S,.20],[659,1,.20],[0,S,0],
+    [523,Q,.15],[587,Q,.15],[659,Q,.15],[784,Q,.18],
+    [880,S,.20],[784,S,.18],[699,1,.18],[0,S,0],
+    [659,Q,.15],[587,Q,.15],[523,Q,.15],[494,Q,.12],
+    [523,S,.18],[440,S,.15],[494,1,.18],[0,S,0],
+    [659,S,.18],[587,Q,.15],[659,Q,.15],[784,S,.18],[0,S,0],
+    [880,S,.20],[784,S,.18],[659,1,.20],[0,S,0],
+    [587,S,.18],[523,Q,.15],[494,Q,.15],[523,S,.15],[659,S,.18],
+    [784,S,.20],[659,2,.22],[0,1,0],
+  ];
+  const BASS=[
+    [164,.4,.12],[0,.1,0],[130,.4,.12],[0,.1,0],
+    [164,.4,.12],[0,.1,0],[196,.4,.12],[0,.1,0],
+    [174,.4,.12],[0,.1,0],[220,.4,.12],[0,.1,0],
+    [196,.4,.12],[0,.1,0],[164,.4,.12],[0,.1,0],
+    [130,.4,.12],[0,.1,0],[164,.4,.12],[0,.1,0],
+    [174,.4,.12],[0,.1,0],[196,.4,.12],[0,.1,0],
+    [220,.4,.12],[0,.1,0],[174,.4,.12],[0,.1,0],
+    [164,.4,.12],[0,.1,0],[196,.4,.12],[0,.1,0],
+  ];
+
+  const getCtx=()=>{
+    if(!ctx){
+      ctx=new(window.AudioContext||window.webkitAudioContext)();
+      masterGain=ctx.createGain();
+      masterGain.gain.value=muted?0:.55;
+      masterGain.connect(ctx.destination);
+    }
+    return ctx;
+  };
+  const note=(freq,dur,vol,t,type='square')=>{
+    if(!freq||!vol) return;
+    const c=getCtx(),o=c.createOscillator(),g=c.createGain();
+    o.connect(g);g.connect(masterGain);
+    o.type=type;o.frequency.value=freq;
+    g.gain.setValueAtTime(vol,t);
+    g.gain.setValueAtTime(vol,t+dur*B*.7);
+    g.gain.linearRampToValueAtTime(0,t+dur*B*.96);
+    o.start(t);o.stop(t+dur*B);
+  };
+  const scheduler=()=>{
+    const c=getCtx(),now=c.currentTime,LOOK=.15;
+    while(melodyNext<now+LOOK){
+      const[f,d,v]=MELODY[melodyIdx];
+      note(f,d,v*.9,melodyNext,'square');
+      melodyNext+=d*B; melodyIdx=(melodyIdx+1)%MELODY.length;
+    }
+    while(bassNext<now+LOOK){
+      const[f,d,v]=BASS[bassIdx];
+      note(f,d,v*.8,bassNext,'triangle');
+      bassNext+=d*B; bassIdx=(bassIdx+1)%BASS.length;
+    }
+    rafID=requestAnimationFrame(scheduler);
+  };
+
+  return {
+    start(){
+      if(started)return; started=true;
+      const c=getCtx();
+      if(c.state==='suspended')c.resume();
+      melodyNext=c.currentTime+.05;bassNext=c.currentTime+.05;
+      scheduler();
+    },
+    toggle(){
+      muted=!muted;
+      if(masterGain)masterGain.gain.value=muted?0:.55;
+      document.getElementById('mute-btn').textContent=muted?'🔇':'🔊';
+    },
+    setMuted(v){
+      muted=!!v;
+      if(masterGain)masterGain.gain.value=muted?0:.55;
+      document.getElementById('mute-btn').textContent=muted?'🔇':'🔊';
+    },
+    sfx(type){
+      const c=getCtx(),mg=c.createGain();
+      mg.gain.value=.45;mg.connect(c.destination);
+      const plays={
+        attack  :[[440,.1,'square'],[330,.15,'square',.08]],
+        hit     :[[220,.08,'sawtooth'],[160,.15,'sawtooth',.07]],
+        correct :[[523,.12,'square'],[659,.12,'square',.13],[784,.28,'square',.26]],
+        wrong   :[[250,.2,'sawtooth'],[185,.32,'sawtooth',.22]],
+        victory :[[659,.12,'square'],[659,.12,'square',.15],[784,.2,'square',.3],[1047,.45,'square',.55]],
+        evolution:Array.from({length:20},(_,i)=>[180+i*44,.12,'sine',i*.09]),
+        levelup :[[523,.12,'square'],[659,.12,'square',.13],[784,.12,'square',.26],[1047,.4,'square',.4]],
+        appear  :[[300,.07,'sawtooth'],[400,.07,'sawtooth',.08],[350,.2,'sawtooth',.16]],
+        select  :[[500,.08,'square']],
+      };
+      (plays[type]||[]).forEach(([freq,dur,wt,delay=0])=>{
+        const o=c.createOscillator(),g=c.createGain();
+        o.connect(g);g.connect(mg);
+        o.type=wt;o.frequency.value=freq;
+        const t=c.currentTime+delay;
+        g.gain.setValueAtTime(.9,t);
+        g.gain.exponentialRampToValueAtTime(.001,t+dur+.01);
+        o.start(t);o.stop(t+dur+.05);
+      });
+    },
+  };
+})();
+
+// ================================================================
+// SAVE MODULE  (File System Access API + IndexedDB for persistence)
+// ================================================================
+const Save={
+  _data:{'1':null,'2':null,'3':null}, // in-memory cache; reads are sync
+  _handle:null,                        // FileSystemFileHandle
+  _db:null,
+  _pendingHandle:null,                 // handle restored from IDB, needs permission
+  _useFallback:false,                  // true when browser lacks File System Access API
+
+  // ── freshUsedQ ────────────────────────────────────────────────
+  freshUsedQ(){
+    const r={};
+    ['kinder','grade1','grade2','grade3'].forEach(g=>{
+      r[g]={math:[],chinese:[],english:[]};
+    });
+    return r;
+  },
+
+  // ── IndexedDB for handle persistence ─────────────────────────
+  async _initDB(){
+    return new Promise(res=>{
+      const r=indexedDB.open('pokemon_school_v1',1);
+      r.onupgradeneeded=e=>e.target.result.createObjectStore('kv');
+      r.onsuccess=e=>{this._db=e.target.result;res();};
+      r.onerror=()=>res();
+    });
+  },
+  async _storeHandle(h){
+    if(!this._db)return;
+    return new Promise(res=>{
+      const tx=this._db.transaction('kv','readwrite');
+      tx.objectStore('kv').put(h,'fileHandle');
+      tx.oncomplete=res; tx.onerror=res;
+    });
+  },
+  async _getStoredHandle(){
+    if(!this._db)return null;
+    return new Promise(res=>{
+      const tx=this._db.transaction('kv','readonly');
+      const req=tx.objectStore('kv').get('fileHandle');
+      req.onsuccess=()=>res(req.result||null);
+      req.onerror=()=>res(null);
+    });
+  },
+  async _clearStoredHandle(){
+    if(!this._db)return;
+    const tx=this._db.transaction('kv','readwrite');
+    tx.objectStore('kv').delete('fileHandle');
+  },
+
+  // ── init: called once on page load ───────────────────────────
+  async init(){
+    if(!('showOpenFilePicker' in window)){
+      this._useFallback=true;
+      this._loadFallback();
+      return;
+    }
+    await this._initDB();
+    const h=await this._getStoredHandle();
+    if(!h)return;
+    try{
+      const perm=await h.queryPermission({mode:'readwrite'});
+      if(perm==='granted'){
+        this._handle=h;
+        await this._readFile();
+      } else {
+        this._pendingHandle=h; // needs user gesture to re-permit
+      }
+    }catch{}
+  },
+
+  // ── file operations ───────────────────────────────────────────
+  async openFile(){
+    if(this._useFallback)return;
+    const [h]=await window.showOpenFilePicker({
+      types:[{description:'寶可夢存檔',accept:{'application/json':['.json']}}],
+      multiple:false,
+    });
+    await this._setupHandle(h);
+  },
+  async newFile(){
+    if(this._useFallback)return;
+    const h=await window.showSaveFilePicker({
+      suggestedName:'pokemon_save.json',
+      types:[{description:'寶可夢存檔',accept:{'application/json':['.json']}}],
+    });
+    this._data={'1':null,'2':null,'3':null};
+    await this._setupHandle(h);
+    await this._writeFile();
+  },
+  async reconnect(){
+    if(!this._pendingHandle)return;
+    try{
+      const perm=await this._pendingHandle.requestPermission({mode:'readwrite'});
+      if(perm==='granted'){
+        this._handle=this._pendingHandle;
+        this._pendingHandle=null;
+        await this._readFile();
+        await this._storeHandle(this._handle);
+      }
+    }catch{}
+  },
+  async _setupHandle(h){
+    this._handle=h;
+    this._pendingHandle=null;
+    await this._storeHandle(h);
+    await this._readFile();
+  },
+  async _readFile(){
+    try{
+      const file=await this._handle.getFile();
+      const text=await file.text();
+      const parsed=JSON.parse(text);
+      this._data=parsed.slots||{'1':null,'2':null,'3':null};
+    }catch{this._data={'1':null,'2':null,'3':null};}
+  },
+  async _writeFile(){
+    if(!this._handle)return;
+    try{
+      const w=await this._handle.createWritable();
+      await w.write(JSON.stringify({version:1,slots:this._data},null,2));
+      await w.close();
+    }catch(e){console.warn('寫檔失敗:',e);}
+  },
+
+  // ── fallback (localStorage) ───────────────────────────────────
+  _lsKey(slot){ return 'pokemon_school_save_'+slot; },
+  _loadFallback(){
+    ['1','2','3'].forEach(s=>{
+      try{const r=localStorage.getItem(this._lsKey(s));this._data[s]=r?JSON.parse(r):null;}
+      catch{this._data[s]=null;}
+    });
+  },
+  _saveFallback(){
+    try{
+      const d=this._buildSlotData();
+      localStorage.setItem(this._lsKey(String(G.currentSlot)),JSON.stringify(d));
+      this._data[String(G.currentSlot)]=d;
+    }catch{}
+  },
+
+  // ── public API (sync reads, fire-and-forget writes) ──────────
+  _buildSlotData(){
+    return{version:1,playerName:G.playerName,
+      party:JSON.parse(JSON.stringify(G.party)),
+      settings:{...G.settings},wins:G.wins,correct:G.correct,savedAt:Date.now()};
+  },
+  save(){
+    const d=this._buildSlotData();
+    this._data[String(G.currentSlot)]=d;
+    if(this._useFallback){this._saveFallback();return;}
+    this._writeFile();
+  },
+  load(slot){ return this._data[String(slot)]||null; },
+  clear(slot){
+    this._data[String(slot)]=null;
+    if(this._useFallback){
+      try{localStorage.removeItem(this._lsKey(String(slot)));}catch{}
+      return;
+    }
+    this._writeFile();
+  },
+  hasFile(){ return this._useFallback||!!this._handle; },
+  hasPending(){ return!!this._pendingHandle; },
+  fileName(){ return this._handle?.name||''; },
+  pendingName(){ return this._pendingHandle?.name||''; },
+
+  fmtDate(ts){
+    const d=new Date(ts);
+    return `${d.getMonth()+1}/${d.getDate()} ${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
+  },
+};
+
+// ================================================================
+// TTS MODULE
+// ================================================================
+const TTS={
+  voices:[],
+  init(){
+    if(!('speechSynthesis' in window))return;
+    const load=()=>{this.voices=window.speechSynthesis.getVoices();};
+    load();
+    window.speechSynthesis.onvoiceschanged=load;
+  },
+  say(text){
+    if(!G.settings.ttsEnabled||!('speechSynthesis' in window))return;
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g,''));
+    u.lang='zh-TW'; u.rate=.9; u.pitch=1.1;
+    const v=this.voices.find(x=>x.lang==='zh-TW')||this.voices.find(x=>x.lang.startsWith('zh'));
+    if(v)u.voice=v;
+    window.speechSynthesis.speak(u);
+  },
+  cancel(){if('speechSynthesis' in window)window.speechSynthesis.cancel();},
+};
+
+// ================================================================
+// QUESTION BANK  (loaded async from questions/<grade>/<sub>.json)
+// ================================================================
+const QB={
+  _data:{
+    kinder: {math:[],chinese:[],english:[]},
+    grade1: {math:[],chinese:[],english:[]},
+    grade2: {math:[],chinese:[],english:[]},
+    grade3: {math:[],chinese:[],english:[]},
+  },
+
+  // ── minimal fallback if fetch fails (file:// protocol etc.) ──
+  _fallback:{
+    kinder:{
+      math:[
+        {id:'km_f1',type:'mcq',q:'2 + 1 = ?',opts:['1','2','3','4'],a:2,tags:['addition']},
+        {id:'km_f2',type:'tf', q:'5 比 3 大，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['comparison']},
+        {id:'km_f3',type:'mcq',q:'○ 是什麼形狀？',opts:['三角形','正方形','圓形','長方形'],a:2,tags:['shapes']},
+        {id:'km_f4',type:'mcq',q:'5 - 2 = ?',opts:['2','3','4','5'],a:1,tags:['subtraction']},
+        {id:'km_f5',type:'tf', q:'貓咪的叫聲是「汪汪」嗎？',opts:['正確','錯誤'],a:1,tags:['animals']},
+      ],
+      chinese:[
+        {id:'kc_f1',type:'mcq',q:'哪個動物會飛？',opts:['魚','狗','鳥','貓'],a:2,tags:['animals']},
+        {id:'kc_f2',type:'mcq',q:'哪個是水果？',opts:['書包','蘋果','桌子','椅子'],a:1,tags:['food']},
+        {id:'kc_f3',type:'tf', q:'下雨時要用雨傘，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['daily-life']},
+        {id:'kc_f4',type:'mcq',q:'爸爸的爸爸叫做？',opts:['爺爺','奶奶','外公','叔叔'],a:0,tags:['family']},
+        {id:'kc_f5',type:'mcq',q:'哪個是交通工具？',opts:['蘋果','書包','汽車','衣服'],a:2,tags:['transport']},
+      ],
+      english:[
+        {id:'ke_f1',type:'mcq',q:'蘋果的英文是？',opts:['Cat','Apple','Dog','Sun'],a:1,tags:['vocabulary','food']},
+        {id:'ke_f2',type:'tf', q:'Dog 是狗的英文，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['vocabulary','animals']},
+        {id:'ke_f3',type:'mcq',q:'紅色的英文是？',opts:['Blue','Green','Red','Yellow'],a:2,tags:['colors']},
+        {id:'ke_f4',type:'mcq',q:'英文「一」是？',opts:['One','Two','Three','Four'],a:0,tags:['numbers']},
+        {id:'ke_f5',type:'tf', q:'Cat 是貓的英文，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['vocabulary','animals']},
+      ],
+    },
+    grade1:{
+      math:[
+        {id:'g1m_f1',type:'mcq',q:'8 + 7 = ?',opts:['13','14','15','16'],a:2,tags:['addition']},
+        {id:'g1m_f2',type:'mcq',q:'15 - 6 = ?',opts:['7','8','9','10'],a:2,tags:['subtraction']},
+        {id:'g1m_f3',type:'tf', q:'10 + 5 = 15，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['addition']},
+        {id:'g1m_f4',type:'mcq',q:'一個星期有幾天？',opts:['5天','6天','7天','8天'],a:2,tags:['time']},
+        {id:'g1m_f5',type:'mcq',q:'3 × 3 = ?',opts:['6','8','9','12'],a:2,tags:['multiplication']},
+      ],
+      chinese:[
+        {id:'g1c_f1',type:'mcq',q:'「大」的相反詞是？',opts:['高','胖','小','長'],a:2,tags:['antonyms']},
+        {id:'g1c_f2',type:'tf', q:'「冷」的反義詞是「熱」，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['antonyms']},
+        {id:'g1c_f3',type:'mcq',q:'太陽從哪個方向升起？',opts:['南邊','北邊','東邊','西邊'],a:2,tags:['geography']},
+        {id:'g1c_f4',type:'mcq',q:'春天之後是哪個季節？',opts:['春天','夏天','秋天','冬天'],a:1,tags:['seasons']},
+        {id:'g1c_f5',type:'mcq',q:'哪個字的部首是「木」？',opts:['海','樹','草','山'],a:1,tags:['radicals']},
+      ],
+      english:[
+        {id:'g1e_f1',type:'mcq',q:'媽媽的英文是？',opts:['Father','Mother','Sister','Brother'],a:1,tags:['family']},
+        {id:'g1e_f2',type:'tf', q:'Hello 是「你好」的意思，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['greetings']},
+        {id:'g1e_f3',type:'mcq',q:'快樂的英文是？',opts:['Sad','Angry','Happy','Scared'],a:2,tags:['emotions']},
+        {id:'g1e_f4',type:'mcq',q:'英文「六」是？',opts:['Five','Six','Seven','Eight'],a:1,tags:['numbers']},
+        {id:'g1e_f5',type:'mcq',q:'學校的英文是？',opts:['Home','Park','School','Store'],a:2,tags:['places']},
+      ],
+    },
+    grade2:{
+      math:[
+        {id:'g2m_f1',type:'mcq',q:'45 + 38 = ?',opts:['73','83','93','63'],a:1,tags:['addition']},
+        {id:'g2m_f2',type:'mcq',q:'3 × 4 = ?',opts:['10','11','12','13'],a:2,tags:['multiplication']},
+        {id:'g2m_f3',type:'tf', q:'4 × 5 = 20，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['multiplication']},
+        {id:'g2m_f4',type:'mcq',q:'半小時有幾分鐘？',opts:['15分','20分','30分','45分'],a:2,tags:['time']},
+        {id:'g2m_f5',type:'mcq',q:'一公里等於幾公尺？',opts:['100','500','1000','10000'],a:2,tags:['units']},
+      ],
+      chinese:[
+        {id:'g2c_f1',type:'mcq',q:'「美麗」的近義詞是？',opts:['可愛','漂亮','高大','聰明'],a:1,tags:['synonyms']},
+        {id:'g2c_f2',type:'tf', q:'蝴蝶是昆蟲，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['animals','science']},
+        {id:'g2c_f3',type:'mcq',q:'「哭」的反義詞是？',opts:['跑','跳','笑','睡'],a:2,tags:['antonyms']},
+        {id:'g2c_f4',type:'mcq',q:'哪個是形容詞？',opts:['跑步','美麗','吃飯','睡覺'],a:1,tags:['grammar']},
+        {id:'g2c_f5',type:'mcq',q:'「謝謝」是表示？',opts:['道歉','感謝','拒絕','詢問'],a:1,tags:['expression']},
+      ],
+      english:[
+        {id:'g2e_f1',type:'mcq',q:'星期一的英文是？',opts:['Sunday','Monday','Tuesday','Wednesday'],a:1,tags:['days']},
+        {id:'g2e_f2',type:'tf', q:'Monday 是星期一，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['days']},
+        {id:'g2e_f3',type:'mcq',q:'I ___ a student.（我是學生）',opts:['am','is','are','be'],a:0,tags:['grammar','be-verbs']},
+        {id:'g2e_f4',type:'mcq',q:'椅子的英文是？',opts:['Table','Chair','Desk','Door'],a:1,tags:['classroom']},
+        {id:'g2e_f5',type:'mcq',q:'游泳的英文是？',opts:['Walk','Run','Jump','Swim'],a:3,tags:['actions']},
+      ],
+    },
+    grade3:{
+      math:[
+        {id:'g3m_f1',type:'mcq',q:'7 × 8 = ?',opts:['48','54','56','63'],a:2,tags:['multiplication']},
+        {id:'g3m_f2',type:'mcq',q:'48 ÷ 6 = ?',opts:['6','7','8','9'],a:2,tags:['division']},
+        {id:'g3m_f3',type:'tf', q:'9 × 9 = 81，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['multiplication']},
+        {id:'g3m_f4',type:'mcq',q:'一小時有幾分鐘？',opts:['30分','45分','60分','90分'],a:2,tags:['time']},
+        {id:'g3m_f5',type:'mcq',q:'三角形有幾個邊？',opts:['2個','3個','4個','5個'],a:1,tags:['geometry']},
+      ],
+      chinese:[
+        {id:'g3c_f1',type:'mcq',q:'「快樂」的反義詞是？',opts:['開心','傷心','緊張','平靜'],a:1,tags:['antonyms']},
+        {id:'g3c_f2',type:'tf', q:'春夏秋冬，秋天是第三個季節，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['seasons']},
+        {id:'g3c_f3',type:'mcq',q:'太陽從哪個方向升起？',opts:['南邊','北邊','東邊','西邊'],a:2,tags:['geography']},
+        {id:'g3c_f4',type:'mcq',q:'蝴蝶是哪種動物？',opts:['魚類','鳥類','昆蟲','哺乳類'],a:2,tags:['animals','science']},
+        {id:'g3c_f5',type:'mcq',q:'哪個字的部首是「木」？',opts:['海','樹','草','山'],a:1,tags:['radicals']},
+      ],
+      english:[
+        {id:'g3e_f1',type:'mcq',q:'蘋果的英文是？',opts:['Orange','Apple','Banana','Grape'],a:1,tags:['food','vocabulary']},
+        {id:'g3e_f2',type:'tf', q:'School 是「學校」的英文，這是正確的嗎？',opts:['正確','錯誤'],a:0,tags:['places']},
+        {id:'g3e_f3',type:'mcq',q:'紅色的英文是？',opts:['Blue','Green','Yellow','Red'],a:3,tags:['colors']},
+        {id:'g3e_f4',type:'mcq',q:'快樂的英文是？',opts:['Sad','Angry','Happy','Scared'],a:2,tags:['emotions']},
+        {id:'g3e_f5',type:'mcq',q:'魚的英文是？',opts:['Bird','Dog','Cat','Fish'],a:3,tags:['animals','vocabulary']},
+      ],
+    },
+  },
+
+  // ── load all banks at startup ─────────────────────────────────
+  async loadAll(){
+    const grades=['kinder','grade1','grade2','grade3'];
+    const subs=['math','chinese','english'];
+    await Promise.all(grades.flatMap(g=>subs.map(s=>this._loadOne(g,s))));
+  },
+  async _loadOne(grade,sub){
+    try{
+      const r=await fetch(`questions/${grade}/${sub}.json`);
+      if(!r.ok) throw new Error('not found');
+      const data=await r.json();
+      if(Array.isArray(data.questions)&&data.questions.length>0)
+        this._data[grade][sub]=data.questions;
+      else
+        this._data[grade][sub]=this._fallback[grade][sub]||[];
+    }catch{
+      this._data[grade][sub]=this._fallback[grade]?.[sub]||[];
+    }
+  },
+  get(grade,sub){ return this._data[grade][sub]||[]; },
+
+  // ── old-style access kept for compatibility ───────────────────
+  // (kept as proxy so any QB[grade][sub] access still works)
+  kinder:{math:[],chinese:[],english:[]},
+  grade1:{math:[],chinese:[],english:[]},
+  grade2:{math:[],chinese:[],english:[]},
+  grade3:{math:[],chinese:[],english:[]},
+
+  // ── EMBEDDED LEGACY (removed — see questions/ folder) ─────────
+  // Legacy data was here. Now sourced from JSON files.
+  // ── 大班 ──────────────────────────────────────────────────────
+};
+
+// ================================================================
+// POKEMON DATA
+// ================================================================
+const ZH={
+  1:'妙蛙種子',2:'妙蛙草',3:'妙蛙花',4:'小火龍',5:'火恐龍',6:'噴火龍',
+  7:'傑尼龜',8:'卡咪龜',9:'水箭龜',10:'綠毛蟲',13:'獨角蟲',16:'波波',
+  19:'小拉達',21:'嘟嘟',23:'阿柔尾',25:'皮卡丘',27:'穿山王',35:'皮皮',
+  37:'六尾',39:'胖丁',41:'超音蝠',43:'走路草',46:'派拉斯',48:'球球',
+  50:'地鼠',52:'喵喵',54:'可達鴨',56:'猴怪',58:'卡蒂狗',60:'蚊香蝌蚪',
+  63:'凱西',66:'腕力',69:'喇叭芽',72:'水母',74:'小拳石',79:'呆呆獸',
+  81:'小磁怪',84:'多多',86:'靈靈',88:'臭泥',90:'大舌貝',92:'鬼斯',
+  96:'引夢貘',98:'大鉗蟹',100:'霹靂電球',102:'蛋蛋',104:'可拉可拉',
+  109:'毒毒',111:'鐵甲犀牛',113:'吉利蛋',116:'海馬',118:'金魚王',
+  120:'星形寶石',129:'鯉魚王',133:'伊布',143:'卡比獸',147:'迷你龍',
+};
+// 24 curated recognizable Pokemon for kids party select
+const CURATED=[1,4,7,25,39,52,133,143,58,63,79,129,35,37,54,41,43,50,86,92,96,116,120,147];
+const WILD=[
+  10,13,16,19,21,23,25,27,35,37,39,41,43,46,48,50,52,54,56,58,
+  60,63,66,69,72,74,79,81,84,86,88,90,92,96,98,100,102,109,111,
+  113,116,118,120,129,133,143,147,
+];
+const EVO={
+  1:{lv:3,to:2},2:{lv:6,to:3},
+  4:{lv:3,to:5},5:{lv:6,to:6},
+  7:{lv:3,to:8},8:{lv:6,to:9},
+};
+const SP =id=>`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+const SPB=id=>`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`;
+
+// ================================================================
+// GAME STATE
+// ================================================================
+const G={
+  playerName:'訓練師',
+  currentSlot:1,   // active save slot (1, 2, or 3)
+  party:[],        // array of party member objects
+  activeIdx:0,     // which party member is battling
+  get activePoke(){ return this.party[this.activeIdx]||null; },
+
+  enemy:null, eHP:0, eMaxHP:0, eLv:1,
+  wins:0, correct:0, wrong:0, revives:3,
+
+  settings:{
+    grade:'grade3',
+    timerSec:15,
+    difficulty:'normal',
+    ttsEnabled:false,
+    bgmEnabled:true,
+  },
+
+  selectedStarters:[], // during party select
+  pendingCB:null,
+  qTimerID:null,
+  currentQAns:-1,      // for keyboard handler
+  battleChooseMode:'pre-battle',
+
+  usedQ:null, // set by Save.freshUsedQ()
+
+  calcHP(p,lv){ return Math.floor((p.baseHP*2*lv)/100)+lv+10; },
+  calcDmg(atk,def,lv,sp){
+    const pw=sp?90:55;
+    const mult={easy:.55,normal:1,hard:1.55}[this.settings.difficulty]||1;
+    return Math.max(4,Math.min(Math.floor((((2*lv/5+2)*pw*atk/def)/50)+2)*mult,40));
+  },
+};
+G.usedQ=Save.freshUsedQ();
+
+// ================================================================
+// APP
+// ================================================================
+const App={
+  _settingsFrom:'s-title',
+  _evoPokeObj:null,
+
+  // ── screens ────────────────────────────────────────────────────
+  showScreen(id){
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  },
+  showLoad(msg='載入中...'){
+    document.getElementById('load-text').textContent=msg;
+    document.getElementById('loading').classList.add('active');
+  },
+  hideLoad(){ document.getElementById('loading').classList.remove('active'); },
+
+  // ── title ──────────────────────────────────────────────────────
+  showTitleScreen(){
+    this._renderFileBar();
+    const hasFile=Save.hasFile();
+    const grid=document.getElementById('slot-grid');
+    grid.style.display=hasFile?'flex':'none';
+    if(hasFile){
+      grid.innerHTML=[1,2,3].map(slot=>{
+        const sv=Save.load(slot);
+        if(sv&&sv.party&&sv.party.length===3){
+          const lvStr=sv.party.map(p=>'Lv.'+p.lv).join(' / ');
+          return `<div class="slot-card filled" onclick="App.continueGame(${slot})">
+            <button class="slot-del" onclick="event.stopPropagation();App.deleteSlot(${slot})">🗑</button>
+            <div class="slot-num">Slot ${slot}</div>
+            <div class="slot-party">${sv.party.map(p=>`<img src="${SP(p.id)}" alt="${p.name}">`).join('')}</div>
+            <div class="slot-pname">${sv.playerName}</div>
+            <div class="slot-info">${sv.wins}勝 ・ ${lvStr}<br>${Save.fmtDate(sv.savedAt)}</div>
+          </div>`;
+        } else {
+          return `<div class="slot-card empty" onclick="App.goName(${slot})">
+            <div class="slot-num">Slot ${slot}</div>
+            <div class="slot-empty-icon">➕</div>
+            <div class="slot-empty-text">新遊戲</div>
+          </div>`;
+        }
+      }).join('');
+    }
+    this.showScreen('s-title');
+  },
+
+  _renderFileBar(){
+    const bar=document.getElementById('file-bar');
+    if(Save._useFallback){
+      bar.innerHTML=`
+        <div class="file-fallback-warn">⚠️ 您的瀏覽器不支援檔案存取，改用瀏覽器暫存（重新安裝瀏覽器或清除資料可能導致遺失）</div>`;
+      return;
+    }
+    if(Save.hasFile()){
+      bar.innerHTML=`
+        <div class="file-loaded">
+          📄 <strong>${Save.fileName()}</strong>
+          <span>存檔位置</span>
+        </div>
+        <div class="file-bar-btns">
+          <button class="file-btn" onclick="App.switchSaveFile()">📂 更換存檔</button>
+          <button class="file-btn" onclick="App.newSaveFile()">✨ 新增存檔</button>
+        </div>`;
+    } else if(Save.hasPending()){
+      bar.innerHTML=`
+        <div class="file-bar-status">偵測到上次的存檔：${Save.pendingName()}</div>
+        <div class="file-bar-btns">
+          <button class="file-btn reconnect" onclick="App.reconnectFile()">🔗 重新連結存檔</button>
+          <button class="file-btn" onclick="App.switchSaveFile()">📂 開啟其他存檔</button>
+          <button class="file-btn" onclick="App.newSaveFile()">✨ 新增存檔</button>
+        </div>`;
+    } else {
+      bar.innerHTML=`
+        <div class="file-bar-status">請選擇或新增一個存檔，所有進度將儲存在該檔案中</div>
+        <div class="file-bar-btns">
+          <button class="file-btn" onclick="App.switchSaveFile()">📂 開啟存檔</button>
+          <button class="file-btn" onclick="App.newSaveFile()">✨ 新增存檔</button>
+        </div>`;
+    }
+  },
+
+  async switchSaveFile(){
+    try{ await Save.openFile(); } catch(e){ if(e.name!=='AbortError')console.warn(e); return; }
+    this.showTitleScreen();
+  },
+
+  async newSaveFile(){
+    try{ await Save.newFile(); } catch(e){ if(e.name!=='AbortError')console.warn(e); return; }
+    this.showTitleScreen();
+  },
+
+  async reconnectFile(){
+    await Save.reconnect();
+    this.showTitleScreen();
+  },
+
+  deleteSlot(slot){
+    if(!confirm(`確定要刪除 Slot ${slot} 的存檔嗎？`)) return;
+    Save.clear(slot);
+    this.showTitleScreen();
+  },
+
+  continueGame(slot){
+    const sv=Save.load(slot);
+    if(!sv) return;
+    G.currentSlot=slot;
+    G.playerName=sv.playerName;
+    G.party=sv.party;
+    G.activeIdx=0;
+    G.settings=Object.assign(G.settings,sv.settings||{});
+    G.wins=sv.wins||0;
+    G.correct=sv.correct||0;
+    G.wrong=0; G.revives=3;
+    G.usedQ=Save.freshUsedQ();
+    this._applySavedSettings();
+    BGM.start();
+    this.showBattleChoose('pre-battle');
+  },
+
+  _applySavedSettings(){
+    BGM.setMuted(!G.settings.bgmEnabled);
+    this.renderSettings();
+  },
+
+  // ── settings ───────────────────────────────────────────────────
+  openSettings(){
+    this._settingsFrom=document.querySelector('.screen.active')?.id||'s-title';
+    this.renderSettings();
+    this.showScreen('s-settings');
+  },
+  closeSettings(){
+    Save.save();
+    this.showScreen(this._settingsFrom);
+  },
+  renderSettings(){
+    const s=G.settings;
+    document.querySelectorAll('.setting-opt').forEach(b=>{
+      const k=b.dataset.k, v=b.dataset.v;
+      if(!k) return;
+      const cur=String(s[k]);
+      b.classList.toggle('active', cur===v);
+    });
+    const ttsBtn=document.getElementById('tts-toggle');
+    ttsBtn.textContent=s.ttsEnabled?'開':'關';
+    ttsBtn.className='toggle-btn '+(s.ttsEnabled?'on':'off');
+    const bgmBtn=document.getElementById('bgm-toggle');
+    bgmBtn.textContent=s.bgmEnabled?'開':'關';
+    bgmBtn.className='toggle-btn '+(s.bgmEnabled?'on':'off');
+  },
+  setSetting(key,val){
+    G.settings[key]=val;
+    this.renderSettings();
+    BGM.sfx('select');
+  },
+  toggleSetting(which){
+    if(which==='tts'){
+      if(!G.settings.ttsEnabled&&!('speechSynthesis' in window)){
+        alert('您的瀏覽器不支援語音朗讀功能');return;
+      }
+      G.settings.ttsEnabled=!G.settings.ttsEnabled;
+    }
+    if(which==='bgm'){
+      G.settings.bgmEnabled=!G.settings.bgmEnabled;
+      BGM.setMuted(!G.settings.bgmEnabled);
+    }
+    this.renderSettings();
+  },
+
+  // ── name ───────────────────────────────────────────────────────
+  goName(slot){
+    G.currentSlot=slot||G.currentSlot||1;
+    BGM.sfx('select');
+    document.getElementById('name-input').value='';
+    this.showScreen('s-name');
+    setTimeout(()=>document.getElementById('name-input').focus(),200);
+  },
+  confirmName(){
+    const v=document.getElementById('name-input').value.trim();
+    if(!v){
+      document.getElementById('name-input').style.borderColor='#FF4444';
+      document.getElementById('name-input').placeholder='請輸入名字！';
+      return;
+    }
+    BGM.sfx('select');
+    G.playerName=v;
+    this.loadPartySelect();
+    this.showScreen('s-party-select');
+  },
+
+  // ── party select ───────────────────────────────────────────────
+  loadPartySelect(){
+    const grid=document.getElementById('party-grid');
+    grid.innerHTML=CURATED.map(id=>`
+      <div class="party-card" id="pc-${id}" onclick="App.togglePartySelect(${id})">
+        <img src="${SP(id)}" alt="${ZH[id]||'#'+id}" loading="lazy">
+        <div class="pc-name">${ZH[id]||'#'+id}</div>
+        <div class="pc-check">✓</div>
+      </div>
+    `).join('');
+    G.selectedStarters=[];
+    document.getElementById('ps-count').textContent='0';
+    document.getElementById('ps-confirm-btn').disabled=true;
+  },
+  togglePartySelect(id){
+    const idx=G.selectedStarters.indexOf(id);
+    if(idx>-1){
+      G.selectedStarters.splice(idx,1);
+      document.getElementById(`pc-${id}`).classList.remove('selected');
+    } else {
+      if(G.selectedStarters.length>=3){
+        const old=G.selectedStarters.shift();
+        document.getElementById(`pc-${old}`)?.classList.remove('selected');
+      }
+      G.selectedStarters.push(id);
+      document.getElementById(`pc-${id}`).classList.add('selected');
+    }
+    document.getElementById('ps-count').textContent=G.selectedStarters.length;
+    document.getElementById('ps-confirm-btn').disabled=G.selectedStarters.length<3;
+    BGM.sfx('select');
+  },
+  async confirmParty(){
+    if(G.selectedStarters.length<3) return;
+    BGM.sfx('select');
+    this.showLoad('召喚夥伴中...');
+    G.party=[];
+    for(const id of G.selectedStarters){
+      const d=await this.fetchPoke(id);
+      G.party.push({...d, lv:1, xp:0, xpNeeded:3,
+        maxHP:G.calcHP(d,1), hp:G.calcHP(d,1)});
+    }
+    G.wins=0; G.correct=0; G.wrong=0; G.revives=3;
+    G.activeIdx=0;
+    G.usedQ=Save.freshUsedQ();
+    this.hideLoad();
+    BGM.start();
+    Save.save();
+    this.showBattleChoose('pre-battle');
+  },
+
+  // ── fetch pokemon ─────────────────────────────────────────────
+  async fetchPoke(id){
+    try{
+      const r=await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+      const d=await r.json();
+      return{
+        id,name:ZH[id]||d.name,
+        baseHP:  d.stats.find(s=>s.stat.name==='hp').base_stat,
+        baseAtk: d.stats.find(s=>s.stat.name==='attack').base_stat,
+        baseDef: d.stats.find(s=>s.stat.name==='defense').base_stat,
+        sprite:  d.sprites.front_default||SP(id),
+        spriteB: d.sprites.back_default ||SPB(id),
+      };
+    }catch{
+      return{id,name:ZH[id]||`#${id}`,baseHP:60,baseAtk:55,baseDef:50,
+        sprite:SP(id),spriteB:SPB(id)};
+    }
+  },
+
+  // ── battle-choose screen ──────────────────────────────────────
+  showBattleChoose(mode){
+    G.phase='choose';
+    G.battleChooseMode=mode;
+    const title=document.getElementById('bc-title');
+    const sub  =document.getElementById('bc-subtitle');
+    const canc =document.getElementById('bc-cancel-btn');
+    if(mode==='fainted'){
+      title.textContent=`${G.activePoke?.name||'??'} 倒下了！`;
+      sub.textContent='換誰出戰？';
+      canc.style.display='none';
+    } else if(mode==='mid-battle'){
+      title.textContent='換隊員';
+      sub.textContent='選擇出戰的寶可夢';
+      canc.style.display='inline-block';
+    } else {
+      title.textContent='出戰哪一隻？';
+      sub.textContent=`選擇 ${G.playerName} 的出戰寶可夢`;
+      canc.style.display='none';
+    }
+    this.renderBattleChoose();
+    this.showScreen('s-battle-choose');
+  },
+  renderBattleChoose(){
+    const grid=document.getElementById('bc-grid');
+    grid.innerHTML=G.party.map((p,i)=>{
+      const pct=Math.max(0,(p.hp/p.maxHP)*100);
+      const hpC=pct<=20?'hp-red':pct<=50?'hp-yellow':'';
+      return`
+        <div class="bc-card ${p.hp<=0?'fainted':''} ${i===G.activeIdx?'is-active':''}"
+             onclick="App.selectBattlePoke(${i})">
+          <div class="bc-active-badge">出戰中</div>
+          <img src="${p.spriteB||p.sprite}" class="bc-sprite" alt="${p.name}">
+          <div class="bc-name">${p.name}</div>
+          <div class="bc-lv">Lv.${p.lv}</div>
+          <div class="hp-bar" style="margin-top:5px">
+            <div class="hp-fill ${hpC}" style="width:${pct}%"></div>
+          </div>
+          <div class="bc-hp">${Math.max(0,p.hp)}/${p.maxHP}</div>
+          <div class="bc-num-hint">[${i+1}]</div>
+        </div>`;
+    }).join('');
+  },
+  selectBattlePoke(idx){
+    const p=G.party[idx];
+    if(!p||p.hp<=0) return;
+    G.activeIdx=idx;
+    BGM.sfx('select');
+    if(G.battleChooseMode==='pre-battle'){
+      this.startBattle();
+    } else {
+      // mid-battle or fainted: return to battle screen with new pokemon
+      document.getElementById('p-sprite').src=p.spriteB||p.sprite;
+      this.updateUI();
+      this.say(`${G.playerName} 換上了 ${p.name}！`,()=>this.showMenu());
+      this.showScreen('s-battle');
+    }
+  },
+  cancelPartySwitch(){
+    this.showScreen('s-battle');
+    this.showMenu();
+  },
+
+  // ── battle ────────────────────────────────────────────────────
+  async startBattle(){
+    this.showLoad('野生寶可夢出現了！');
+    const wid=WILD[Math.floor(Math.random()*WILD.length)];
+    const eData=await this.fetchPoke(wid);
+    const p=G.activePoke;
+    const lvOff={easy:-2,normal:0,hard:2}[G.settings.difficulty]||0;
+    G.enemy=eData;
+    G.eLv=Math.max(1,p.lv+Math.floor(Math.random()*3)-1+lvOff);
+    G.eMaxHP=G.calcHP(eData,G.eLv); G.eHP=G.eMaxHP;
+    G.phase='busy';
+    this.hideLoad();
+
+    this.showScreen('s-battle');
+    document.getElementById('st-name').textContent=G.playerName;
+    document.getElementById('st-wins').textContent=G.wins;
+
+    const ep=document.getElementById('e-sprite');
+    const pp=document.getElementById('p-sprite');
+    ep.src=G.enemy.sprite;
+    pp.src=p.spriteB||p.sprite;
+    ep.style.opacity='1'; ep.style.filter='';
+    ep.className='enemy-sprite anim-slideR';
+    pp.className='player-sprite anim-slideL';
+
+    document.getElementById('q-overlay').classList.remove('active');
+    document.getElementById('battle-menu').style.display='none';
+    this.updateUI();
+    BGM.sfx('appear');
+
+    this.say(`野生的 ${G.enemy.name} 出現了！`,()=>
+      this.say(`${G.playerName} 出戰 ${p.name}！`,()=>
+        this.showMenu()
+      )
+    );
+  },
+
+  updateUI(){
+    // enemy
+    document.getElementById('e-name').textContent=G.enemy?G.enemy.name:'---';
+    document.getElementById('e-lv').textContent=G.eLv;
+    const ep=Math.max(0,(G.eHP/G.eMaxHP)*100);
+    document.getElementById('e-hp-fill').style.width=ep+'%';
+    document.getElementById('e-hp-text').textContent=`${Math.max(0,G.eHP)}/${G.eMaxHP}`;
+    this._hpc('e-hp-fill',ep);
+
+    // player (active)
+    const p=G.activePoke;
+    document.getElementById('p-name').textContent=p?p.name:'---';
+    document.getElementById('p-lv').textContent=p?p.lv:1;
+    const pp2=p?Math.max(0,(p.hp/p.maxHP)*100):0;
+    document.getElementById('p-hp-fill').style.width=pp2+'%';
+    document.getElementById('p-hp-text').textContent=p?`${Math.max(0,p.hp)}/${p.maxHP}`:'—/—';
+    this._hpc('p-hp-fill',pp2);
+    const xp=p?Math.min(100,(p.xp/p.xpNeeded)*100):0;
+    document.getElementById('p-xp-fill').style.width=xp+'%';
+
+    // party strip in status bar
+    document.getElementById('party-strip').innerHTML=G.party.map((pm,i)=>{
+      const pct=pm.hp<=0?0:(pm.hp/pm.maxHP)*100;
+      const bg=pm.hp<=0?'#555':pct<=20?'#f44':pct<=50?'#fa0':'#4b4';
+      const border=i===G.activeIdx?'2px solid #FFD700':'2px solid #888';
+      return`<div class="ps-dot" style="background:${bg};border:${border}" title="${pm.name} HP:${Math.max(0,pm.hp)}/${pm.maxHP}">
+               ${i===G.activeIdx?'★':''}
+             </div>`;
+    }).join('');
+  },
+
+  _hpc(id,pct){
+    const el=document.getElementById(id);
+    el.classList.remove('hp-yellow','hp-red');
+    if(pct<=20)el.classList.add('hp-red');
+    else if(pct<=50)el.classList.add('hp-yellow');
+  },
+
+  say(text,cb){
+    document.getElementById('battle-text').innerHTML=
+      text+(cb?' <span style="animation:bounce .6s infinite">▼</span>':'');
+    TTS.say(text);
+    G.pendingCB=cb||null;
+  },
+  advanceText(){
+    if(G.pendingCB){const cb=G.pendingCB;G.pendingCB=null;cb();}
+  },
+
+  showMenu(){
+    G.phase='menu';
+    document.getElementById('battle-menu').style.display='grid';
+    document.getElementById('battle-text').innerHTML='選擇行動！';
+    ['btn-attack','btn-special','btn-item','btn-switch'].forEach(id=>{
+      document.getElementById(id).disabled=false;
+    });
+    // disable switch if no other alive party members
+    const canSwitch=G.party.some((p,i)=>i!==G.activeIdx&&p.hp>0);
+    document.getElementById('btn-switch').disabled=!canSwitch;
+  },
+
+  // ── attacks ───────────────────────────────────────────────────
+  doAttack(type){
+    if(G.phase!=='menu')return;
+    G.phase='question';
+    document.getElementById('battle-menu').style.display='none';
+    this._showQ(this._rSub(),type==='special',ok=>{
+      document.getElementById('q-overlay').classList.remove('active');
+      const p=G.activePoke;
+      if(ok){
+        BGM.sfx('attack');
+        const dmg=Math.floor(G.calcDmg(p.baseAtk,G.enemy.baseDef,p.lv,type==='special'));
+        G.eHP-=dmg; G.correct++;
+        const ep=document.getElementById('e-sprite');
+        ep.className='enemy-sprite anim-flash';
+        setTimeout(()=>{ep.className='enemy-sprite';},700);
+        this.updateUI();
+        this.say(`${p.name} 使用${type==='special'?'特技':'攻擊'}！造成 <b>${dmg}</b> 傷害！`,
+          ()=>{ G.eHP<=0?this.enemyFainted():this.enemyTurn(); });
+      } else {
+        BGM.sfx('wrong'); G.wrong++;
+        this.say(`攻擊落空！${p.name} 沒有命中！`,()=>this.enemyTurn());
+      }
+    });
+  },
+
+  doItem(){
+    if(G.phase!=='menu')return;
+    G.phase='question';
+    document.getElementById('battle-menu').style.display='none';
+    this._showQ(this._rSub(),false,ok=>{
+      document.getElementById('q-overlay').classList.remove('active');
+      const p=G.activePoke;
+      if(ok){
+        const heal=Math.max(12,Math.floor(p.maxHP*.35));
+        p.hp=Math.min(p.maxHP,p.hp+heal); G.correct++;
+        BGM.sfx('correct'); this.updateUI();
+        this.say(`使用道具！${p.name} 回復 <b>${heal}</b> HP！`,()=>this.enemyTurn());
+      } else {
+        G.wrong++;
+        this.say('道具使用失敗...',()=>this.enemyTurn());
+      }
+    });
+  },
+
+  tryRun(){
+    if(G.phase!=='menu')return;
+    G.phase='busy';
+    document.getElementById('battle-menu').style.display='none';
+    if(Math.random()>.45){
+      this.say('成功逃跑了！',()=>setTimeout(()=>this.showBattleChoose('pre-battle'),300));
+    } else {
+      this.say('逃跑失敗！',()=>this.enemyTurn());
+    }
+  },
+
+  enemyTurn(){
+    G.phase='enemy';
+    setTimeout(()=>{
+      const p=G.activePoke;
+      const dmg=Math.max(3,Math.floor(G.calcDmg(G.enemy.baseAtk,p.baseDef,G.eLv,false)*.55));
+      p.hp-=dmg; BGM.sfx('hit');
+      const ps=document.getElementById('p-sprite');
+      ps.className='player-sprite anim-shake';
+      setTimeout(()=>{ps.className='player-sprite';},500);
+      this.updateUI();
+      this.say(`野生 ${G.enemy.name} 發動攻擊！${p.name} 受到 <b>${dmg}</b> 傷害！`,
+        ()=>{ p.hp<=0?this.activeFainted():this.showMenu(); });
+    },400);
+  },
+
+  // ── fainted logic ─────────────────────────────────────────────
+  activeFainted(){
+    G.activePoke.hp=0;
+    this.updateUI();
+    const alive=G.party.filter(p=>p.hp>0);
+    if(alive.length>0){
+      this.showBattleChoose('fainted');
+    } else {
+      // all fainted
+      G.revives--;
+      if(G.revives>0){
+        G.party.forEach(p=>{ p.hp=Math.floor(p.maxHP*.5); });
+        this.say(`所有寶可夢都倒下了！復活！剩 ${G.revives} 次機會`,
+          ()=>setTimeout(()=>this.showBattleChoose('pre-battle'),300));
+        this.showScreen('s-battle');
+      } else {
+        document.getElementById('go-score').textContent=`最終 ${G.wins} 連勝`;
+        document.getElementById('go-stats').textContent=
+          `答對 ${G.correct} 題 ／ 答錯 ${G.wrong} 題`;
+        this.showScreen('s-gameover');
+      }
+    }
+  },
+
+  // ── enemy fainted / victory ───────────────────────────────────
+  enemyFainted(){
+    BGM.sfx('victory');
+    G.wins++;
+    document.getElementById('st-wins').textContent=G.wins;
+    const ep=document.getElementById('e-sprite');
+    ep.style.opacity='.2'; ep.style.filter='grayscale(1)';
+    const xpGain=(G.eLv||1)+1;
+    this.say(`野生的 ${G.enemy.name} 倒下了！獲得 <b>${xpGain}</b> 點經驗值！`,
+      ()=>{ G.activePoke.xp+=xpGain; this._checkLevelUp(G.activePoke); });
+  },
+
+  _checkLevelUp(p){
+    if(p.xp>=p.xpNeeded) this.levelUp(p);
+    else { Save.save(); this.showVictory(); }
+  },
+
+  levelUp(p){
+    p.lv++; p.xp=0; p.xpNeeded=p.lv*3;
+    const old=p.maxHP;
+    p.maxHP=G.calcHP(p,p.lv);
+    p.hp=Math.min(p.maxHP,p.hp+(p.maxHP-old)+8);
+    BGM.sfx('levelup'); this.updateUI();
+    TTS.say(`${p.name} 升到 ${p.lv} 等了！`);
+    this.say(`${p.name} 升到 ${p.lv} 等了！🎉`,()=>{
+      const evo=EVO[p.id];
+      if(evo&&p.lv>=evo.lv) setTimeout(()=>this.showEvolution(p,evo.to),500);
+      else { Save.save(); this.showVictory(); }
+    });
+  },
+
+  showVictory(){
+    document.getElementById('v-wins').textContent=G.wins;
+    document.getElementById('v-correct').textContent=G.correct;
+    document.getElementById('v-msg').textContent=`打倒了野生的 ${G.enemy.name}！`;
+    const fainted=G.party.filter(p=>p.hp<=0).length;
+    document.getElementById('v-heal-msg').textContent=
+      fainted>0
+        ? `繼續前：倒下的夥伴復活至 50% HP，存活隊員回復 25% HP`
+        : `繼續前：全隊回復 25% HP`;
+
+    // party summary
+    document.getElementById('v-party').innerHTML=G.party.map(p=>`
+      <div class="v-poke">
+        <img src="${p.sprite}" alt="${p.name}">
+        <div class="v-poke-name">${p.name}</div>
+        <div class="v-poke-info">Lv.${p.lv} · ${p.hp<=0?'❌':Math.max(0,p.hp)+'HP'}</div>
+      </div>`).join('');
+
+    this.showScreen('s-victory');
+  },
+
+  nextBattle(){
+    // revive fainted members to 50% HP; heal surviving members by 25%
+    G.party.forEach(p=>{
+      if(p.hp<=0) p.hp=Math.floor(p.maxHP*.5);
+      else p.hp=Math.min(p.maxHP,p.hp+Math.floor(p.maxHP*.25));
+    });
+    this.showBattleChoose('pre-battle');
+  },
+
+  // ── evolution ─────────────────────────────────────────────────
+  async showEvolution(pokeObj,toId){
+    this._evoPokeObj=pokeObj;
+    this.showLoad('準備進化！');
+    const toData=await this.fetchPoke(toId);
+    this.hideLoad();
+    this._evoPendingData=toData;
+
+    document.getElementById('evo-from-img').src=pokeObj.sprite;
+    const toImg=document.getElementById('evo-to-img');
+    toImg.src=toData.sprite; toImg.style.opacity='.3'; toImg.style.filter='brightness(.2)';
+    BGM.sfx('evolution');
+    TTS.say('要進化了！答對題目就能進化！');
+    this.showScreen('s-evo');
+
+    const sub=this._rSub();
+    const q=this._pickQ(sub);
+    const nm={math:'數學',chinese:'國語',english:'英文'};
+    document.getElementById('evo-q-badge').textContent=`⭐ 進化題目：${nm[sub]}`;
+    document.getElementById('evo-q-text').textContent=q.q;
+    document.getElementById('evo-q-result').textContent='';
+    TTS.say(q.q);
+
+    const LB=['Ａ','Ｂ','Ｃ','Ｄ'];
+    G.currentQAns=q.a;
+    document.getElementById('evo-q-opts').innerHTML=q.opts.map((o,i)=>`
+      <button class="opt-btn" onclick="App.answerEvo(${i},${q.a})">
+        ${LB[i]}. ${o}
+      </button>`).join('');
+  },
+
+  async answerEvo(sel,ans){
+    document.querySelectorAll('#evo-q-opts .opt-btn').forEach((b,i)=>{
+      b.disabled=true;
+      if(i===ans)b.classList.add('correct');
+      else if(i===sel&&sel!==ans)b.classList.add('wrong');
+    });
+    const ok=sel===ans;
+    const res=document.getElementById('evo-q-result');
+    const p=this._evoPokeObj;
+    TTS.say(ok?'答對了！開始進化！':'答錯了！進化失敗...');
+
+    if(ok){
+      G.correct++; BGM.sfx('evolution');
+      res.innerHTML='<span class="r-correct">✅ 答對了！開始進化！🌟</span>';
+      const toImg=document.getElementById('evo-to-img');
+      toImg.style.opacity='1'; toImg.style.filter='none';
+      setTimeout(()=>{
+        const d=this._evoPendingData;
+        const oldName=p.name;
+        Object.assign(p,{id:d.id,name:d.name,baseHP:d.baseHP,baseAtk:d.baseAtk,
+          baseDef:d.baseDef,sprite:d.sprite,spriteB:d.spriteB});
+        p.maxHP=G.calcHP(p,p.lv);
+        p.hp=Math.min(p.maxHP,p.hp+20);
+        document.getElementById('p-sprite').src=p.spriteB||p.sprite;
+        res.innerHTML=`<span class="r-correct">🎉 ${oldName} 進化成 ${p.name} 了！</span>`;
+        TTS.say(`${p.name} 進化完成！`);
+        Save.save();
+        setTimeout(()=>this.showVictory(),2000);
+      },1600);
+    } else {
+      G.wrong++; BGM.sfx('wrong');
+      res.innerHTML='<span class="r-wrong">❌ 答錯了！進化失敗...下次加油！</span>';
+      Save.save();
+      setTimeout(()=>this.showVictory(),2000);
+    }
+  },
+
+  // ── question system ───────────────────────────────────────────
+  _rSub(){ const s=['math','chinese','english']; return s[Math.floor(Math.random()*s.length)]; },
+
+  _pickQ(sub){
+    const grade=G.settings.grade;
+    const bank=QB.get(grade,sub);
+    if(!bank||bank.length===0) return{type:'mcq',q:'1+1=?',opts:['1','2','3','4'],a:1,tags:[]};
+    if(G.usedQ[grade][sub].length>=bank.length) G.usedQ[grade][sub]=[];
+    const avail=bank.map((_,i)=>i).filter(i=>!G.usedQ[grade][sub].includes(i));
+    const idx=avail[Math.floor(Math.random()*avail.length)];
+    G.usedQ[grade][sub].push(idx);
+    return bank[idx];
+  },
+
+  _qCB:null,
+
+  _showQ(sub,special,cb){
+    this._qCB=cb;
+    const q=this._pickQ(sub);
+    G.currentQAns=q.a;
+
+    const CM={math:'badge-math',chinese:'badge-chinese',english:'badge-english'};
+    const NM={math:'數學',chinese:'國語',english:'英文'};
+    const badge=document.getElementById('q-badge');
+    const typeTag=q.type==='tf'?' 〔是非〕':'';
+    badge.textContent=(special?'⭐ ':'')+NM[sub]+typeTag;
+    badge.className=`q-badge ${CM[sub]}`;
+
+    document.getElementById('q-text').textContent=q.q;
+    document.getElementById('q-result').textContent='';
+    TTS.say(q.q);
+
+    // build option buttons — support 2 opts (tf) and 4 opts (mcq)
+    const LB=['Ａ','Ｂ','Ｃ','Ｄ'];
+    const KB =['A','B','C','D'];
+    const isTF=q.type==='tf'||q.opts.length===2;
+    document.getElementById('q-opts').innerHTML=q.opts.map((o,i)=>`
+      <button class="opt-btn${isTF?(i===0?' tf-true':' tf-false'):''}"
+              onclick="App._ansQ(${i},${q.a})">
+        ${LB[i]}. ${o} <span class="kb-hint">[${KB[i]}]</span>
+      </button>`).join('');
+
+    // timer
+    const TIME=G.settings.timerSec;
+    const timerBar=document.getElementById('q-timer-bar');
+    const timerLabel=document.getElementById('q-timer-label');
+    if(TIME===0){
+      timerBar.style.display='none';
+      timerLabel.textContent='';
+    } else {
+      timerBar.style.display='block';
+      timerLabel.textContent=`⏳ ${TIME}秒`;
+      const tf=document.getElementById('q-timer');
+      tf.style.transition='none'; tf.style.width='100%'; tf.style.background='#4488FF';
+      let left=TIME;
+      if(G.qTimerID) clearInterval(G.qTimerID);
+      setTimeout(()=>{ tf.style.transition=`width ${TIME}s linear`; tf.style.width='0%'; },60);
+      G.qTimerID=setInterval(()=>{
+        left--;
+        if(left<=5) tf.style.background='#FF4444';
+        if(left<=0){ clearInterval(G.qTimerID); G.qTimerID=null; this._qTimeout(); }
+      },1000);
+    }
+
+    document.getElementById('q-overlay').classList.add('active');
+  },
+
+  _qTimeout(){
+    document.querySelectorAll('#q-opts .opt-btn').forEach(b=>{b.disabled=true;b.style.opacity='.5';});
+    document.getElementById('q-result').innerHTML='<span class="r-wrong">⏰ 時間到！答題失敗！</span>';
+    BGM.sfx('wrong'); TTS.say('時間到，答題失敗！');
+    setTimeout(()=>{ if(this._qCB){const cb=this._qCB;this._qCB=null;cb(false);} },1500);
+  },
+
+  _ansQ(sel,ans){
+    if(G.qTimerID){clearInterval(G.qTimerID);G.qTimerID=null;}
+    document.querySelectorAll('#q-opts .opt-btn').forEach((b,i)=>{
+      b.disabled=true;
+      if(i===ans)b.classList.add('correct');
+      else if(i===sel&&sel!==ans)b.classList.add('wrong');
+    });
+    const ok=sel===ans;
+    const msg=ok?'✅ 答對了！太棒了！':'❌ 答錯了！繼續加油！';
+    document.getElementById('q-result').innerHTML=
+      `<span class="${ok?'r-correct':'r-wrong'}">${msg}</span>`;
+    BGM.sfx(ok?'correct':'wrong');
+    TTS.say(ok?'答對了！太棒了！':'答錯了！繼續加油！');
+    setTimeout(()=>{ if(this._qCB){const cb=this._qCB;this._qCB=null;cb(ok);} },1400);
+  },
+
+  // ── restart ───────────────────────────────────────────────────
+  restart(){
+    G.party=[]; G.activeIdx=0; G.enemy=null;
+    G.eHP=0; G.eMaxHP=0; G.eLv=1;
+    G.wins=0; G.correct=0; G.wrong=0; G.revives=3;
+    G.phase='menu'; G.selectedStarters=[];
+    G.usedQ=Save.freshUsedQ();
+    this.showTitleScreen();
+  },
+
+  // ── help ──────────────────────────────────────────────────────
+  _helpData:{
+    's-title':{
+      title:'🏠 主畫面',
+      sections:[
+        {label:'操作說明',rows:[
+          {key:null, text:'點擊 Slot 卡片開始新遊戲或繼續上次進度'},
+          {key:null, text:'點擊 🗑 可刪除該 Slot 的存檔'},
+          {key:null, text:'點右上角 ⚙️ 開啟遊戲設定'},
+        ]},
+        {label:'快捷鍵',rows:[
+          {key:'S', text:'開啟設定'},
+          {key:'?', text:'開啟說明（任何畫面皆可）'},
+        ]},
+      ],
+    },
+    's-name':{
+      title:'✏️ 輸入名字',
+      sections:[
+        {label:'操作說明',rows:[
+          {key:null, text:'輸入訓練師名字，最多 8 個字'},
+          {key:'Enter', text:'確認名字，前往選擇隊伍'},
+          {key:null, text:'點「返回」回到主畫面'},
+        ]},
+      ],
+    },
+    's-settings':{
+      title:'⚙️ 遊戲設定',
+      sections:[
+        {label:'各項說明',rows:[
+          {key:'📚 年級', text:'選擇出題的年級，影響題目難易度'},
+          {key:'⏳ 時間', text:'每題作答秒數；「停用」表示無時間限制'},
+          {key:'⚔️ 難度', text:'影響敵人等級與造成的傷害'},
+          {key:'🔊 朗讀', text:'開啟後語音朗讀題目（需支援 TTS 的瀏覽器）'},
+          {key:'🎵 音樂', text:'開啟或關閉背景音樂'},
+        ]},
+        {label:'快捷鍵',rows:[
+          {key:'Esc', text:'關閉設定並自動存檔'},
+        ]},
+      ],
+    },
+    's-party-select':{
+      title:'🌟 選擇隊伍',
+      sections:[
+        {label:'操作說明',rows:[
+          {key:null, text:'從 24 隻寶可夢中選出 3 隻組成隊伍'},
+          {key:null, text:'點擊卡片選擇或取消選擇'},
+          {key:null, text:'選滿 3 隻後點「出發！」開始冒險'},
+        ]},
+        {label:'快捷鍵',rows:[
+          {key:'Enter', text:'確認隊伍（已選滿 3 隻時有效）'},
+        ]},
+      ],
+    },
+    's-battle':{
+      title:'⚔️ 戰鬥畫面',
+      sections:[
+        {label:'戰鬥指令',rows:[
+          {key:'1 / Z', text:'普通攻擊（需答題）'},
+          {key:'2 / X', text:'特殊攻擊（需答題，威力較強）'},
+          {key:'3 / C', text:'使用道具回復 HP'},
+          {key:'4 / P', text:'更換出戰隊員'},
+        ]},
+        {label:'答題操作',rows:[
+          {key:'A B C D', text:'選擇第 1 ～ 4 個答案選項'},
+          {key:'1 2 3 4', text:'同上，數字鍵也可使用'},
+        ]},
+        {label:'對話推進',rows:[
+          {key:'空白 / Enter', text:'繼續對話或推進文字'},
+        ]},
+        {label:'注意事項',rows:[
+          {key:null, text:'答對才能攻擊；答錯敵人不受傷，輪到敵人攻擊'},
+          {key:null, text:'有時間限制時，時間到視同答錯'},
+        ]},
+      ],
+    },
+    's-battle-choose':{
+      title:'👥 選擇出戰隊員',
+      sections:[
+        {label:'操作說明',rows:[
+          {key:null, text:'點擊隊員卡片，或按數字鍵選擇出戰'},
+          {key:null, text:'HP 為 0 的隊員無法選擇'},
+        ]},
+        {label:'快捷鍵',rows:[
+          {key:'1', text:'選第一隻隊員出戰'},
+          {key:'2', text:'選第二隻隊員出戰'},
+          {key:'3', text:'選第三隻隊員出戰'},
+          {key:'Esc', text:'取消換人，返回戰鬥（換人途中才有效）'},
+        ]},
+      ],
+    },
+    's-evo':{
+      title:'🌟 進化挑戰',
+      sections:[
+        {label:'規則說明',rows:[
+          {key:null, text:'升到特定等級時觸發進化題目'},
+          {key:null, text:'答對：進化成功！寶可夢變強並回復部分 HP'},
+          {key:null, text:'答錯：進化失敗，繼續遊戲'},
+        ]},
+        {label:'快捷鍵',rows:[
+          {key:'A B C D', text:'選擇第 1 ～ 4 個答案選項'},
+          {key:'1 2 3 4', text:'同上'},
+        ]},
+      ],
+    },
+    's-victory':{
+      title:'🏆 勝利結算',
+      sections:[
+        {label:'說明',rows:[
+          {key:null, text:'顯示本場戰鬥結果與全隊狀態'},
+          {key:null, text:'倒下的夥伴復活至 50% HP，存活隊員回復 25% HP'},
+        ]},
+        {label:'快捷鍵',rows:[
+          {key:'空白 / Enter', text:'繼續下一場戰鬥'},
+        ]},
+      ],
+    },
+    's-gameover':{
+      title:'💀 遊戲結束',
+      sections:[
+        {label:'說明',rows:[
+          {key:null, text:'全隊 HP 歸零，遊戲結束'},
+          {key:null, text:'存檔不會消失，可重新開始挑戰'},
+        ]},
+        {label:'快捷鍵',rows:[
+          {key:'空白 / Enter', text:'返回主畫面'},
+        ]},
+      ],
+    },
+  },
+
+  openHelp(){
+    const s=document.querySelector('.screen.active')?.id||'s-title';
+    const d=this._helpData[s]||{title:'說明',sections:[]};
+    document.getElementById('help-title').textContent=d.title;
+    document.getElementById('help-body').innerHTML=d.sections.map(sec=>`
+      <div class="help-section">
+        <div class="help-section-label">${sec.label}</div>
+        ${sec.rows.map(r=>r.key
+          ?`<div class="help-row"><span class="help-key">${r.key}</span><span>${r.text}</span></div>`
+          :`<div class="help-row" style="padding-left:4px">・${r.text}</div>`
+        ).join('')}
+      </div>`).join('');
+    document.getElementById('help-overlay').classList.add('active');
+    BGM.sfx('select');
+  },
+
+  closeHelp(){
+    document.getElementById('help-overlay').classList.remove('active');
+  },
+};
+
+// ================================================================
+// KEYBOARD MODULE
+// ================================================================
+const Keys={
+  init(){
+    document.addEventListener('keydown',e=>this._handle(e));
+  },
+  _screen(){ return document.querySelector('.screen.active')?.id||''; },
+  _handle(e){
+    const k=e.key;
+    const s=this._screen();
+
+    // Global ? → open help
+    if(k==='?'||k==='？'){
+      const helpOpen=document.getElementById('help-overlay').classList.contains('active');
+      if(helpOpen) App.closeHelp(); else App.openHelp();
+      return;
+    }
+
+    // Global Esc
+    if(k==='Escape'){
+      if(document.getElementById('help-overlay').classList.contains('active')){
+        App.closeHelp(); return;
+      }
+      if(s==='s-settings'){ App.closeSettings(); return; }
+      if(s==='s-battle-choose'&&document.getElementById('bc-cancel-btn').style.display!=='none'){
+        App.cancelPartySwitch(); return;
+      }
+    }
+
+    switch(s){
+      case 's-title':
+        if(k==='s'||k==='S') App.openSettings();
+        break;
+
+      case 's-party-select':
+        if(k==='Enter'&&!document.getElementById('ps-confirm-btn').disabled)
+          App.confirmParty();
+        break;
+
+      case 's-battle-choose':
+        if(k==='1') App.selectBattlePoke(0);
+        if(k==='2') App.selectBattlePoke(1);
+        if(k==='3') App.selectBattlePoke(2);
+        break;
+
+      case 's-battle':{
+        // question overlay open?
+        const qOpen=document.getElementById('q-overlay').classList.contains('active');
+        if(qOpen){
+          if(k==='1'||k==='a'||k==='A') this._clickOpt(0);
+          if(k==='2'||k==='b'||k==='B') this._clickOpt(1);
+          if(k==='3'||k==='c'||k==='C') this._clickOpt(2);
+          if(k==='4'||k==='d'||k==='D') this._clickOpt(3);
+          return;
+        }
+        if(G.phase==='menu'){
+          if(k==='1'||k==='z'||k==='Z') App.doAttack('normal');
+          if(k==='2'||k==='x'||k==='X') App.doAttack('special');
+          if(k==='3'||k==='c'||k==='C') App.doItem();
+          if(k==='4'||k==='p'||k==='P') document.getElementById('btn-switch').click();
+        }
+        if(k===' '||k==='Enter'||k==='z'||k==='Z') App.advanceText();
+        break;
+      }
+      case 's-evo':{
+        if(k==='1'||k==='a'||k==='A') this._clickEvoOpt(0);
+        if(k==='2'||k==='b'||k==='B') this._clickEvoOpt(1);
+        if(k==='3'||k==='c'||k==='C') this._clickEvoOpt(2);
+        if(k==='4'||k==='d'||k==='D') this._clickEvoOpt(3);
+        break;
+      }
+      case 's-victory':
+        if(k===' '||k==='Enter') App.nextBattle();
+        break;
+
+      case 's-gameover':
+        if(k===' '||k==='Enter') App.restart();
+        break;
+    }
+  },
+  _clickOpt(i){
+    const btns=document.querySelectorAll('#q-opts .opt-btn');
+    if(btns[i]&&!btns[i].disabled) btns[i].click();
+  },
+  _clickEvoOpt(i){
+    const btns=document.querySelectorAll('#evo-q-opts .opt-btn');
+    if(btns[i]&&!btns[i].disabled) btns[i].click();
+  },
+};
+
+// ================================================================
+// INIT
+// ================================================================
+TTS.init();
+Keys.init();
+(async()=>{
+  App.showLoad('載入題庫中...');
+  await Promise.all([Save.init(), QB.loadAll()]);
+  App.hideLoad();
+  App.showTitleScreen();
+})();
+</script>
+</body>
+</html>

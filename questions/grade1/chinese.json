@@ -1,0 +1,330 @@
+{
+  "meta": {
+    "grade": "grade1",
+    "subject": "chinese",
+    "description": "小學一年級 國語",
+    "version": "1.0"
+  },
+  "questions": [
+    {
+      "id": "g1c001",
+      "type": "mcq",
+      "q": "「大」的反義詞是什麼？",
+      "opts": ["高", "小", "長", "多"],
+      "a": 1,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c002",
+      "type": "mcq",
+      "q": "「冷」的反義詞是什麼？",
+      "opts": ["涼", "暖", "熱", "乾"],
+      "a": 2,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c003",
+      "type": "mcq",
+      "q": "「快」的反義詞是什麼？",
+      "opts": ["緩", "遲", "慢", "停"],
+      "a": 2,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c004",
+      "type": "mcq",
+      "q": "「上」的反義詞是什麼？",
+      "opts": ["右", "左", "前", "下"],
+      "a": 3,
+      "tags": ["antonyms", "directions"]
+    },
+    {
+      "id": "g1c005",
+      "type": "mcq",
+      "q": "「氵」部首的字是哪個？",
+      "opts": ["根", "海", "草", "花"],
+      "a": 1,
+      "tags": ["radical", "character"]
+    },
+    {
+      "id": "g1c006",
+      "type": "mcq",
+      "q": "「木」部首的字是哪個？",
+      "opts": ["河", "山", "樹", "火"],
+      "a": 2,
+      "tags": ["radical", "character"]
+    },
+    {
+      "id": "g1c007",
+      "type": "mcq",
+      "q": "「笑」的反義詞是什麼？",
+      "opts": ["喊", "叫", "唱", "哭"],
+      "a": 3,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c008",
+      "type": "mcq",
+      "q": "春天之後是哪個季節？",
+      "opts": ["冬天", "秋天", "夏天", "春天"],
+      "a": 2,
+      "tags": ["seasons", "sequence"]
+    },
+    {
+      "id": "g1c009",
+      "type": "mcq",
+      "q": "太陽從哪個方向升起？",
+      "opts": ["西邊", "南邊", "北邊", "東邊"],
+      "a": 3,
+      "tags": ["directions", "nature"]
+    },
+    {
+      "id": "g1c010",
+      "type": "mcq",
+      "q": "「多」的反義詞是什麼？",
+      "opts": ["大", "小", "少", "短"],
+      "a": 2,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c011",
+      "type": "mcq",
+      "q": "「長」的反義詞是什麼？",
+      "opts": ["矮", "小", "短", "細"],
+      "a": 2,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c012",
+      "type": "mcq",
+      "q": "「前」的反義詞是什麼？",
+      "opts": ["左", "右", "上", "後"],
+      "a": 3,
+      "tags": ["antonyms", "directions"]
+    },
+    {
+      "id": "g1c013",
+      "type": "mcq",
+      "q": "哪個是動物？",
+      "opts": ["玫瑰", "蝴蝶", "大樹", "水草"],
+      "a": 1,
+      "tags": ["animals", "classification"]
+    },
+    {
+      "id": "g1c014",
+      "type": "mcq",
+      "q": "哪個是植物？",
+      "opts": ["蚊子", "螞蟻", "樹", "青蛙"],
+      "a": 2,
+      "tags": ["plants", "classification"]
+    },
+    {
+      "id": "g1c015",
+      "type": "mcq",
+      "q": "我們在哪裡上學？",
+      "opts": ["醫院", "公園", "學校", "超市"],
+      "a": 2,
+      "tags": ["places", "daily-life"]
+    },
+    {
+      "id": "g1c016",
+      "type": "mcq",
+      "q": "「好」的反義詞是什麼？",
+      "opts": ["壞", "醜", "舊", "少"],
+      "a": 0,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c017",
+      "type": "mcq",
+      "q": "「新」的反義詞是什麼？",
+      "opts": ["破", "髒", "舊", "小"],
+      "a": 2,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c018",
+      "type": "mcq",
+      "q": "一年有幾個月？",
+      "opts": ["10個月", "11個月", "12個月", "13個月"],
+      "a": 2,
+      "tags": ["time", "calendar"]
+    },
+    {
+      "id": "g1c019",
+      "type": "mcq",
+      "q": "「山」這個字讀作什麼？",
+      "opts": ["水", "火", "山", "土"],
+      "a": 2,
+      "tags": ["phonics", "character-reading"]
+    },
+    {
+      "id": "g1c020",
+      "type": "mcq",
+      "q": "「水」這個字讀作什麼？",
+      "opts": ["山", "水", "火", "土"],
+      "a": 1,
+      "tags": ["phonics", "character-reading"]
+    },
+    {
+      "id": "g1c021",
+      "type": "mcq",
+      "q": "「黑」的反義詞是什麼？",
+      "opts": ["灰", "白", "藍", "紅"],
+      "a": 1,
+      "tags": ["antonyms", "colors"]
+    },
+    {
+      "id": "g1c022",
+      "type": "mcq",
+      "q": "哪個是數字的漢字？",
+      "opts": ["月", "日", "五", "天"],
+      "a": 2,
+      "tags": ["numbers", "character"]
+    },
+    {
+      "id": "g1c023",
+      "type": "mcq",
+      "q": "天空中飛的動物是什麼？",
+      "opts": ["魚", "狗", "鳥", "貓"],
+      "a": 2,
+      "tags": ["animals", "characteristics"]
+    },
+    {
+      "id": "g1c024",
+      "type": "mcq",
+      "q": "「光明」的反義詞是什麼？",
+      "opts": ["陰影", "黑暗", "夜晚", "暗淡"],
+      "a": 1,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c025",
+      "type": "tf",
+      "q": "「大」的反義詞是「小」，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["antonyms", "true-false"]
+    },
+    {
+      "id": "g1c026",
+      "type": "tf",
+      "q": "太陽從西邊升起，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 1,
+      "tags": ["directions", "true-false"]
+    },
+    {
+      "id": "g1c027",
+      "type": "tf",
+      "q": "春天之後是夏天，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["seasons", "true-false"]
+    },
+    {
+      "id": "g1c028",
+      "type": "tf",
+      "q": "一年有 12 個月，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["time", "true-false"]
+    },
+    {
+      "id": "g1c029",
+      "type": "mcq",
+      "q": "「左」的反義詞是什麼？",
+      "opts": ["上", "下", "右", "前"],
+      "a": 2,
+      "tags": ["antonyms", "directions"]
+    },
+    {
+      "id": "g1c030",
+      "type": "mcq",
+      "q": "「火」部首的字是哪個？",
+      "opts": ["海", "樹", "燈", "山"],
+      "a": 2,
+      "tags": ["radical", "character"]
+    },
+    {
+      "id": "g1c031",
+      "type": "mcq",
+      "q": "「高」的反義詞是什麼？",
+      "opts": ["小", "少", "矮", "輕"],
+      "a": 2,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c032",
+      "type": "tf",
+      "q": "蝴蝶是一種動物，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["animals", "true-false"]
+    },
+    {
+      "id": "g1c033",
+      "type": "mcq",
+      "q": "秋天之後是哪個季節？",
+      "opts": ["春天", "夏天", "冬天", "秋天"],
+      "a": 2,
+      "tags": ["seasons", "sequence"]
+    },
+    {
+      "id": "g1c034",
+      "type": "mcq",
+      "q": "「重」的反義詞是什麼？",
+      "opts": ["小", "輕", "細", "少"],
+      "a": 1,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c035",
+      "type": "tf",
+      "q": "「冷」的反義詞是「熱」，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["antonyms", "true-false"]
+    },
+    {
+      "id": "g1c036",
+      "type": "mcq",
+      "q": "哪個字的部首是「口」？",
+      "opts": ["樹", "河", "唱", "書"],
+      "a": 2,
+      "tags": ["radical", "character"]
+    },
+    {
+      "id": "g1c037",
+      "type": "mcq",
+      "q": "「胖」的反義詞是什麼？",
+      "opts": ["小", "短", "瘦", "輕"],
+      "a": 2,
+      "tags": ["antonyms", "vocabulary"]
+    },
+    {
+      "id": "g1c038",
+      "type": "tf",
+      "q": "一週有 7 天，這是正確的嗎？",
+      "opts": ["正確", "錯誤"],
+      "a": 0,
+      "tags": ["time", "true-false"]
+    },
+    {
+      "id": "g1c039",
+      "type": "mcq",
+      "q": "老師在哪裡工作？",
+      "opts": ["醫院", "警察局", "學校", "消防局"],
+      "a": 2,
+      "tags": ["occupations", "places"]
+    },
+    {
+      "id": "g1c040",
+      "type": "mcq",
+      "q": "「哭」的反義詞是什麼？",
+      "opts": ["說", "喊", "笑", "叫"],
+      "a": 2,
+      "tags": ["antonyms", "vocabulary"]
+    }
+  ]
+}
