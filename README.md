@@ -134,18 +134,17 @@ python3 scrapers/generate_questions.py
 
 ## 授權聲明
 
-本專案採用 **BSD 3-Clause License**。
+本專案採用 **CC BY-NC 4.0（創用CC 姓名標示─非商業性）**。
 
-### 為什麼選擇 BSD 3-Clause？
+### 為什麼選擇 CC BY-NC 4.0？
 
-本遊戲的 Pokémon 圖片與資料來自 **[PokéAPI](https://pokeapi.co)**，  
-PokéAPI 本身即採用 BSD 3-Clause License。  
-為了與上游資料來源保持一致的授權精神：
+本遊戲的 Pokémon 圖片與資料來自 **[PokéAPI](https://pokeapi.co)**（BSD 3-Clause）。
+遊戲本身的程式碼、題庫與美術另外採用 **CC BY-NC 4.0**，原因如下：
 
-- **允許**自由使用、修改與散布（包括商業用途）
-- **要求**保留著作權聲明與免責聲明
-- **不允許**使用本專案名稱為衍生品背書
-- 相較於 GPL/LGPL，BSD 的「弱著作權」限制最少，適合教育性開源工具
+- **允許**自由使用、修改與散布（供個人、教育、研究等非商業用途）
+- **要求**保留著作權聲明與來源連結
+- **禁止**將本專案或其衍生版本用於任何商業目的（付費服務、廣告盈利等）
+- 這樣可以防止有人直接複製遊戲上架或包裝成付費產品，同時仍對教育者和學生完全免費開放
 
 ---
 ---
@@ -206,9 +205,9 @@ python3 scrapers/generate_questions.py
 
 ### License
 
-This project is licensed under the **BSD 3-Clause License** — the same license used by [PokéAPI](https://pokeapi.co), from which all Pokémon data and sprites are sourced.
+This project is licensed under **CC BY-NC 4.0 (Creative Commons Attribution-NonCommercial 4.0 International)**.
 
-The BSD 3-Clause license was chosen to align with the upstream data source and to impose minimal restrictions on educators and developers who wish to adapt this tool.
+Pokémon data and sprites are sourced from [PokéAPI](https://pokeapi.co) (BSD 3-Clause). The game code, question banks, and assets are separately licensed under CC BY-NC 4.0 to prevent commercial copying — anyone is free to use, adapt, and share this game for educational or personal purposes, but **commercial use is prohibited**.
 
 **Pokémon and all related names are trademarks of Nintendo / Game Freak. This project is not affiliated with or endorsed by Nintendo.**
 
