@@ -4,7 +4,7 @@
 
 **繁體中文** | [English](#english)
 
-一款讓小學生在寶可夢對戰中學習國語、英文、數學的 HTML5 單頁遊戲。  
+一款讓小學生在寶可夢對戰中學習國語、英文、數學的 HTML5 單頁遊戲。
 A single-file HTML5 game where elementary students learn through Pokémon battles.
 
 ![Title Screen](docs/screenshots/01_title.png)
@@ -26,26 +26,32 @@ A single-file HTML5 game where elementary students learn through Pokémon battle
 
 ## 遊戲截圖
 
-| 設定畫面 | 輸入名字 |
+| 設定畫面 | 選擇隊伍 |
 |:---:|:---:|
-| ![Settings](docs/screenshots/02_settings.png) | ![Name Input](docs/screenshots/03_name_input.png) |
+| ![Settings](docs/screenshots/02_settings.png) | ![Party Select](docs/screenshots/04_party_select.png) |
 
-| 選擇隊伍 | 戰鬥畫面 |
+| 對戰 VS 動畫 | 戰鬥畫面 |
 |:---:|:---:|
-| ![Party Select](docs/screenshots/04_party_select.png) | ![Battle](docs/screenshots/05_battle.png) |
+| ![VS Intro](docs/screenshots/06_vs_intro.png) | ![Battle](docs/screenshots/05_battle.png) |
 
 ---
 
 ## 功能特色
 
 - 🎮 **寶可夢對戰系統** — 答題才能攻擊，答對造成傷害，答錯輪到敵人攻擊
-- 📚 **多年級題庫** — 大班 / 一年級 / 二年級 / 三年級，三科各 40–130 題
+- 📚 **多年級題庫** — 大班 / 一年級 / 二年級 / 三年級，三科共 971+ 題
 - 🔤 **兩種題型** — 選擇題（四選一）與是非題（正確 / 錯誤）
-- 👾 **三隻夥伴隊伍** — 升級、進化、倒下後下一場自動復活
+- 👾 **151 隻寶可夢可選** — 含神獸（超夢、夢幻、三神鳥），附搜尋篩選
+- 🔄 **換陣容功能** — 每場勝利後可更換隊伍，原有寶可夢保留等級
+- 📈 **進化進度顯示** — 戰鬥中即時顯示「還差幾級進化」
+- 🎬 **帥氣對戰動畫** — VS 開場動畫（雙方寶可夢滑入、VS 爆炸彈出）
+- ✨ **勝敗特效** — 擊倒金色閃光、全滅紅色震撼特效
 - 💾 **三欄存檔** — 透過 File System Access API 存為本地 `.json` 檔，不怕瀏覽器清除
+- 👤 **多用戶支援** — 三個存檔槽，各自獨立設定（年級、難度、計時等）
 - ⚙️ **豐富設定** — 年級、答題計時、難度、語音朗讀（TTS）、背景音樂
-- ⌨️ **鍵盤快捷鍵** — 全程可用鍵盤操作（詳見遊戲內 `？` 說明按鈕）
-- 📖 **情境說明** — 每個畫面都有繁體中文說明覆蓋層
+- 🔊 **喇叭按鈕** — 每題附朗讀按鈕（`R` 鍵），隨時重聽題目
+- ⌨️ **完整鍵盤支援** — 全程可用鍵盤操作，快捷鍵一目了然
+- ❓ **情境說明** — 每個畫面都有繁體中文說明覆蓋層
 
 ---
 
@@ -54,18 +60,19 @@ A single-file HTML5 game where elementary students learn through Pokémon battle
 此遊戲使用 **File System Access API** 讀寫存檔，必須透過 HTTP 伺服器開啟（不支援 `file://` 協議）。
 
 ```bash
-# 方式一：Python（最簡單）
+# 方式一：雙擊 start.sh（macOS，最簡單）
+./start.sh
+
+# 方式二：Python（內建，不需安裝）
 cd pokemon-school
 python3 -m http.server 8080
 # 開啟瀏覽器：http://localhost:8080
 
-# 方式二：Node.js
+# 方式三：Node.js
 npx serve .
-
-# 方式三：VS Code Live Server 擴充功能
 ```
 
-> **建議瀏覽器**：Chrome / Edge（完整支援）、Firefox 111+ / Safari 15.2+（部分支援）  
+> **建議瀏覽器**：Chrome / Edge（完整支援）、Firefox 111+ / Safari 15.2+（部分支援）
 > 若瀏覽器不支援 File System Access API，遊戲會自動 fallback 為 localStorage。
 
 ---
@@ -75,21 +82,21 @@ npx serve .
 ```
 questions/
 ├── kinder/           # 大班
-│   ├── math.json     # 109 題（加減法、數數、形狀）
-│   ├── chinese.json  #  42 題（動物、顏色、家庭）
-│   └── english.json  #  42 題（字母、數字、顏色）
+│   ├── math.json     # 129 題（加減法、數數、形狀、應用題）
+│   ├── chinese.json  #  57 題（動物、顏色、家庭、反義詞）
+│   └── english.json  #  57 題（字母、數字、顏色、動物）
 ├── grade1/           # 小學一年級
-│   ├── math.json     #  87 題（20 以內加減、乘法入門）
-│   ├── chinese.json  #  40 題（反義詞、部首、季節）
-│   └── english.json  #  40 題（家人、問候語、顏色）
+│   ├── math.json     # 107 題（20 以內加減、應用題、規律）
+│   ├── chinese.json  #  55 題（反義詞、部首、季節、句型）
+│   └── english.json  #  55 題（家人、問候語、文法）
 ├── grade2/           # 小學二年級
-│   ├── math.json     # 133 題（九九乘法、三位數、時間）
-│   ├── chinese.json  #  40 題（近義詞、詞性、昆蟲分類）
-│   └── english.json  #  40 題（星期、be 動詞、教室物品）
+│   ├── math.json     # 153 題（九九乘法、三位數、時間、面積）
+│   ├── chinese.json  #  55 題（近義詞、詞性、成語）
+│   └── english.json  #  55 題（星期、be 動詞、教室物品）
 └── grade3/           # 小學三年級
-    ├── math.json     # 122 題（乘除法、幾何、大數計算）
-    ├── chinese.json  #  45 題（反義詞、部首、交通工具）
-    └── english.json  #  16 題（現在式、疑問詞）
+    ├── math.json     # 142 題（乘除法、幾何面積、大數計算）
+    ├── chinese.json  #  60 題（成語、部首、比喻、因果句型）
+    └── english.json  #  46 題（現在式、時態、問句詞、介系詞）
 ```
 
 每題格式：
@@ -105,6 +112,8 @@ questions/
   "q": "9 × 9 = 81，這是正確的嗎？", "opts": ["正確","錯誤"], "a": 0,
   "tags": ["multiplication","tf"] }
 ```
+
+外部來源題目可加上 `"source": "均一平台"` 欄位，遊戲會自動在題目畫面顯示出處連結。
 
 ---
 
@@ -125,11 +134,6 @@ python3 scrapers/generate_questions.py
 - 與現有題庫合併（不重複）
 - 更新 `meta.count`
 
-### 方式三：擴充腳本產生其他科目
-
-編輯 `scrapers/generate_questions.py`，參考 `extra_grade3_english()` 的寫法新增函式，  
-並在 `main()` 的 `generators` 字典中登記即可。
-
 ---
 
 ## 授權聲明
@@ -144,7 +148,8 @@ python3 scrapers/generate_questions.py
 - **允許**自由使用、修改與散布（供個人、教育、研究等非商業用途）
 - **要求**保留著作權聲明與來源連結
 - **禁止**將本專案或其衍生版本用於任何商業目的（付費服務、廣告盈利等）
-- 這樣可以防止有人直接複製遊戲上架或包裝成付費產品，同時仍對教育者和學生完全免費開放
+
+**Pokémon and all related names are trademarks of Nintendo / Game Freak. This project is not affiliated with or endorsed by Nintendo.**
 
 ---
 ---
@@ -162,12 +167,18 @@ python3 scrapers/generate_questions.py
 ### Features
 
 - 🎮 **Pokémon Battle System** — answer correctly to attack; wrong answers let the enemy strike back
-- 📚 **Multi-grade Question Banks** — 4 grades × 3 subjects, 756+ questions total
+- 📚 **Multi-grade Question Banks** — 4 grades × 3 subjects, 971+ questions total
 - 🔤 **Two Question Types** — multiple choice (4 options) and true/false
-- 👾 **Party of 3 Pokémon** — level up, evolve, and revive between battles
+- 👾 **All 151 Gen 1 Pokémon** — including legendaries (Mewtwo, Mew, legendary birds); searchable grid
+- 🔄 **Party Swap** — replace team members after each victory; existing Pokémon keep their levels
+- 📈 **Evolution Progress** — live "X levels until evolution" indicator in battle
+- 🎬 **Battle Intro Animation** — VS screen with sliding sprites and explosive VS text
+- ✨ **Win/Lose Effects** — gold flash on victory, red flash on defeat
 - 💾 **3-Slot Save System** — saves to a local `.json` file via File System Access API
+- 👤 **Multi-user Support** — 3 save slots with independent settings per user
 - ⚙️ **Rich Settings** — grade, answer timer, difficulty, TTS narration, background music
-- ⌨️ **Full Keyboard Support** — play without touching the mouse
+- 🔊 **TTS Replay Button** — speaker button (or `R` key) re-reads any question aloud
+- ⌨️ **Full Keyboard Support** — large, clear key badges on every button
 - ❓ **Contextual Help** — Traditional Chinese help overlay on every screen
 
 ### Running the Game
@@ -175,12 +186,15 @@ python3 scrapers/generate_questions.py
 The game requires an HTTP server (File System Access API does not work over `file://`):
 
 ```bash
-# Python
+# macOS — double-click start.sh, or:
+./start.sh
+
+# Python (built-in, no install needed)
 cd pokemon-school && python3 -m http.server 8080
 # Open: http://localhost:8080
 ```
 
-**Recommended browsers**: Chrome / Edge (full support), Firefox 111+ / Safari 15.2+.  
+**Recommended browsers**: Chrome / Edge (full support), Firefox 111+ / Safari 15.2+.
 Falls back to localStorage if File System Access API is unavailable.
 
 ### Question Bank Format
@@ -196,6 +210,8 @@ subjects: math   | chinese | english
   "q": "7 × 8 = ?", "opts": ["48","54","56","63"], "a": 2,
   "tags": ["multiplication"] }
 ```
+
+Add `"source": "均一平台"` to any question to display a clickable attribution link in-game.
 
 To add questions, edit the JSON files directly or run the generator:
 
