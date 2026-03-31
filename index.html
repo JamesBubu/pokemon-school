@@ -764,146 +764,252 @@
 // Three tracks: 'party' (team select), 'battle', 'victory'
 // ================================================================
 const BGM = (() => {
-  let ctx=null, masterGain=null, muted=false;
+  let ctx=null, masterGain=null, reverbSend=null, muted=false;
   let rafID=null, curTrack=null;
-  let mIdx=0, bIdx=0, mNext=0, bNext=0;
+  let mIdx=0, bIdx=0, dIdx=0, mNext=0, bNext=0, dNext=0;
 
-  // ── Audio context + hall reverb ───────────────────────────────
+  // ── Audio context + send reverb (separate bus, no feedback loop) ─
   const getCtx=()=>{
     if(ctx) return ctx;
     ctx=new(window.AudioContext||window.webkitAudioContext)();
     masterGain=ctx.createGain();
-    masterGain.gain.value=muted?0:.5;
+    masterGain.gain.value=muted?0:.55;
     masterGain.connect(ctx.destination);
-    // Delay-feedback reverb for warmth and space
-    const dly=ctx.createDelay(1.0),fb=ctx.createGain(),mix=ctx.createGain();
-    dly.delayTime.value=.15; fb.gain.value=.3; mix.gain.value=.13;
-    masterGain.connect(mix); mix.connect(dly);
-    dly.connect(fb); fb.connect(dly); dly.connect(masterGain);
+    // Reverb send bus (parallel, not feedback)
+    reverbSend=ctx.createGain();
+    reverbSend.gain.value=.18;
+    const dly=ctx.createDelay(.3);
+    const dly2=ctx.createDelay(.18);
+    const rvGain=ctx.createGain();
+    rvGain.gain.value=.38;
+    dly.connect(dly2); dly2.connect(rvGain); rvGain.connect(dly);
+    reverbSend.connect(dly); dly.connect(ctx.destination);
     return ctx;
   };
 
-  // ── Piano note: sine + harmonics + natural ADSR ───────────────
+  // ── Piano: sine + 5 harmonics (bright, full-bodied) ──────────
   const piano=(freq,beats,vol,t,bpm)=>{
     if(!freq||!vol) return;
     const c=getCtx(),d=beats*(60/bpm);
-    [[freq,1.0,'sine'],[freq*2,.11,'sine'],[freq*3,.04,'sine']].forEach(([f,vm,wt])=>{
+    // harmonic series: 1x 100%, 2x 18%, 3x 10%, 4x 6%, 5x 4%, 6x 2%
+    [[1,1.0],[2,.18],[3,.10],[4,.06],[5,.04],[6,.02]].forEach(([n,vm])=>{
       const o=c.createOscillator(),g=c.createGain();
-      o.type=wt; o.frequency.value=f; o.connect(g); g.connect(masterGain);
+      o.type='sine'; o.frequency.value=freq*n;
+      o.connect(g); g.connect(masterGain); g.connect(reverbSend);
       const v=vol*vm;
       g.gain.setValueAtTime(0,t);
-      g.gain.linearRampToValueAtTime(v,t+.013);
-      g.gain.exponentialRampToValueAtTime(Math.max(v*.38,.0001),t+Math.min(d*.45,.28));
-      g.gain.linearRampToValueAtTime(.0001,t+d*.96);
-      o.start(t); o.stop(t+d+.02);
+      g.gain.linearRampToValueAtTime(v,t+.012);
+      g.gain.exponentialRampToValueAtTime(Math.max(v*.3,.0001),t+Math.min(d*.5,.35));
+      g.gain.linearRampToValueAtTime(.0001,t+d*.98);
+      o.start(t); o.stop(t+d+.05);
     });
   };
 
-  // ── Lead note: triangle chorus + vibrato (warm, not harsh) ────
+  // ── Synth lead: sawtooth + filter sweep (punchy, distinctive) ─
   const lead=(freq,beats,vol,t,bpm)=>{
     if(!freq||!vol) return;
     const c=getCtx(),d=beats*(60/bpm);
-    [0,6,-5].forEach((det,i)=>{
-      const o=c.createOscillator(),g=c.createGain();
-      o.type='triangle'; o.frequency.value=freq; o.detune.value=det;
-      o.connect(g); g.connect(masterGain);
-      const vMult=i===0?1:.28;
-      g.gain.setValueAtTime(0,t);
-      g.gain.linearRampToValueAtTime(vol*vMult,t+.04);
-      g.gain.setValueAtTime(vol*vMult,t+d*.78);
-      g.gain.linearRampToValueAtTime(.0001,t+d*.97);
-      o.start(t); o.stop(t+d+.02);
-    });
+    const o=c.createOscillator(),flt=c.createBiquadFilter(),g=c.createGain();
+    o.type='sawtooth'; o.frequency.value=freq;
+    flt.type='lowpass'; flt.frequency.setValueAtTime(freq*8,t);
+    flt.frequency.exponentialRampToValueAtTime(freq*2.5,t+d*.6);
+    flt.Q.value=3.5;
+    o.connect(flt); flt.connect(g); g.connect(masterGain); g.connect(reverbSend);
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(vol*.9,t+.018);
+    g.gain.setValueAtTime(vol*.9,t+d*.7);
+    g.gain.linearRampToValueAtTime(.0001,t+d*.98);
+    o.start(t); o.stop(t+d+.04);
+    // subtle octave below at low vol
+    const o2=c.createOscillator(),g2=c.createGain();
+    o2.type='triangle'; o2.frequency.value=freq*.5;
+    o2.connect(g2); g2.connect(masterGain);
+    g2.gain.setValueAtTime(0,t);
+    g2.gain.linearRampToValueAtTime(vol*.22,t+.025);
+    g2.gain.linearRampToValueAtTime(.0001,t+d*.9);
+    o2.start(t); o2.stop(t+d+.04);
   };
 
-  // ── Warm bass: sine + octave triangle ─────────────────────────
+  // ── Bass: sine punch ───────────────────────────────────────────
   const bass=(freq,beats,vol,t,bpm)=>{
     if(!freq||!vol) return;
     const c=getCtx(),d=beats*(60/bpm);
-    [[freq,'sine',1.0],[freq*2,'triangle',.28]].forEach(([f,wt,vm])=>{
-      const o=c.createOscillator(),g=c.createGain();
-      o.type=wt; o.frequency.value=f; o.connect(g); g.connect(masterGain);
-      g.gain.setValueAtTime(vol*vm,t);
-      g.gain.exponentialRampToValueAtTime(vol*vm*.5,t+.07);
-      g.gain.setValueAtTime(vol*vm*.5,t+d*.7);
-      g.gain.linearRampToValueAtTime(.0001,t+d*.93);
-      o.start(t); o.stop(t+d+.02);
-    });
+    const o=c.createOscillator(),g=c.createGain();
+    o.type='sine'; o.frequency.value=freq;
+    o.connect(g); g.connect(masterGain);
+    g.gain.setValueAtTime(vol,t);
+    g.gain.exponentialRampToValueAtTime(vol*.55,t+.06);
+    g.gain.setValueAtTime(vol*.55,t+d*.65);
+    g.gain.linearRampToValueAtTime(.0001,t+d*.95);
+    o.start(t); o.stop(t+d+.04);
+  };
+
+  // ── Kick drum (tonal thud) ─────────────────────────────────────
+  const kick=(t,vol=.55)=>{
+    const c=getCtx(),o=c.createOscillator(),g=c.createGain();
+    o.type='sine';
+    o.frequency.setValueAtTime(160,t);
+    o.frequency.exponentialRampToValueAtTime(45,t+.07);
+    o.connect(g); g.connect(masterGain);
+    g.gain.setValueAtTime(vol,t);
+    g.gain.exponentialRampToValueAtTime(.001,t+.22);
+    o.start(t); o.stop(t+.23);
+  };
+
+  // ── Snare drum (noise + tone) ──────────────────────────────────
+  const snare=(t,vol=.32)=>{
+    const c=getCtx();
+    // noise burst
+    const bufLen=Math.ceil(c.sampleRate*.09);
+    const buf=c.createBuffer(1,bufLen,c.sampleRate);
+    const d=buf.getChannelData(0);
+    for(let i=0;i<bufLen;i++) d[i]=(Math.random()*2-1);
+    const src=c.createBufferSource(),hpf=c.createBiquadFilter(),gn=c.createGain();
+    src.buffer=buf; hpf.type='highpass'; hpf.frequency.value=1800;
+    src.connect(hpf); hpf.connect(gn); gn.connect(masterGain);
+    gn.gain.setValueAtTime(vol,t);
+    gn.gain.exponentialRampToValueAtTime(.001,t+.09);
+    src.start(t); src.stop(t+.10);
+    // body tone
+    const o=c.createOscillator(),gt=c.createGain();
+    o.type='triangle'; o.frequency.value=185;
+    o.connect(gt); gt.connect(masterGain);
+    gt.gain.setValueAtTime(vol*.55,t);
+    gt.gain.exponentialRampToValueAtTime(.001,t+.07);
+    o.start(t); o.stop(t+.08);
+  };
+
+  // ── Hi-hat (short noise click) ────────────────────────────────
+  const hihat=(t,vol=.12)=>{
+    const c=getCtx();
+    const bufLen=Math.ceil(c.sampleRate*.025);
+    const buf=c.createBuffer(1,bufLen,c.sampleRate);
+    const d=buf.getChannelData(0);
+    for(let i=0;i<bufLen;i++) d[i]=(Math.random()*2-1);
+    const src=c.createBufferSource(),hpf=c.createBiquadFilter(),gn=c.createGain();
+    src.buffer=buf; hpf.type='highpass'; hpf.frequency.value=7000;
+    src.connect(hpf); hpf.connect(gn); gn.connect(masterGain);
+    gn.gain.setValueAtTime(vol,t); gn.gain.exponentialRampToValueAtTime(.001,t+.025);
+    src.start(t); src.stop(t+.03);
   };
 
   // ── TRACK DEFINITIONS ─────────────────────────────────────────
-  // Format: [freq_hz, duration_beats, volume]  beats: 1=♩ 2=♩♩ 0.5=♪
+  // melody/bass: [freq_hz, duration_beats, volume]
+  // drum: [fn, duration_beats, volume]   fn=kick/snare/hihat/null
   const TRACKS={
 
-    // ── PARTY ── warm C-major theme, 100 BPM, piano feel ─────
-    party:{bpm:100, fn:piano, bfn:bass,
+    // ── PARTY ── 100 BPM, C major, bright piano, no drums ────
+    party:{bpm:100, fn:piano, bfn:bass, dfn:null,
       melody:[
-        [523,1,.15],[659,1,.15],[784,1,.17],[880,1,.19],
-        [784,2,.17],[659,1,.15],[523,1,.14],
-        [698,1,.15],[880,1,.18],[1047,1,.20],[880,1,.18],
-        [784,1.5,.17],[698,.5,.15],[659,2,.17],
-        [659,1,.15],[587,1,.14],[523,2,.16],[440,1,.14],[494,1,.14],
-        [523,1,.15],[659,1,.16],[784,2,.18],
-        [698,1,.15],[784,1,.17],[880,1,.19],[988,1,.20],
-        [1047,4,.21],[0,2,0],
+        // A section – cheerful ascending motif
+        [523,.5,.18],[659,.5,.18],[784,1,.20],[880,.5,.19],[784,.5,.17],
+        [659,1,.17],[523,2,.18],[0,1,0],
+        [698,.5,.17],[784,.5,.18],[880,1,.20],[988,.5,.20],[880,.5,.18],
+        [784,1,.18],[659,2,.17],[0,1,0],
+        // B section – gentle descent
+        [1047,1,.22],[880,.5,.20],[784,.5,.18],[659,1,.17],[0,1,0],
+        [784,.5,.18],[659,.5,.17],[587,1,.16],[523,2,.17],[0,1,0],
+        // C – playful run
+        [523,.25,.16],[587,.25,.16],[659,.25,.17],[698,.25,.17],
+        [784,.5,.18],[880,.5,.19],[784,1,.18],[659,1,.17],[523,1,.17],[0,1,0],
+        // climax
+        [659,1,.18],[784,1,.20],[880,1,.22],[1047,2,.24],[0,2,0],
       ],
       bass:[
-        [131,1,.09],[0,.5,0],[196,1,.08],[0,.5,0],
-        [220,1,.09],[0,.5,0],[175,1,.08],[0,.5,0],
-        [131,1,.09],[0,.5,0],[196,1,.08],[0,.5,0],
-        [175,1,.09],[0,.5,0],[220,1,.08],[0,.5,0],
-        [131,1,.09],[0,.5,0],[196,1,.08],[0,.5,0],
-        [220,1,.09],[0,.5,0],[262,1,.09],[0,.5,0],
-        [196,1,.09],[0,.5,0],[175,1,.08],[0,.5,0],
-        [131,2,.10],[0,.5,0],[196,1.5,.09],
+        [131,1,.10],[0,.5,0],[196,.5,.09],[0,.5,0],
+        [220,1,.10],[0,.5,0],[175,.5,.09],[0,.5,0],
+        [131,1,.10],[0,.5,0],[196,.5,.09],[0,.5,0],
+        [175,1,.10],[0,.5,0],[220,.5,.09],[0,.5,0],
+        [131,1,.10],[0,.5,0],[196,.5,.09],[0,.5,0],
+        [131,1,.10],[0,.5,0],[175,.5,.08],[0,.5,0],
+        [131,.5,.10],[0,.25,0],[131,.25,.09],[196,.5,.09],[0,.5,0],
+        [196,1,.10],[0,.5,0],[131,1.5,.11],[0,.5,0],
+        [131,1,.10],[0,.5,0],[196,.5,.09],[220,1,.09],[0,.5,0],[175,2,.10],[0,1,0],
+      ],
+      drum:[],
+    },
+
+    // ── BATTLE ── 152 BPM, A minor, sawtooth lead + DRUMS ────
+    battle:{bpm:152, fn:lead, bfn:bass, dfn:null,
+      melody:[
+        // driving riff
+        [880,.5,.22],[880,.25,.20],[0,.25,0],[1047,.5,.24],[880,.5,.22],
+        [784,1,.20],[659,.75,.18],[698,.25,.17],
+        [523,.5,.17],[440,.5,.15],[494,.5,.16],[523,.5,.16],
+        [659,1,.18],[0,1,0],
+        // rising tension
+        [659,.5,.18],[784,.5,.20],[880,.5,.22],[987,.5,.22],
+        [1047,1.5,.24],[880,.5,.20],[784,.25,.18],[698,.25,.17],
+        [659,2,.18],[0,2,0],
+        // aggressive repeat
+        [440,.25,.16],[523,.25,.17],[659,.5,.18],[784,.5,.20],
+        [880,.5,.22],[880,.25,.20],[0,.25,0],[880,.5,.22],[784,.25,.20],[698,.25,.18],
+        [659,2,.19],[523,.5,.17],[440,.5,.15],
+        [494,.5,.16],[523,.5,.17],[659,.5,.18],[784,.5,.20],[880,2,.22],[0,2,0],
+      ],
+      bass:[
+        // punchy 8th-note bass
+        [110,.5,.14],[110,.25,.12],[0,.25,0],[110,.5,.13],[165,.5,.12],
+        [110,.5,.14],[110,.25,.12],[0,.25,0],[196,.5,.13],[0,.5,0],
+        [131,.5,.13],[131,.25,.12],[0,.25,0],[131,.5,.12],[175,.5,.11],
+        [110,1,.13],[165,1,.12],
+        [110,.5,.14],[110,.25,.12],[0,.25,0],[110,.5,.13],[165,.5,.12],
+        [110,.5,.14],[0,.25,0],[110,.25,.12],[196,.5,.13],[0,.5,0],
+        [131,.5,.13],[131,.25,.12],[0,.25,0],[131,.5,.12],[175,.5,.11],
+        [98,2,.14],[110,.5,.13],[0,.5,0],[131,1,.12],
+      ],
+      // drum pattern: [fn, dur_beats, vol] — kick/snare/hihat/null
+      drum:[
+        [kick,.5,.55],[hihat,.5,.12],[snare,.5,.32],[hihat,.5,.12],
+        [kick,.5,.55],[hihat,.5,.12],[snare,.5,.32],[hihat,.5,.12],
+        [kick,.5,.55],[kick,.5,.50],[snare,.5,.32],[hihat,.5,.12],
+        [kick,.5,.55],[hihat,.5,.12],[snare,.5,.32],[hihat,.5,.12],
+        [kick,.5,.55],[hihat,.5,.12],[snare,.5,.32],[hihat,.5,.12],
+        [kick,.5,.55],[hihat,.5,.12],[snare,.5,.32],[hihat,.5,.12],
+        [kick,.5,.55],[kick,.25,.45],[kick,.25,.40],[snare,.5,.32],[hihat,.5,.12],
+        [kick,.5,.55],[hihat,.5,.12],[snare,.5,.32],[hihat,.5,.12],
       ],
     },
 
-    // ── BATTLE ── urgent A-minor, 150 BPM, triangle chorus ───
-    battle:{bpm:150, fn:lead, bfn:bass,
+    // ── VICTORY ── 112 BPM, C major fanfare, triumphant piano ─
+    victory:{bpm:112, fn:piano, bfn:bass, dfn:null,
       melody:[
-        [880,.5,.18],[0,.5,0],[880,.5,.18],[0,.25,0],[1047,.25,.20],[880,1,.19],
-        [784,1,.17],[659,1,.16],[523,1,.15],[440,1,.14],
-        [494,.5,.15],[523,.5,.15],[659,.5,.16],[784,.5,.17],[880,1,.19],[0,1,0],
-        [784,1,.17],[698,1,.15],[659,2,.17],[0,2,0],
-        [987,.5,.20],[0,.25,0],[987,.25,.20],[880,1,.20],[784,.5,.17],[698,.5,.16],
-        [659,1,.17],[587,1,.15],[523,2,.17],[0,1,0],
-        [440,.5,.14],[523,.5,.15],[659,.5,.16],[784,.5,.17],[880,1,.19],[0,1,0],
-        [784,.5,.17],[880,.5,.19],[784,.5,.17],[659,.5,.16],[523,4,.17],[0,2,0],
+        // Opening fanfare (short, bold)
+        [523,.25,.22],[523,.25,.22],[523,.25,.22],[523,.25,.22],
+        [659,1.5,.26],[0,.5,0],
+        [784,.25,.24],[784,.25,.24],[784,.25,.24],[784,.25,.24],
+        [1047,1.5,.28],[0,.5,0],
+        // soaring line
+        [880,.5,.24],[784,.5,.22],[698,.5,.20],[659,.5,.20],
+        [784,1,.22],[523,1,.20],[0,1,0],
+        // final climb
+        [523,.5,.20],[659,.5,.22],[784,.5,.24],[880,.5,.25],
+        [988,.5,.26],[1047,.5,.28],[1175,.5,.28],[1319,2,.30],
+        [1047,1,.26],[784,1,.22],
+        // grand finish
+        [659,.5,.22],[784,.5,.24],[880,.5,.26],[1047,4,.30],
+        [0,2,0],
       ],
       bass:[
-        [110,.5,.11],[0,.25,0],[110,.25,.10],[165,.5,.10],[0,.5,0],
-        [110,.5,.11],[0,.25,0],[110,.25,.10],[196,.5,.10],[0,.5,0],
-        [131,.5,.11],[0,.25,0],[131,.25,.10],[175,.5,.10],[0,.5,0],
-        [110,1,.11],[165,1,.10],
-        [110,.5,.11],[0,.25,0],[110,.25,.10],[165,.5,.10],[0,.5,0],
-        [110,.5,.11],[0,.25,0],[110,.25,.10],[196,.5,.10],[0,.5,0],
-        [131,.5,.11],[0,.25,0],[131,.25,.10],[175,.5,.10],[0,.5,0],
-        [98,2,.12],[110,2,.11],
+        [262,.25,.14],[262,.25,.14],[262,.25,.14],[262,.25,.14],
+        [330,1.5,.15],[0,.5,0],
+        [392,.25,.14],[392,.25,.14],[392,.25,.14],[392,.25,.14],
+        [523,1.5,.16],[0,.5,0],
+        [440,1,.14],[392,.5,.12],[330,.5,.11],[330,1,.12],[262,1,.13],[0,1,0],
+        [262,.5,.13],[330,.5,.13],[392,.5,.14],[440,.5,.14],
+        [494,.5,.14],[523,.5,.15],[587,.5,.15],[659,2,.16],
+        [523,1,.14],[392,1,.12],
+        [330,.5,.12],[392,.5,.13],[440,.5,.14],[523,4,.15],[0,2,0],
       ],
-    },
-
-    // ── VICTORY ── triumphant C-major fanfare, 110 BPM, piano ─
-    victory:{bpm:110, fn:piano, bfn:bass,
-      melody:[
-        [523,.5,.18],[523,.5,.18],[523,.5,.18],[659,1.5,.22],
-        [784,.5,.20],[784,.5,.20],[784,.5,.20],[1047,1.5,.24],
-        [880,1,.22],[784,.5,.20],[698,.5,.18],[659,1,.18],[0,1,0],
-        [523,1,.18],[659,1,.20],[784,1,.22],[880,1,.24],
-        [1047,2,.26],[880,1,.22],[784,2,.20],
-        [523,.5,.18],[587,.5,.18],[659,.5,.20],[784,.5,.21],[880,.5,.22],[988,.5,.22],[1047,1,.24],[0,1,0],
-        [1047,2,.24],[784,1,.20],[523,1,.18],
-        [659,4,.22],[0,2,0],
-      ],
-      bass:[
-        [262,.5,.12],[262,.5,.12],[262,.5,.12],[330,1.5,.13],
-        [392,.5,.12],[392,.5,.12],[392,.5,.12],[523,1.5,.14],
-        [440,1,.13],[392,.5,.11],[349,.5,.10],[330,1,.11],[0,1,0],
-        [262,1,.11],[330,1,.11],[392,1,.12],[440,1,.13],
-        [523,2,.14],[440,1,.12],[392,2,.11],
-        [262,1,.10],[330,1,.11],[392,1,.12],[440,1,.13],[523,.5,.13],[659,.5,.14],[784,1,.15],[0,1,0],
-        [523,2,.13],[440,1,.11],[392,1,.10],
-        [349,1,.10],[330,1,.10],[262,4,.13],[0,2,0],
+      drum:[
+        [kick,.5,.50],[null,.5,0],[snare,.5,.28],[null,.5,0],
+        [kick,.5,.50],[null,.5,0],[snare,.5,.28],[null,.5,0],
+        [kick,.5,.50],[null,.5,0],[snare,.5,.28],[null,.5,0],
+        [kick,.5,.50],[null,.5,0],[snare,.5,.28],[null,.5,0],
+        [kick,.5,.50],[null,.5,0],[snare,.5,.28],[null,.5,0],
+        [kick,.5,.50],[null,.5,0],[snare,.5,.28],[null,.5,0],
+        [kick,.5,.50],[kick,.25,.45],[null,.25,0],[snare,.5,.28],[null,.5,0],
+        [kick,.5,.50],[null,.5,0],[snare,.5,.28],[null,.5,0],
       ],
     },
   };
@@ -911,39 +1017,48 @@ const BGM = (() => {
   const scheduler=()=>{
     if(!curTrack) return;
     const c=getCtx(),now=c.currentTime,T=TRACKS[curTrack];
-    while(mNext<now+.15){
+    const ahead=.3;
+    while(mNext<now+ahead){
       const[f,b,v]=T.melody[mIdx%T.melody.length];
       T.fn(f,b,v,mNext,T.bpm);
       mNext+=b*(60/T.bpm); mIdx++;
     }
-    while(bNext<now+.15){
+    while(bNext<now+ahead){
       const[f,b,v]=T.bass[bIdx%T.bass.length];
       T.bfn(f,b,v,bNext,T.bpm);
       bNext+=b*(60/T.bpm); bIdx++;
+    }
+    if(T.drum&&T.drum.length){
+      while(dNext<now+ahead){
+        const[fn,b,v]=T.drum[dIdx%T.drum.length];
+        if(fn) fn(dNext,v);
+        dNext+=b*(60/T.bpm); dIdx++;
+      }
     }
     rafID=requestAnimationFrame(scheduler);
   };
 
   return {
     play(trackName){
-      if(curTrack===trackName) return;
       curTrack=trackName;
       if(rafID){cancelAnimationFrame(rafID);rafID=null;}
       const c=getCtx();
       if(c.state==='suspended') c.resume();
-      mIdx=0; bIdx=0;
-      mNext=c.currentTime+.05; bNext=c.currentTime+.05;
+      mIdx=0; bIdx=0; dIdx=0;
+      mNext=c.currentTime+.05;
+      bNext=c.currentTime+.05;
+      dNext=c.currentTime+.05;
       scheduler();
     },
     start(){ this.play('party'); },
     toggle(){
       muted=!muted;
-      if(masterGain) masterGain.gain.value=muted?0:.5;
+      if(masterGain) masterGain.gain.value=muted?0:.55;
       document.getElementById('mute-btn').textContent=muted?'🔇':'🔊';
     },
     setMuted(v){
       muted=!!v;
-      if(masterGain) masterGain.gain.value=muted?0:.5;
+      if(masterGain) masterGain.gain.value=muted?0:.55;
       document.getElementById('mute-btn').textContent=muted?'🔇':'🔊';
     },
     sfx(type){
