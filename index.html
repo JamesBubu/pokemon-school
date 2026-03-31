@@ -43,8 +43,13 @@
     .btn-green{background:#44BB44;color:#fff;border-color:#226622;box-shadow:0 5px 0 #114411}
     .btn-gold {background:#FFD700;color:#333;border-color:#AA8800;box-shadow:0 5px 0 #886600}
     .btn-gray {background:#888;color:#fff;border-color:#444;box-shadow:0 5px 0 #333}
-    .kb-hint{font-size:11px;color:#aaa;font-weight:400;background:rgba(0,0,0,.12);
-      border-radius:4px;padding:1px 5px;margin-left:5px;font-family:monospace}
+    .kb-hint{display:inline-flex;align-items:center;justify-content:center;
+      min-width:clamp(22px,3vw,32px);height:clamp(22px,3vw,32px);
+      font-size:clamp(11px,1.4vw,15px);font-weight:800;font-family:monospace;
+      color:#fff;background:rgba(0,0,0,.55);border:2px solid rgba(255,255,255,.6);
+      border-radius:6px;padding:0 5px;margin-left:6px;
+      box-shadow:0 3px 0 rgba(0,0,0,.45);letter-spacing:0;
+      vertical-align:middle;line-height:1}
 
     /* ── TITLE ── */
     #s-title{background:linear-gradient(170deg,#0f3460 0%,#16213e 45%,#1a1a2e 100%);gap:clamp(6px,1.5vh,16px)}
@@ -270,6 +275,20 @@
       margin-top:4px;min-height:14px}
     .q-source a{color:#88b;text-decoration:none}
     .q-source a:hover{text-decoration:underline}
+    .q-tts-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+    .q-tts-btn{background:#4488FF;border:none;border-radius:50%;
+      width:clamp(36px,5vw,48px);height:clamp(36px,5vw,48px);
+      font-size:clamp(18px,2.5vw,26px);cursor:pointer;color:#fff;
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+      box-shadow:0 3px 0 #0044aa;transition:transform .1s,box-shadow .1s}
+    .q-tts-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #0044aa}
+    .q-tts-btn:hover{background:#2266dd}
+    .q-text-wrap{flex:1;font-size:clamp(17px,2.5vw,30px);font-weight:700;
+      line-height:1.45;color:#222}
+    /* bigger kb-hint inside opt-btn */
+    .opt-btn .kb-hint{min-width:clamp(20px,2.5vw,28px);height:clamp(20px,2.5vw,28px);
+      font-size:clamp(11px,1.3vw,14px);background:rgba(0,0,0,.18);
+      border-color:rgba(0,0,0,.3);color:#444}
 
     /* ── BATTLE-CHOOSE SCREEN ── */
     #s-battle-choose{background:linear-gradient(160deg,#1a1a2e,#0f3460);
@@ -424,7 +443,7 @@
         </div>
         <button class="btn btn-gray" onclick="App.closeSettings()"
                 style="padding:8px 18px;font-size:clamp(13px,1.6vw,17px)">
-          ✕ 關閉 <span class="kb-hint">[Esc]</span>
+          ✕ 關閉 <span class="kb-hint">Esc</span>
         </button>
       </div>
 
@@ -558,16 +577,16 @@
 
     <div class="battle-menu" id="battle-menu" style="display:none">
       <button class="battle-btn" id="btn-attack"  onclick="App.doAttack('normal')">
-        ⚔️ 攻擊<br><span class="kb-hint">[1/Z]</span>
+        ⚔️ 攻擊<br><span class="kb-hint">1</span><span class="kb-hint" style="margin-left:3px">Z</span>
       </button>
       <button class="battle-btn" id="btn-special" onclick="App.doAttack('special')">
-        ✨ 特技<br><span class="kb-hint">[2/X]</span>
+        ✨ 特技<br><span class="kb-hint">2</span><span class="kb-hint" style="margin-left:3px">X</span>
       </button>
       <button class="battle-btn" id="btn-item" onclick="App.doItem()">
-        🎒 道具<br><span class="kb-hint">[3/C]</span>
+        🎒 道具<br><span class="kb-hint">3</span><span class="kb-hint" style="margin-left:3px">C</span>
       </button>
       <button class="battle-btn" id="btn-switch" onclick="App.showBattleChoose('mid-battle')">
-        🔄 換人<br><span class="kb-hint">[4/P]</span>
+        🔄 換人<br><span class="kb-hint">4</span><span class="kb-hint" style="margin-left:3px">P</span>
       </button>
     </div>
 
@@ -581,7 +600,14 @@
         <div class="timer-bar" id="q-timer-bar">
           <div class="timer-fill" id="q-timer" style="width:100%"></div>
         </div>
-        <div class="q-text" id="q-text">題目</div>
+        <div class="q-tts-row">
+          <button class="q-tts-btn" onclick="App.replayTTS()" title="重新朗讀題目 [R]">🔊</button>
+          <div class="q-text-wrap" id="q-text">題目</div>
+        </div>
+        <div style="text-align:right;margin-bottom:2px">
+          <span class="kb-hint" style="font-size:clamp(9px,1vw,11px);opacity:.7">🔊 重讀</span>
+          <span class="kb-hint" style="font-size:clamp(9px,1vw,11px);margin-left:2px;opacity:.7">R</span>
+        </div>
         <div class="opts-grid" id="q-opts"></div>
         <div class="q-result" id="q-result"></div>
         <div class="q-source" id="q-source"></div>
@@ -596,7 +622,7 @@
     <div class="party-choose-grid" id="bc-grid"></div>
     <button class="btn btn-gray" id="bc-cancel-btn" onclick="App.cancelPartySwitch()"
             style="display:none;font-size:clamp(13px,1.6vw,17px)">
-      取消 <span class="kb-hint">[Esc]</span>
+      取消 <span class="kb-hint">Esc</span>
     </button>
   </div>
 
@@ -632,13 +658,13 @@
     </div>
     <div class="v-party" id="v-party"></div>
     <button class="btn btn-red" onclick="App.nextBattle()">
-      繼續戰鬥！⚔️ <span class="kb-hint">[Enter]</span>
+      繼續戰鬥！⚔️ <span class="kb-hint">Enter</span>
     </button>
     <div style="font-size:clamp(11px,1.4vw,15px);color:rgba(255,255,255,.7);margin-top:4px"
          id="v-heal-msg"></div>
     <button class="btn btn-gray" onclick="App.goHome()"
             style="margin-top:8px;font-size:clamp(13px,1.6vw,17px)">
-      🏠 回首頁 <span class="kb-hint">[H]</span>
+      🏠 回首頁 <span class="kb-hint">H</span>
     </button>
   </div>
 
@@ -650,7 +676,7 @@
     <div class="go-score" id="go-score">最終 0 連勝</div>
     <div style="font-size:clamp(12px,1.6vw,18px);color:#88aaff;margin:4px 0" id="go-stats"></div>
     <button class="btn btn-red" onclick="App.restart()">
-      再次挑戰！🔥 <span class="kb-hint">[Enter]</span>
+      再次挑戰！🔥 <span class="kb-hint">Enter</span>
     </button>
     <button class="btn btn-gray" onclick="App.showTitleScreen()"
             style="margin-top:8px;font-size:clamp(13px,1.6vw,17px)">回首頁</button>
@@ -1916,7 +1942,7 @@ const App={
     document.getElementById('q-opts').innerHTML=q.opts.map((o,i)=>`
       <button class="opt-btn${isTF?(i===0?' tf-true':' tf-false'):''}"
               onclick="App._ansQ(${i},${q.a})">
-        ${LB[i]}. ${o} <span class="kb-hint">[${KB[i]}]</span>
+        <span class="kb-hint">${KB[i]}</span> ${o}
       </button>`).join('');
 
     // timer
@@ -1942,6 +1968,14 @@ const App={
     }
 
     document.getElementById('q-overlay').classList.add('active');
+  },
+
+  replayTTS(){
+    const t=document.getElementById('q-text')?.textContent;
+    if(t) TTS.say(t);
+    // animate button
+    const btn=document.querySelector('.q-tts-btn');
+    if(btn){ btn.style.transform='scale(1.25)'; setTimeout(()=>btn.style.transform='',200); }
   },
 
   _qTimeout(){
@@ -2184,6 +2218,7 @@ const Keys={
         // question overlay open?
         const qOpen=document.getElementById('q-overlay').classList.contains('active');
         if(qOpen){
+          if(k==='r'||k==='R') App.replayTTS();
           if(k==='1'||k==='a'||k==='A') this._clickOpt(0);
           if(k==='2'||k==='b'||k==='B') this._clickOpt(1);
           if(k==='3'||k==='c'||k==='C') this._clickOpt(2);
