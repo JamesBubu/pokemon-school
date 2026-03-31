@@ -3,344 +3,661 @@
     "grade": "kinder",
     "subject": "chinese",
     "description": "幼稚園大班 國語",
-    "version": "1.0"
+    "version": "1.0",
+    "source": "自製"
   },
   "questions": [
     {
       "id": "kc001",
       "type": "mcq",
       "q": "小狗的叫聲是什麼？",
-      "opts": ["喵喵", "汪汪", "咩咩", "呱呱"],
+      "opts": [
+        "喵喵",
+        "汪汪",
+        "咩咩",
+        "呱呱"
+      ],
       "a": 1,
-      "tags": ["animals", "sounds"]
+      "tags": [
+        "animals",
+        "sounds"
+      ]
     },
     {
       "id": "kc002",
       "type": "mcq",
       "q": "貓咪的叫聲是什麼？",
-      "opts": ["汪汪", "喵喵", "哞哞", "嘎嘎"],
+      "opts": [
+        "汪汪",
+        "喵喵",
+        "哞哞",
+        "嘎嘎"
+      ],
       "a": 1,
-      "tags": ["animals", "sounds"]
+      "tags": [
+        "animals",
+        "sounds"
+      ]
     },
     {
       "id": "kc003",
       "type": "mcq",
       "q": "哪個顏色是紅色？",
-      "opts": ["🟦 藍色", "🟥 紅色", "🟩 綠色", "🟨 黃色"],
+      "opts": [
+        "🟦 藍色",
+        "🟥 紅色",
+        "🟩 綠色",
+        "🟨 黃色"
+      ],
       "a": 1,
-      "tags": ["colors", "recognition"]
+      "tags": [
+        "colors",
+        "recognition"
+      ]
     },
     {
       "id": "kc004",
       "type": "mcq",
       "q": "哪個顏色是藍色？",
-      "opts": ["🟥 紅色", "🟨 黃色", "🟦 藍色", "🟩 綠色"],
+      "opts": [
+        "🟥 紅色",
+        "🟨 黃色",
+        "🟦 藍色",
+        "🟩 綠色"
+      ],
       "a": 2,
-      "tags": ["colors", "recognition"]
+      "tags": [
+        "colors",
+        "recognition"
+      ]
     },
     {
       "id": "kc005",
       "type": "mcq",
       "q": "哪個顏色是黃色？",
-      "opts": ["🟩 綠色", "🟦 藍色", "🟥 紅色", "🟨 黃色"],
+      "opts": [
+        "🟩 綠色",
+        "🟦 藍色",
+        "🟥 紅色",
+        "🟨 黃色"
+      ],
       "a": 3,
-      "tags": ["colors", "recognition"]
+      "tags": [
+        "colors",
+        "recognition"
+      ]
     },
     {
       "id": "kc006",
       "type": "mcq",
       "q": "爸爸的爸爸叫做什麼？",
-      "opts": ["外公", "叔叔", "爺爺", "舅舅"],
+      "opts": [
+        "外公",
+        "叔叔",
+        "爺爺",
+        "舅舅"
+      ],
       "a": 2,
-      "tags": ["family", "relatives"]
+      "tags": [
+        "family",
+        "relatives"
+      ]
     },
     {
       "id": "kc007",
       "type": "mcq",
       "q": "媽媽的媽媽叫做什麼？",
-      "opts": ["奶奶", "阿姨", "外婆", "姑姑"],
+      "opts": [
+        "奶奶",
+        "阿姨",
+        "外婆",
+        "姑姑"
+      ],
       "a": 2,
-      "tags": ["family", "relatives"]
+      "tags": [
+        "family",
+        "relatives"
+      ]
     },
     {
       "id": "kc008",
       "type": "mcq",
       "q": "哪個是水果？",
-      "opts": ["蘿蔔", "花椰菜", "蘋果", "高麗菜"],
+      "opts": [
+        "蘿蔔",
+        "花椰菜",
+        "蘋果",
+        "高麗菜"
+      ],
       "a": 2,
-      "tags": ["food", "fruits"]
+      "tags": [
+        "food",
+        "fruits"
+      ]
     },
     {
       "id": "kc009",
       "type": "mcq",
       "q": "哪個動物會飛？",
-      "opts": ["魚", "狗", "鳥", "貓"],
+      "opts": [
+        "魚",
+        "狗",
+        "鳥",
+        "貓"
+      ],
       "a": 2,
-      "tags": ["animals", "characteristics"]
+      "tags": [
+        "animals",
+        "characteristics"
+      ]
     },
     {
       "id": "kc010",
       "type": "mcq",
       "q": "哪個動物住在水裡？",
-      "opts": ["貓", "狗", "鳥", "魚"],
+      "opts": [
+        "貓",
+        "狗",
+        "鳥",
+        "魚"
+      ],
       "a": 3,
-      "tags": ["animals", "habitat"]
+      "tags": [
+        "animals",
+        "habitat"
+      ]
     },
     {
       "id": "kc011",
       "type": "mcq",
       "q": "哪個是蔬菜？",
-      "opts": ["蘋果", "香蕉", "蘿蔔", "西瓜"],
+      "opts": [
+        "蘋果",
+        "香蕉",
+        "蘿蔔",
+        "西瓜"
+      ],
       "a": 2,
-      "tags": ["food", "vegetables"]
+      "tags": [
+        "food",
+        "vegetables"
+      ]
     },
     {
       "id": "kc012",
       "type": "mcq",
       "q": "下雨時要用什麼？",
-      "opts": ["帽子", "手套", "眼鏡", "雨傘"],
+      "opts": [
+        "帽子",
+        "手套",
+        "眼鏡",
+        "雨傘"
+      ],
       "a": 3,
-      "tags": ["weather", "daily-life"]
+      "tags": [
+        "weather",
+        "daily-life"
+      ]
     },
     {
       "id": "kc013",
       "type": "mcq",
       "q": "睡覺時躺在哪裡？",
-      "opts": ["椅子", "桌子", "床", "沙發"],
+      "opts": [
+        "椅子",
+        "桌子",
+        "床",
+        "沙發"
+      ],
       "a": 2,
-      "tags": ["daily-life", "furniture"]
+      "tags": [
+        "daily-life",
+        "furniture"
+      ]
     },
     {
       "id": "kc014",
       "type": "mcq",
       "q": "哪個可以用來寫字？",
-      "opts": ["湯匙", "剪刀", "鉛筆", "尺子"],
+      "opts": [
+        "湯匙",
+        "剪刀",
+        "鉛筆",
+        "尺子"
+      ],
       "a": 2,
-      "tags": ["school-supplies", "tools"]
+      "tags": [
+        "school-supplies",
+        "tools"
+      ]
     },
     {
       "id": "kc015",
       "type": "mcq",
       "q": "哪個是交通工具？",
-      "opts": ["椅子", "桌子", "汽車", "電話"],
+      "opts": [
+        "椅子",
+        "桌子",
+        "汽車",
+        "電話"
+      ],
       "a": 2,
-      "tags": ["transportation", "daily-life"]
+      "tags": [
+        "transportation",
+        "daily-life"
+      ]
     },
     {
       "id": "kc016",
       "type": "mcq",
       "q": "天空中白天有什麼？",
-      "opts": ["月亮", "星星", "太陽", "雲朵"],
+      "opts": [
+        "月亮",
+        "星星",
+        "太陽",
+        "雲朵"
+      ],
       "a": 2,
-      "tags": ["nature", "sky"]
+      "tags": [
+        "nature",
+        "sky"
+      ]
     },
     {
       "id": "kc017",
       "type": "mcq",
       "q": "冬天的天氣是怎樣的？",
-      "opts": ["熱熱的", "涼涼的", "冷冷的", "潮濕的"],
+      "opts": [
+        "熱熱的",
+        "涼涼的",
+        "冷冷的",
+        "潮濕的"
+      ],
       "a": 2,
-      "tags": ["seasons", "weather"]
+      "tags": [
+        "seasons",
+        "weather"
+      ]
     },
     {
       "id": "kc018",
       "type": "mcq",
       "q": "夏天的天氣是怎樣的？",
-      "opts": ["冷冷的", "熱熱的", "涼涼的", "乾燥的"],
+      "opts": [
+        "冷冷的",
+        "熱熱的",
+        "涼涼的",
+        "乾燥的"
+      ],
       "a": 1,
-      "tags": ["seasons", "weather"]
+      "tags": [
+        "seasons",
+        "weather"
+      ]
     },
     {
       "id": "kc019",
       "type": "mcq",
       "q": "哪個是衣服？",
-      "opts": ["帽子", "T恤", "鞋子", "手錶"],
+      "opts": [
+        "帽子",
+        "T恤",
+        "鞋子",
+        "手錶"
+      ],
       "a": 1,
-      "tags": ["clothing", "daily-life"]
+      "tags": [
+        "clothing",
+        "daily-life"
+      ]
     },
     {
       "id": "kc020",
       "type": "mcq",
       "q": "哪個能吃？",
-      "opts": ["石頭", "木頭", "麵包", "鐵塊"],
+      "opts": [
+        "石頭",
+        "木頭",
+        "麵包",
+        "鐵塊"
+      ],
       "a": 2,
-      "tags": ["food", "recognition"]
+      "tags": [
+        "food",
+        "recognition"
+      ]
     },
     {
       "id": "kc021",
       "type": "tf",
       "q": "小狗的叫聲是「汪汪」，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["animals", "true-false"]
+      "tags": [
+        "animals",
+        "true-false"
+      ]
     },
     {
       "id": "kc022",
       "type": "tf",
       "q": "魚可以在天空中飛，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 1,
-      "tags": ["animals", "true-false"]
+      "tags": [
+        "animals",
+        "true-false"
+      ]
     },
     {
       "id": "kc023",
       "type": "tf",
       "q": "蘋果是一種水果，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["food", "true-false"]
+      "tags": [
+        "food",
+        "true-false"
+      ]
     },
     {
       "id": "kc024",
       "type": "tf",
       "q": "下雨天要帶雨傘，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["weather", "true-false"]
+      "tags": [
+        "weather",
+        "true-false"
+      ]
     },
     {
       "id": "kc025",
       "type": "tf",
       "q": "夏天的天氣是冷冷的，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 1,
-      "tags": ["seasons", "true-false"]
+      "tags": [
+        "seasons",
+        "true-false"
+      ]
     },
     {
       "id": "kc026",
       "type": "tf",
       "q": "爸爸的爸爸叫爺爺，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["family", "true-false"]
+      "tags": [
+        "family",
+        "true-false"
+      ]
     },
     {
       "id": "kc027",
       "type": "mcq",
       "q": "牛的叫聲是什麼？",
-      "opts": ["喵喵", "汪汪", "哞哞", "咩咩"],
+      "opts": [
+        "喵喵",
+        "汪汪",
+        "哞哞",
+        "咩咩"
+      ],
       "a": 2,
-      "tags": ["animals", "sounds"]
+      "tags": [
+        "animals",
+        "sounds"
+      ]
     },
     {
       "id": "kc028",
       "type": "mcq",
       "q": "羊的叫聲是什麼？",
-      "opts": ["哞哞", "咩咩", "汪汪", "喵喵"],
+      "opts": [
+        "哞哞",
+        "咩咩",
+        "汪汪",
+        "喵喵"
+      ],
       "a": 1,
-      "tags": ["animals", "sounds"]
+      "tags": [
+        "animals",
+        "sounds"
+      ]
     },
     {
       "id": "kc029",
       "type": "mcq",
       "q": "哪個顏色是綠色？",
-      "opts": ["🟥 紅色", "🟦 藍色", "🟩 綠色", "🟨 黃色"],
+      "opts": [
+        "🟥 紅色",
+        "🟦 藍色",
+        "🟩 綠色",
+        "🟨 黃色"
+      ],
       "a": 2,
-      "tags": ["colors", "recognition"]
+      "tags": [
+        "colors",
+        "recognition"
+      ]
     },
     {
       "id": "kc030",
       "type": "mcq",
       "q": "用餐時坐在哪裡吃飯？",
-      "opts": ["床上", "地板", "椅子上", "浴缸裡"],
+      "opts": [
+        "床上",
+        "地板",
+        "椅子上",
+        "浴缸裡"
+      ],
       "a": 2,
-      "tags": ["daily-life", "furniture"]
+      "tags": [
+        "daily-life",
+        "furniture"
+      ]
     },
     {
       "id": "kc031",
       "type": "mcq",
       "q": "哪個動物是貓咪的朋友？",
-      "opts": ["老虎", "獅子", "小狗", "大象"],
+      "opts": [
+        "老虎",
+        "獅子",
+        "小狗",
+        "大象"
+      ],
       "a": 2,
-      "tags": ["animals", "recognition"]
+      "tags": [
+        "animals",
+        "recognition"
+      ]
     },
     {
       "id": "kc032",
       "type": "mcq",
       "q": "哪個是甜的食物？",
-      "opts": ["辣椒", "鹽巴", "糖果", "醋"],
+      "opts": [
+        "辣椒",
+        "鹽巴",
+        "糖果",
+        "醋"
+      ],
       "a": 2,
-      "tags": ["food", "taste"]
+      "tags": [
+        "food",
+        "taste"
+      ]
     },
     {
       "id": "kc033",
       "type": "mcq",
       "q": "春天有什麼特別的事？",
-      "opts": ["下雪", "樹葉落下", "花朵開放", "天氣最熱"],
+      "opts": [
+        "下雪",
+        "樹葉落下",
+        "花朵開放",
+        "天氣最熱"
+      ],
       "a": 2,
-      "tags": ["seasons", "nature"]
+      "tags": [
+        "seasons",
+        "nature"
+      ]
     },
     {
       "id": "kc034",
       "type": "tf",
       "q": "貓咪的叫聲是「喵喵」，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["animals", "true-false"]
+      "tags": [
+        "animals",
+        "true-false"
+      ]
     },
     {
       "id": "kc035",
       "type": "tf",
       "q": "蘿蔔是一種水果，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 1,
-      "tags": ["food", "true-false"]
+      "tags": [
+        "food",
+        "true-false"
+      ]
     },
     {
       "id": "kc036",
       "type": "mcq",
       "q": "哪個東西可以讓我們看書？",
-      "opts": ["鞋子", "眼睛", "帽子", "手套"],
+      "opts": [
+        "鞋子",
+        "眼睛",
+        "帽子",
+        "手套"
+      ],
       "a": 1,
-      "tags": ["body", "daily-life"]
+      "tags": [
+        "body",
+        "daily-life"
+      ]
     },
     {
       "id": "kc037",
       "type": "mcq",
       "q": "哪個是學校用品？",
-      "opts": ["鍋子", "碗", "書包", "枕頭"],
+      "opts": [
+        "鍋子",
+        "碗",
+        "書包",
+        "枕頭"
+      ],
       "a": 2,
-      "tags": ["school-supplies", "recognition"]
+      "tags": [
+        "school-supplies",
+        "recognition"
+      ]
     },
     {
       "id": "kc038",
       "type": "tf",
       "q": "冬天天氣是冷冷的，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["seasons", "true-false"]
+      "tags": [
+        "seasons",
+        "true-false"
+      ]
     },
     {
       "id": "kc039",
       "type": "mcq",
       "q": "哪個動物最高？",
-      "opts": ["貓咪", "小狗", "長頸鹿", "兔子"],
+      "opts": [
+        "貓咪",
+        "小狗",
+        "長頸鹿",
+        "兔子"
+      ],
       "a": 2,
-      "tags": ["animals", "characteristics"]
+      "tags": [
+        "animals",
+        "characteristics"
+      ]
     },
     {
       "id": "kc040",
       "type": "tf",
       "q": "鳥會在天空中飛，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["animals", "true-false"]
+      "tags": [
+        "animals",
+        "true-false"
+      ]
     },
     {
       "id": "kc041",
       "type": "mcq",
       "q": "哪個是圓形的水果？",
-      "opts": ["香蕉", "蘋果", "草莓", "葡萄"],
+      "opts": [
+        "香蕉",
+        "蘋果",
+        "草莓",
+        "葡萄"
+      ],
       "a": 1,
-      "tags": ["food", "shapes"]
+      "tags": [
+        "food",
+        "shapes"
+      ]
     },
     {
       "id": "kc042",
       "type": "mcq",
       "q": "媽媽的爸爸叫做什麼？",
-      "opts": ["爺爺", "叔叔", "外公", "舅舅"],
+      "opts": [
+        "爺爺",
+        "叔叔",
+        "外公",
+        "舅舅"
+      ],
       "a": 2,
-      "tags": ["family", "relatives"]
+      "tags": [
+        "family",
+        "relatives"
+      ]
     }
   ]
 }

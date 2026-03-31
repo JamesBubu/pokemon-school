@@ -266,6 +266,10 @@
       margin-top:clamp(7px,1.2vh,13px);min-height:clamp(22px,3.4vh,34px)}
     .r-correct{color:#44BB44}
     .r-wrong  {color:#FF4444}
+    .q-source{font-size:clamp(9px,1.1vw,12px);color:#aaa;text-align:right;
+      margin-top:4px;min-height:14px}
+    .q-source a{color:#88b;text-decoration:none}
+    .q-source a:hover{text-decoration:underline}
 
     /* ── BATTLE-CHOOSE SCREEN ── */
     #s-battle-choose{background:linear-gradient(160deg,#1a1a2e,#0f3460);
@@ -580,6 +584,7 @@
         <div class="q-text" id="q-text">題目</div>
         <div class="opts-grid" id="q-opts"></div>
         <div class="q-result" id="q-result"></div>
+        <div class="q-source" id="q-source"></div>
       </div>
     </div>
   </div>
@@ -1083,9 +1088,11 @@ const QB={
       const r=await fetch(`questions/${grade}/${sub}.json`);
       if(!r.ok) throw new Error('not found');
       const data=await r.json();
-      if(Array.isArray(data.questions)&&data.questions.length>0)
-        this._data[grade][sub]=data.questions;
-      else
+      if(Array.isArray(data.questions)&&data.questions.length>0){
+        const metaSrc=data.meta?.source||'自製';
+        // inject source into each question if not already set
+        this._data[grade][sub]=data.questions.map(q=>q.source?q:{...q,source:metaSrc});
+      } else
         this._data[grade][sub]=this._fallback[grade][sub]||[];
     }catch{
       this._data[grade][sub]=this._fallback[grade]?.[sub]||[];
@@ -1887,6 +1894,17 @@ const App={
 
     document.getElementById('q-text').textContent=q.q;
     document.getElementById('q-result').textContent='';
+    // source attribution
+    const srcEl=document.getElementById('q-source');
+    if(srcEl){
+      if(q.source&&q.source!=='自製'){
+        srcEl.innerHTML=`出處：<a href="https://www.junyiacademy.org" target="_blank" rel="noopener">${q.source}</a>`;
+      } else if(q.source==='自製'){
+        srcEl.textContent='出處：自製題目';
+      } else {
+        srcEl.textContent='';
+      }
+    }
     TTS.say(q.q);
 
     // build option buttons — support 2 opts (tf) and 4 opts (mcq)

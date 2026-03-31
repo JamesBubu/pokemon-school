@@ -3,328 +3,635 @@
     "grade": "grade1",
     "subject": "english",
     "description": "小學一年級 英文",
-    "version": "1.0"
+    "version": "1.0",
+    "source": "自製"
   },
   "questions": [
     {
       "id": "g1e001",
       "type": "mcq",
       "q": "媽媽的英文怎麼說？",
-      "opts": ["Father", "Sister", "Mother", "Brother"],
+      "opts": [
+        "Father",
+        "Sister",
+        "Mother",
+        "Brother"
+      ],
       "a": 2,
-      "tags": ["family", "vocabulary"]
+      "tags": [
+        "family",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e002",
       "type": "mcq",
       "q": "爸爸的英文怎麼說？",
-      "opts": ["Mother", "Father", "Brother", "Sister"],
+      "opts": [
+        "Mother",
+        "Father",
+        "Brother",
+        "Sister"
+      ],
       "a": 1,
-      "tags": ["family", "vocabulary"]
+      "tags": [
+        "family",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e003",
       "type": "mcq",
       "q": "哥哥／弟弟的英文怎麼說？",
-      "opts": ["Sister", "Father", "Mother", "Brother"],
+      "opts": [
+        "Sister",
+        "Father",
+        "Mother",
+        "Brother"
+      ],
       "a": 3,
-      "tags": ["family", "vocabulary"]
+      "tags": [
+        "family",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e004",
       "type": "mcq",
       "q": "「你好」的英文怎麼說？",
-      "opts": ["Bye", "Thank you", "Hello", "Sorry"],
+      "opts": [
+        "Bye",
+        "Thank you",
+        "Hello",
+        "Sorry"
+      ],
       "a": 2,
-      "tags": ["greetings", "phrases"]
+      "tags": [
+        "greetings",
+        "phrases"
+      ]
     },
     {
       "id": "g1e005",
       "type": "mcq",
       "q": "「再見」的英文怎麼說？",
-      "opts": ["Hello", "Hi", "Bye", "Sorry"],
+      "opts": [
+        "Hello",
+        "Hi",
+        "Bye",
+        "Sorry"
+      ],
       "a": 2,
-      "tags": ["greetings", "phrases"]
+      "tags": [
+        "greetings",
+        "phrases"
+      ]
     },
     {
       "id": "g1e006",
       "type": "mcq",
       "q": "「謝謝」的英文怎麼說？",
-      "opts": ["Sorry", "Please", "Hello", "Thank you"],
+      "opts": [
+        "Sorry",
+        "Please",
+        "Hello",
+        "Thank you"
+      ],
       "a": 3,
-      "tags": ["greetings", "phrases"]
+      "tags": [
+        "greetings",
+        "phrases"
+      ]
     },
     {
       "id": "g1e007",
       "type": "mcq",
       "q": "英文「六」怎麼寫？",
-      "opts": ["Five", "Six", "Seven", "Eight"],
+      "opts": [
+        "Five",
+        "Six",
+        "Seven",
+        "Eight"
+      ],
       "a": 1,
-      "tags": ["numbers", "vocabulary"]
+      "tags": [
+        "numbers",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e008",
       "type": "mcq",
       "q": "英文「七」怎麼寫？",
-      "opts": ["Six", "Seven", "Eight", "Nine"],
+      "opts": [
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine"
+      ],
       "a": 1,
-      "tags": ["numbers", "vocabulary"]
+      "tags": [
+        "numbers",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e009",
       "type": "mcq",
       "q": "英文「八」怎麼寫？",
-      "opts": ["Six", "Seven", "Eight", "Nine"],
+      "opts": [
+        "Six",
+        "Seven",
+        "Eight",
+        "Nine"
+      ],
       "a": 2,
-      "tags": ["numbers", "vocabulary"]
+      "tags": [
+        "numbers",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e010",
       "type": "mcq",
       "q": "英文「九」怎麼寫？",
-      "opts": ["Seven", "Eight", "Nine", "Ten"],
+      "opts": [
+        "Seven",
+        "Eight",
+        "Nine",
+        "Ten"
+      ],
       "a": 2,
-      "tags": ["numbers", "vocabulary"]
+      "tags": [
+        "numbers",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e011",
       "type": "mcq",
       "q": "英文「十」怎麼寫？",
-      "opts": ["Eight", "Nine", "Ten", "Eleven"],
+      "opts": [
+        "Eight",
+        "Nine",
+        "Ten",
+        "Eleven"
+      ],
       "a": 2,
-      "tags": ["numbers", "vocabulary"]
+      "tags": [
+        "numbers",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e012",
       "type": "mcq",
       "q": "橘色的英文怎麼說？",
-      "opts": ["Red", "Yellow", "Orange", "Purple"],
+      "opts": [
+        "Red",
+        "Yellow",
+        "Orange",
+        "Purple"
+      ],
       "a": 2,
-      "tags": ["colors", "vocabulary"]
+      "tags": [
+        "colors",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e013",
       "type": "mcq",
       "q": "綠色的英文怎麼說？",
-      "opts": ["Blue", "Green", "Red", "Yellow"],
+      "opts": [
+        "Blue",
+        "Green",
+        "Red",
+        "Yellow"
+      ],
       "a": 1,
-      "tags": ["colors", "vocabulary"]
+      "tags": [
+        "colors",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e014",
       "type": "mcq",
       "q": "白色的英文怎麼說？",
-      "opts": ["Black", "Gray", "White", "Brown"],
+      "opts": [
+        "Black",
+        "Gray",
+        "White",
+        "Brown"
+      ],
       "a": 2,
-      "tags": ["colors", "vocabulary"]
+      "tags": [
+        "colors",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e015",
       "type": "mcq",
       "q": "黑色的英文怎麼說？",
-      "opts": ["White", "Gray", "Brown", "Black"],
+      "opts": [
+        "White",
+        "Gray",
+        "Brown",
+        "Black"
+      ],
       "a": 3,
-      "tags": ["colors", "vocabulary"]
+      "tags": [
+        "colors",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e016",
       "type": "mcq",
       "q": "老師的英文怎麼說？",
-      "opts": ["Doctor", "Teacher", "Student", "Farmer"],
+      "opts": [
+        "Doctor",
+        "Teacher",
+        "Student",
+        "Farmer"
+      ],
       "a": 1,
-      "tags": ["occupations", "vocabulary"]
+      "tags": [
+        "occupations",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e017",
       "type": "mcq",
       "q": "學生的英文怎麼說？",
-      "opts": ["Teacher", "Doctor", "Student", "Worker"],
+      "opts": [
+        "Teacher",
+        "Doctor",
+        "Student",
+        "Worker"
+      ],
       "a": 2,
-      "tags": ["occupations", "vocabulary"]
+      "tags": [
+        "occupations",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e018",
       "type": "mcq",
       "q": "香蕉的英文怎麼說？",
-      "opts": ["Apple", "Orange", "Banana", "Grape"],
+      "opts": [
+        "Apple",
+        "Orange",
+        "Banana",
+        "Grape"
+      ],
       "a": 2,
-      "tags": ["fruits", "vocabulary"]
+      "tags": [
+        "fruits",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e019",
       "type": "mcq",
       "q": "葡萄的英文怎麼說？",
-      "opts": ["Apple", "Banana", "Mango", "Grape"],
+      "opts": [
+        "Apple",
+        "Banana",
+        "Mango",
+        "Grape"
+      ],
       "a": 3,
-      "tags": ["fruits", "vocabulary"]
+      "tags": [
+        "fruits",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e020",
       "type": "mcq",
       "q": "快樂的英文怎麼說？",
-      "opts": ["Sad", "Angry", "Happy", "Tired"],
+      "opts": [
+        "Sad",
+        "Angry",
+        "Happy",
+        "Tired"
+      ],
       "a": 2,
-      "tags": ["emotions", "vocabulary"]
+      "tags": [
+        "emotions",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e021",
       "type": "mcq",
       "q": "傷心的英文怎麼說？",
-      "opts": ["Happy", "Sad", "Angry", "Scared"],
+      "opts": [
+        "Happy",
+        "Sad",
+        "Angry",
+        "Scared"
+      ],
       "a": 1,
-      "tags": ["emotions", "vocabulary"]
+      "tags": [
+        "emotions",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e022",
       "type": "mcq",
       "q": "大的英文怎麼說？",
-      "opts": ["Small", "Big", "Tall", "Short"],
+      "opts": [
+        "Small",
+        "Big",
+        "Tall",
+        "Short"
+      ],
       "a": 1,
-      "tags": ["adjectives", "vocabulary"]
+      "tags": [
+        "adjectives",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e023",
       "type": "mcq",
       "q": "小的英文怎麼說？",
-      "opts": ["Big", "Tall", "Small", "Short"],
+      "opts": [
+        "Big",
+        "Tall",
+        "Small",
+        "Short"
+      ],
       "a": 2,
-      "tags": ["adjectives", "vocabulary"]
+      "tags": [
+        "adjectives",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e024",
       "type": "mcq",
       "q": "學校的英文怎麼說？",
-      "opts": ["Hospital", "Park", "School", "Market"],
+      "opts": [
+        "Hospital",
+        "Park",
+        "School",
+        "Market"
+      ],
       "a": 2,
-      "tags": ["places", "vocabulary"]
+      "tags": [
+        "places",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e025",
       "type": "tf",
       "q": "「Mother」是媽媽的英文，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["family", "true-false"]
+      "tags": [
+        "family",
+        "true-false"
+      ]
     },
     {
       "id": "g1e026",
       "type": "tf",
       "q": "「Hello」是再見的英文，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 1,
-      "tags": ["greetings", "true-false"]
+      "tags": [
+        "greetings",
+        "true-false"
+      ]
     },
     {
       "id": "g1e027",
       "type": "tf",
       "q": "「Happy」是快樂的英文，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["emotions", "true-false"]
+      "tags": [
+        "emotions",
+        "true-false"
+      ]
     },
     {
       "id": "g1e028",
       "type": "tf",
       "q": "「Ten」是英文的「十」，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["numbers", "true-false"]
+      "tags": [
+        "numbers",
+        "true-false"
+      ]
     },
     {
       "id": "g1e029",
       "type": "mcq",
       "q": "姊姊／妹妹的英文怎麼說？",
-      "opts": ["Brother", "Mother", "Sister", "Father"],
+      "opts": [
+        "Brother",
+        "Mother",
+        "Sister",
+        "Father"
+      ],
       "a": 2,
-      "tags": ["family", "vocabulary"]
+      "tags": [
+        "family",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e030",
       "type": "mcq",
       "q": "公園的英文怎麼說？",
-      "opts": ["School", "Hospital", "Park", "Market"],
+      "opts": [
+        "School",
+        "Hospital",
+        "Park",
+        "Market"
+      ],
       "a": 2,
-      "tags": ["places", "vocabulary"]
+      "tags": [
+        "places",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e031",
       "type": "mcq",
       "q": "「不客氣」的英文怎麼說？",
-      "opts": ["Sorry", "Please", "You're welcome", "Thank you"],
+      "opts": [
+        "Sorry",
+        "Please",
+        "You're welcome",
+        "Thank you"
+      ],
       "a": 2,
-      "tags": ["greetings", "phrases"]
+      "tags": [
+        "greetings",
+        "phrases"
+      ]
     },
     {
       "id": "g1e032",
       "type": "tf",
       "q": "「Black」是白色的英文，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 1,
-      "tags": ["colors", "true-false"]
+      "tags": [
+        "colors",
+        "true-false"
+      ]
     },
     {
       "id": "g1e033",
       "type": "mcq",
       "q": "醫生的英文怎麼說？",
-      "opts": ["Teacher", "Doctor", "Farmer", "Driver"],
+      "opts": [
+        "Teacher",
+        "Doctor",
+        "Farmer",
+        "Driver"
+      ],
       "a": 1,
-      "tags": ["occupations", "vocabulary"]
+      "tags": [
+        "occupations",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e034",
       "type": "mcq",
       "q": "蘋果的英文怎麼說？",
-      "opts": ["Banana", "Orange", "Apple", "Mango"],
+      "opts": [
+        "Banana",
+        "Orange",
+        "Apple",
+        "Mango"
+      ],
       "a": 2,
-      "tags": ["fruits", "vocabulary"]
+      "tags": [
+        "fruits",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e035",
       "type": "tf",
       "q": "「Teacher」是老師的英文，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["occupations", "true-false"]
+      "tags": [
+        "occupations",
+        "true-false"
+      ]
     },
     {
       "id": "g1e036",
       "type": "mcq",
       "q": "高的英文怎麼說？",
-      "opts": ["Short", "Small", "Tall", "Big"],
+      "opts": [
+        "Short",
+        "Small",
+        "Tall",
+        "Big"
+      ],
       "a": 2,
-      "tags": ["adjectives", "vocabulary"]
+      "tags": [
+        "adjectives",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e037",
       "type": "mcq",
       "q": "矮的英文怎麼說？",
-      "opts": ["Tall", "Short", "Big", "Small"],
+      "opts": [
+        "Tall",
+        "Short",
+        "Big",
+        "Small"
+      ],
       "a": 1,
-      "tags": ["adjectives", "vocabulary"]
+      "tags": [
+        "adjectives",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e038",
       "type": "tf",
       "q": "「School」是學校的英文，這是正確的嗎？",
-      "opts": ["正確", "錯誤"],
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
       "a": 0,
-      "tags": ["places", "true-false"]
+      "tags": [
+        "places",
+        "true-false"
+      ]
     },
     {
       "id": "g1e039",
       "type": "mcq",
       "q": "紫色的英文怎麼說？",
-      "opts": ["Orange", "Pink", "Purple", "Brown"],
+      "opts": [
+        "Orange",
+        "Pink",
+        "Purple",
+        "Brown"
+      ],
       "a": 2,
-      "tags": ["colors", "vocabulary"]
+      "tags": [
+        "colors",
+        "vocabulary"
+      ]
     },
     {
       "id": "g1e040",
       "type": "mcq",
       "q": "粉紅色的英文怎麼說？",
-      "opts": ["Purple", "Pink", "Orange", "Brown"],
+      "opts": [
+        "Purple",
+        "Pink",
+        "Orange",
+        "Brown"
+      ],
       "a": 1,
-      "tags": ["colors", "vocabulary"]
+      "tags": [
+        "colors",
+        "vocabulary"
+      ]
     }
   ]
 }
