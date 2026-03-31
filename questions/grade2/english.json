@@ -4,7 +4,8 @@
     "subject": "english",
     "description": "小學二年級 英文",
     "version": "1.0",
-    "source": "自製"
+    "source": "自製",
+    "count": 55
   },
   "questions": [
     {
@@ -605,6 +606,237 @@
       "a": 2,
       "tags": [
         "months"
+      ]
+    },
+    {
+      "id": "g2e0041",
+      "type": "mcq",
+      "q": "Which sentence is correct?",
+      "opts": [
+        "I am happy.",
+        "I is happy.",
+        "I are happy.",
+        "I be happy."
+      ],
+      "a": 0,
+      "tags": [
+        "grammar",
+        "be-verb"
+      ]
+    },
+    {
+      "id": "g2e0042",
+      "type": "mcq",
+      "q": "What day is after Wednesday?",
+      "opts": [
+        "Monday",
+        "Tuesday",
+        "Thursday",
+        "Friday"
+      ],
+      "a": 2,
+      "tags": [
+        "days"
+      ]
+    },
+    {
+      "id": "g2e0043",
+      "type": "mcq",
+      "q": "I ___ a student.",
+      "opts": [
+        "am",
+        "is",
+        "are",
+        "be"
+      ],
+      "a": 0,
+      "tags": [
+        "be-verb",
+        "fill-blank"
+      ]
+    },
+    {
+      "id": "g2e0044",
+      "type": "tf",
+      "q": "There are 12 months in a year.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "months",
+        "tf"
+      ]
+    },
+    {
+      "id": "g2e0045",
+      "type": "mcq",
+      "q": "Which word means 教室?",
+      "opts": [
+        "Library",
+        "Kitchen",
+        "Classroom",
+        "Bedroom"
+      ],
+      "a": 2,
+      "tags": [
+        "school",
+        "noun"
+      ]
+    },
+    {
+      "id": "g2e0046",
+      "type": "mcq",
+      "q": "She ___ a teacher.",
+      "opts": [
+        "am",
+        "is",
+        "are",
+        "be"
+      ],
+      "a": 1,
+      "tags": [
+        "be-verb",
+        "fill-blank"
+      ]
+    },
+    {
+      "id": "g2e0047",
+      "type": "mcq",
+      "q": "What is the opposite of \"old\"?",
+      "opts": [
+        "Big",
+        "New",
+        "Small",
+        "Long"
+      ],
+      "a": 1,
+      "tags": [
+        "antonym"
+      ]
+    },
+    {
+      "id": "g2e0048",
+      "type": "tf",
+      "q": "Sunday is the first day of the week.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "days",
+        "tf"
+      ]
+    },
+    {
+      "id": "g2e0049",
+      "type": "mcq",
+      "q": "Which word is an animal?",
+      "opts": [
+        "Book",
+        "Pencil",
+        "Tiger",
+        "Table"
+      ],
+      "a": 2,
+      "tags": [
+        "animal",
+        "noun"
+      ]
+    },
+    {
+      "id": "g2e0050",
+      "type": "mcq",
+      "q": "I like ___ apples. (我喜歡吃蘋果)",
+      "opts": [
+        "eat",
+        "eating",
+        "ate",
+        "eats"
+      ],
+      "a": 1,
+      "tags": [
+        "verb",
+        "grammar"
+      ]
+    },
+    {
+      "id": "g2e0051",
+      "type": "tf",
+      "q": "\"They are\" is correct grammar.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "be-verb",
+        "tf"
+      ]
+    },
+    {
+      "id": "g2e0052",
+      "type": "mcq",
+      "q": "Which sentence asks a question?",
+      "opts": [
+        "I am happy.",
+        "She likes cats.",
+        "Are you okay?",
+        "He runs fast."
+      ],
+      "a": 2,
+      "tags": [
+        "question",
+        "grammar"
+      ]
+    },
+    {
+      "id": "g2e0053",
+      "type": "mcq",
+      "q": "What month comes after June?",
+      "opts": [
+        "May",
+        "August",
+        "July",
+        "September"
+      ],
+      "a": 2,
+      "tags": [
+        "months"
+      ]
+    },
+    {
+      "id": "g2e0054",
+      "type": "mcq",
+      "q": "We ___ students.",
+      "opts": [
+        "am",
+        "is",
+        "are",
+        "be"
+      ],
+      "a": 2,
+      "tags": [
+        "be-verb",
+        "fill-blank"
+      ]
+    },
+    {
+      "id": "g2e0055",
+      "type": "mcq",
+      "q": "Which word means 圖書館?",
+      "opts": [
+        "Hospital",
+        "Library",
+        "School",
+        "Park"
+      ],
+      "a": 1,
+      "tags": [
+        "place",
+        "noun"
       ]
     }
   ]

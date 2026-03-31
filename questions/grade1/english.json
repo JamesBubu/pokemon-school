@@ -4,7 +4,8 @@
     "subject": "english",
     "description": "小學一年級 英文",
     "version": "1.0",
-    "source": "自製"
+    "source": "自製",
+    "count": 55
   },
   "questions": [
     {
@@ -631,6 +632,234 @@
       "tags": [
         "colors",
         "vocabulary"
+      ]
+    },
+    {
+      "id": "g1e041",
+      "type": "mcq",
+      "q": "What is 6 + 4?",
+      "opts": [
+        "8",
+        "9",
+        "10",
+        "11"
+      ],
+      "a": 2,
+      "tags": [
+        "math",
+        "number"
+      ]
+    },
+    {
+      "id": "g1e042",
+      "type": "mcq",
+      "q": "Which day comes after Monday?",
+      "opts": [
+        "Sunday",
+        "Wednesday",
+        "Tuesday",
+        "Friday"
+      ],
+      "a": 2,
+      "tags": [
+        "days"
+      ]
+    },
+    {
+      "id": "g1e043",
+      "type": "mcq",
+      "q": "How do you say 謝謝 in English?",
+      "opts": [
+        "Sorry",
+        "Please",
+        "Thank you",
+        "Hello"
+      ],
+      "a": 2,
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "g1e044",
+      "type": "tf",
+      "q": "A mother is a woman.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "family",
+        "tf"
+      ]
+    },
+    {
+      "id": "g1e045",
+      "type": "mcq",
+      "q": "Which is a classroom object?",
+      "opts": [
+        "Apple",
+        "River",
+        "Desk",
+        "Mountain"
+      ],
+      "a": 2,
+      "tags": [
+        "school",
+        "noun"
+      ]
+    },
+    {
+      "id": "g1e046",
+      "type": "mcq",
+      "q": "What color is grass?",
+      "opts": [
+        "Blue",
+        "Red",
+        "Green",
+        "Yellow"
+      ],
+      "a": 2,
+      "tags": [
+        "color",
+        "nature"
+      ]
+    },
+    {
+      "id": "g1e047",
+      "type": "mcq",
+      "q": "How many days are in a week?",
+      "opts": [
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "a": 2,
+      "tags": [
+        "time",
+        "number"
+      ]
+    },
+    {
+      "id": "g1e048",
+      "type": "tf",
+      "q": "Sister is a girl.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "family",
+        "tf"
+      ]
+    },
+    {
+      "id": "g1e049",
+      "type": "mcq",
+      "q": "Which word means the opposite of \"big\"?",
+      "opts": [
+        "Tall",
+        "Small",
+        "Heavy",
+        "Fast"
+      ],
+      "a": 1,
+      "tags": [
+        "antonym"
+      ]
+    },
+    {
+      "id": "g1e050",
+      "type": "mcq",
+      "q": "What do you use to write?",
+      "opts": [
+        "Fork",
+        "Pencil",
+        "Spoon",
+        "Cup"
+      ],
+      "a": 1,
+      "tags": [
+        "school",
+        "noun"
+      ]
+    },
+    {
+      "id": "g1e051",
+      "type": "tf",
+      "q": "February comes before January.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "months",
+        "tf"
+      ]
+    },
+    {
+      "id": "g1e052",
+      "type": "mcq",
+      "q": "Which animal can swim?",
+      "opts": [
+        "Cat",
+        "Dog",
+        "Fish",
+        "Bird"
+      ],
+      "a": 2,
+      "tags": [
+        "animal"
+      ]
+    },
+    {
+      "id": "g1e053",
+      "type": "mcq",
+      "q": "How do you greet someone in the evening?",
+      "opts": [
+        "Good morning",
+        "Good afternoon",
+        "Good evening",
+        "Good night"
+      ],
+      "a": 2,
+      "tags": [
+        "greeting",
+        "time"
+      ]
+    },
+    {
+      "id": "g1e054",
+      "type": "tf",
+      "q": "There are 26 letters in the English alphabet.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "alphabet",
+        "tf"
+      ]
+    },
+    {
+      "id": "g1e055",
+      "type": "mcq",
+      "q": "Which word is a verb (動作)?",
+      "opts": [
+        "Run",
+        "Happy",
+        "Blue",
+        "Book"
+      ],
+      "a": 0,
+      "tags": [
+        "verb",
+        "grammar"
       ]
     }
   ]

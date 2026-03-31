@@ -4,7 +4,7 @@
     "subject": "english",
     "description": "小學三年級 英文",
     "version": "1.0",
-    "count": 16,
+    "count": 46,
     "source": "自製"
   },
   "questions": [
@@ -251,6 +251,462 @@
         "tf"
       ],
       "id": "g3e0016"
+    },
+    {
+      "id": "g3e0017",
+      "type": "mcq",
+      "q": "She ___ to school every day.",
+      "opts": [
+        "go",
+        "goes",
+        "going",
+        "went"
+      ],
+      "a": 1,
+      "tags": [
+        "present-tense",
+        "verb"
+      ]
+    },
+    {
+      "id": "g3e0018",
+      "type": "mcq",
+      "q": "They ___ playing basketball now.",
+      "opts": [
+        "is",
+        "am",
+        "are",
+        "be"
+      ],
+      "a": 2,
+      "tags": [
+        "present-continuous",
+        "be-verb"
+      ]
+    },
+    {
+      "id": "g3e0019",
+      "type": "mcq",
+      "q": "What does \"beautiful\" mean?",
+      "opts": [
+        "Ugly",
+        "Pretty",
+        "Small",
+        "Fast"
+      ],
+      "a": 1,
+      "tags": [
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "g3e0020",
+      "type": "mcq",
+      "q": "___ is your favorite color?",
+      "opts": [
+        "Who",
+        "What",
+        "Where",
+        "When"
+      ],
+      "a": 1,
+      "tags": [
+        "question-word"
+      ]
+    },
+    {
+      "id": "g3e0021",
+      "type": "tf",
+      "q": "\"He don't like cats\" is correct.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "grammar",
+        "tf"
+      ]
+    },
+    {
+      "id": "g3e0022",
+      "type": "mcq",
+      "q": "___ does he live?",
+      "opts": [
+        "What",
+        "Who",
+        "Where",
+        "When"
+      ],
+      "a": 2,
+      "tags": [
+        "question-word"
+      ]
+    },
+    {
+      "id": "g3e0023",
+      "type": "mcq",
+      "q": "I ___ my homework yesterday.",
+      "opts": [
+        "do",
+        "does",
+        "did",
+        "done"
+      ],
+      "a": 2,
+      "tags": [
+        "past-tense",
+        "verb"
+      ]
+    },
+    {
+      "id": "g3e0024",
+      "type": "mcq",
+      "q": "Which word means 圖書館?",
+      "opts": [
+        "Hospital",
+        "Library",
+        "Post office",
+        "Police station"
+      ],
+      "a": 1,
+      "tags": [
+        "noun",
+        "place"
+      ]
+    },
+    {
+      "id": "g3e0025",
+      "type": "tf",
+      "q": "\"She goes\" is correct present tense.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "present-tense",
+        "tf"
+      ]
+    },
+    {
+      "id": "g3e0026",
+      "type": "mcq",
+      "q": "___ many students are in your class?",
+      "opts": [
+        "What",
+        "Who",
+        "How",
+        "Where"
+      ],
+      "a": 2,
+      "tags": [
+        "question-word"
+      ]
+    },
+    {
+      "id": "g3e0027",
+      "type": "mcq",
+      "q": "The opposite of \"happy\" is ___.",
+      "opts": [
+        "Sad",
+        "Angry",
+        "Tired",
+        "Hungry"
+      ],
+      "a": 0,
+      "tags": [
+        "antonym"
+      ]
+    },
+    {
+      "id": "g3e0028",
+      "type": "mcq",
+      "q": "We ___ eat lunch at noon.",
+      "opts": [
+        "usually",
+        "is",
+        "am",
+        "were"
+      ],
+      "a": 0,
+      "tags": [
+        "adverb",
+        "grammar"
+      ]
+    },
+    {
+      "id": "g3e0029",
+      "type": "tf",
+      "q": "\"They was happy\" is correct.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "grammar",
+        "tf"
+      ]
+    },
+    {
+      "id": "g3e0030",
+      "type": "mcq",
+      "q": "___ do you go to school?",
+      "opts": [
+        "What",
+        "Who",
+        "How",
+        "Which"
+      ],
+      "a": 2,
+      "tags": [
+        "question-word"
+      ]
+    },
+    {
+      "id": "g3e0031",
+      "type": "mcq",
+      "q": "She has ___ apple and ___ orange.",
+      "opts": [
+        "a / a",
+        "an / an",
+        "an / a",
+        "a / an"
+      ],
+      "a": 2,
+      "tags": [
+        "article",
+        "grammar"
+      ]
+    },
+    {
+      "id": "g3e0032",
+      "type": "mcq",
+      "q": "Which word is an adjective?",
+      "opts": [
+        "Run",
+        "Beautiful",
+        "Book",
+        "Quickly"
+      ],
+      "a": 1,
+      "tags": [
+        "adjective",
+        "grammar"
+      ]
+    },
+    {
+      "id": "g3e0033",
+      "type": "tf",
+      "q": "\"I am going to the park\" means 我要去公園。",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "translation",
+        "tf"
+      ]
+    },
+    {
+      "id": "g3e0034",
+      "type": "mcq",
+      "q": "He ___ play soccer on Sundays.",
+      "opts": [
+        "do",
+        "does",
+        "is",
+        "are"
+      ],
+      "a": 1,
+      "tags": [
+        "present-tense",
+        "verb"
+      ]
+    },
+    {
+      "id": "g3e0035",
+      "type": "mcq",
+      "q": "What is the plural of \"child\"?",
+      "opts": [
+        "Childs",
+        "Children",
+        "Childrens",
+        "Child"
+      ],
+      "a": 1,
+      "tags": [
+        "plural",
+        "grammar"
+      ]
+    },
+    {
+      "id": "g3e0036",
+      "type": "mcq",
+      "q": "___ old are you?",
+      "opts": [
+        "What",
+        "Who",
+        "How",
+        "Where"
+      ],
+      "a": 2,
+      "tags": [
+        "question-word"
+      ]
+    },
+    {
+      "id": "g3e0037",
+      "type": "tf",
+      "q": "\"We are friends\" is correct.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "grammar",
+        "tf"
+      ]
+    },
+    {
+      "id": "g3e0038",
+      "type": "mcq",
+      "q": "I drink water ___ I am thirsty.",
+      "opts": [
+        "so",
+        "but",
+        "because",
+        "and"
+      ],
+      "a": 2,
+      "tags": [
+        "conjunction"
+      ]
+    },
+    {
+      "id": "g3e0039",
+      "type": "mcq",
+      "q": "Which sentence is in the past tense?",
+      "opts": [
+        "She eats rice.",
+        "She ate rice.",
+        "She is eating rice.",
+        "She will eat rice."
+      ],
+      "a": 1,
+      "tags": [
+        "past-tense",
+        "grammar"
+      ]
+    },
+    {
+      "id": "g3e0040",
+      "type": "mcq",
+      "q": "The book is ___ the desk. (書在桌子上)",
+      "opts": [
+        "in",
+        "on",
+        "under",
+        "beside"
+      ],
+      "a": 1,
+      "tags": [
+        "preposition"
+      ]
+    },
+    {
+      "id": "g3e0041",
+      "type": "tf",
+      "q": "\"Does she like cats?\" is a correct question.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "question",
+        "tf"
+      ]
+    },
+    {
+      "id": "g3e0042",
+      "type": "mcq",
+      "q": "Which word means 安靜?",
+      "opts": [
+        "Noisy",
+        "Loud",
+        "Quiet",
+        "Happy"
+      ],
+      "a": 2,
+      "tags": [
+        "vocabulary"
+      ]
+    },
+    {
+      "id": "g3e0043",
+      "type": "mcq",
+      "q": "I have ___ umbrella.",
+      "opts": [
+        "a",
+        "an",
+        "the",
+        "some"
+      ],
+      "a": 1,
+      "tags": [
+        "article",
+        "grammar"
+      ]
+    },
+    {
+      "id": "g3e0044",
+      "type": "tf",
+      "q": "\"I goes to school\" is correct.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "grammar",
+        "tf"
+      ]
+    },
+    {
+      "id": "g3e0045",
+      "type": "mcq",
+      "q": "What is 7 × 6?",
+      "opts": [
+        "36",
+        "40",
+        "42",
+        "48"
+      ],
+      "a": 2,
+      "tags": [
+        "math",
+        "number"
+      ]
+    },
+    {
+      "id": "g3e0046",
+      "type": "mcq",
+      "q": "___ season comes after winter?",
+      "opts": [
+        "Which",
+        "What",
+        "Where",
+        "Who"
+      ],
+      "a": 0,
+      "tags": [
+        "question-word",
+        "season"
+      ]
     }
   ]
 }

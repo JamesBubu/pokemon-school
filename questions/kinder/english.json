@@ -4,7 +4,8 @@
     "subject": "english",
     "description": "幼稚園大班 英文",
     "version": "1.0",
-    "source": "自製"
+    "source": "自製",
+    "count": 57
   },
   "questions": [
     {
@@ -657,6 +658,231 @@
       "tags": [
         "nature",
         "vocabulary"
+      ]
+    },
+    {
+      "id": "ke043",
+      "type": "mcq",
+      "q": "Which animal says \"moo\"?",
+      "opts": [
+        "Dog",
+        "Cat",
+        "Cow",
+        "Bird"
+      ],
+      "a": 2,
+      "tags": [
+        "animal",
+        "sound"
+      ]
+    },
+    {
+      "id": "ke044",
+      "type": "mcq",
+      "q": "What color is the sky?",
+      "opts": [
+        "Red",
+        "Green",
+        "Blue",
+        "Yellow"
+      ],
+      "a": 2,
+      "tags": [
+        "color"
+      ]
+    },
+    {
+      "id": "ke045",
+      "type": "mcq",
+      "q": "How many fingers do you have on one hand?",
+      "opts": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "a": 2,
+      "tags": [
+        "number",
+        "body"
+      ]
+    },
+    {
+      "id": "ke046",
+      "type": "mcq",
+      "q": "Which is a fruit?",
+      "opts": [
+        "Chair",
+        "Apple",
+        "Book",
+        "Pen"
+      ],
+      "a": 1,
+      "tags": [
+        "food",
+        "category"
+      ]
+    },
+    {
+      "id": "ke047",
+      "type": "tf",
+      "q": "A cat has four legs.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "animal",
+        "tf"
+      ]
+    },
+    {
+      "id": "ke048",
+      "type": "mcq",
+      "q": "What do you say in the morning?",
+      "opts": [
+        "Good night",
+        "Good morning",
+        "Goodbye",
+        "Thank you"
+      ],
+      "a": 1,
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "ke049",
+      "type": "mcq",
+      "q": "Which letter comes after \"B\"?",
+      "opts": [
+        "A",
+        "C",
+        "D",
+        "E"
+      ],
+      "a": 1,
+      "tags": [
+        "alphabet"
+      ]
+    },
+    {
+      "id": "ke050",
+      "type": "mcq",
+      "q": "What color is the sun?",
+      "opts": [
+        "Blue",
+        "Green",
+        "Yellow",
+        "Purple"
+      ],
+      "a": 2,
+      "tags": [
+        "color",
+        "nature"
+      ]
+    },
+    {
+      "id": "ke051",
+      "type": "tf",
+      "q": "A fish can fly.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 1,
+      "tags": [
+        "animal",
+        "tf"
+      ]
+    },
+    {
+      "id": "ke052",
+      "type": "mcq",
+      "q": "Which is a body part?",
+      "opts": [
+        "Table",
+        "Nose",
+        "Apple",
+        "Rain"
+      ],
+      "a": 1,
+      "tags": [
+        "body"
+      ]
+    },
+    {
+      "id": "ke053",
+      "type": "mcq",
+      "q": "How do you say 再見 in English?",
+      "opts": [
+        "Hello",
+        "Sorry",
+        "Goodbye",
+        "Thank you"
+      ],
+      "a": 2,
+      "tags": [
+        "greeting"
+      ]
+    },
+    {
+      "id": "ke054",
+      "type": "tf",
+      "q": "There are 7 days in a week.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "time",
+        "tf"
+      ]
+    },
+    {
+      "id": "ke055",
+      "type": "mcq",
+      "q": "Which animal lives in the ocean?",
+      "opts": [
+        "Dog",
+        "Horse",
+        "Fish",
+        "Cat"
+      ],
+      "a": 2,
+      "tags": [
+        "animal"
+      ]
+    },
+    {
+      "id": "ke056",
+      "type": "mcq",
+      "q": "What comes after 4?",
+      "opts": [
+        "3",
+        "5",
+        "6",
+        "7"
+      ],
+      "a": 1,
+      "tags": [
+        "number"
+      ]
+    },
+    {
+      "id": "ke057",
+      "type": "tf",
+      "q": "Red, blue, and yellow are colors.",
+      "opts": [
+        "正確",
+        "錯誤"
+      ],
+      "a": 0,
+      "tags": [
+        "color",
+        "tf"
       ]
     }
   ]
