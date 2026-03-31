@@ -95,6 +95,17 @@
     .slot-party img{width:clamp(30px,4.5vw,48px);image-rendering:pixelated}
     .slot-pname{font-size:clamp(13px,1.8vw,18px);font-weight:900;color:#FFD700}
     .slot-info{font-size:clamp(9px,1.1vw,12px);color:#aac;margin-top:2px;line-height:1.5}
+    .slot-tags{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+    .slot-tag{font-size:clamp(9px,1vw,11px);padding:2px 8px;border-radius:10px;font-weight:700}
+    .slot-tag-grade{background:rgba(100,180,255,.25);color:#9de}
+    .slot-tag-diff{background:rgba(255,200,80,.2);color:#fda}
+    .slot-gear{position:absolute;top:5px;left:6px;background:rgba(255,255,255,.18);
+      border:none;border-radius:50%;width:22px;height:22px;font-size:12px;
+      cursor:pointer;color:#fff;line-height:1;padding:0;display:flex;
+      align-items:center;justify-content:center}
+    .slot-gear:hover{background:rgba(255,255,255,.35)}
+    #settings-player-label{font-size:clamp(13px,1.6vw,16px);color:#ade;
+      margin-top:4px;font-weight:700;min-height:20px}
     .slot-del{position:absolute;top:5px;right:6px;background:rgba(255,60,60,.7);
       border:none;border-radius:50%;width:22px;height:22px;font-size:13px;
       cursor:pointer;color:#fff;line-height:1;padding:0;display:flex;
@@ -403,7 +414,10 @@
   <div id="s-settings" class="screen">
     <div class="settings-panel">
       <div class="settings-header">
-        <h2>⚙️ 設定</h2>
+        <div>
+          <h2>⚙️ 設定</h2>
+          <div id="settings-player-label"></div>
+        </div>
         <button class="btn btn-gray" onclick="App.closeSettings()"
                 style="padding:8px 18px;font-size:clamp(13px,1.6vw,17px)">
           ✕ 關閉 <span class="kb-hint">[Esc]</span>
@@ -460,6 +474,14 @@
       <div class="settings-section settings-toggle-row">
         <div class="settings-label">🎵 背景音樂</div>
         <button class="toggle-btn on" id="bgm-toggle" onclick="App.toggleSetting('bgm')">開</button>
+      </div>
+
+      <!-- shown only during new-game setup -->
+      <div id="settings-newgame-btn" style="display:none;margin-top:clamp(12px,2vh,20px);text-align:center">
+        <button class="btn btn-green" onclick="App.settingsToPartySelect()"
+                style="font-size:clamp(16px,2.2vw,22px)">
+          確定，選擇隊伍 →
+        </button>
       </div>
     </div>
   </div>
@@ -1175,16 +1197,26 @@ const App={
     const hasFile=Save.hasFile();
     const grid=document.getElementById('slot-grid');
     grid.style.display=hasFile?'flex':'none';
+    const GRADE_LABEL={'kinder':'大班','grade1':'小一','grade2':'小二','grade3':'小三'};
+    const DIFF_LABEL={'easy':'簡單','normal':'普通','hard':'困難'};
     if(hasFile){
       grid.innerHTML=[1,2,3].map(slot=>{
         const sv=Save.load(slot);
         if(sv&&sv.party&&sv.party.length===3){
           const lvStr=sv.party.map(p=>'Lv.'+p.lv).join(' / ');
+          const cfg=sv.settings||{};
+          const gradeLbl=GRADE_LABEL[cfg.grade]||cfg.grade||'';
+          const diffLbl=DIFF_LABEL[cfg.difficulty]||cfg.difficulty||'';
           return `<div class="slot-card filled" onclick="App.continueGame(${slot})">
             <button class="slot-del" onclick="event.stopPropagation();App.deleteSlot(${slot})">🗑</button>
+            <button class="slot-gear" onclick="event.stopPropagation();App.openSettingsForSlot(${slot})" title="調整設定">⚙️</button>
             <div class="slot-num">Slot ${slot}</div>
             <div class="slot-party">${sv.party.map(p=>`<img src="${SP(p.id)}" alt="${p.name}">`).join('')}</div>
             <div class="slot-pname">${sv.playerName}</div>
+            <div class="slot-tags">
+              <span class="slot-tag slot-tag-grade">${gradeLbl}</span>
+              <span class="slot-tag slot-tag-diff">${diffLbl}</span>
+            </div>
             <div class="slot-info">${sv.wins}勝 ・ ${lvStr}<br>${Save.fmtDate(sv.savedAt)}</div>
           </div>`;
         } else {
@@ -1255,6 +1287,25 @@ const App={
     this.showTitleScreen();
   },
 
+  // open settings for a filled slot without starting a full game
+  openSettingsForSlot(slot){
+    const sv=Save.load(slot);
+    if(!sv) return;
+    G.currentSlot=slot;
+    G.playerName=sv.playerName;
+    G.party=sv.party;
+    G.wins=sv.wins||0; G.correct=sv.correct||0;
+    G.settings=Object.assign({grade:'grade3',timerSec:15,difficulty:'normal',ttsEnabled:false,bgmEnabled:true},sv.settings||{});
+    BGM.setMuted(!G.settings.bgmEnabled);
+    this._settingsFrom='s-title';
+    this._settingsNewGame=false;
+    this.renderSettings();
+    document.getElementById('settings-newgame-btn').style.display='none';
+    const closeBtn=document.querySelector('#s-settings .btn-gray');
+    if(closeBtn) closeBtn.style.display='flex';
+    this.showScreen('s-settings');
+  },
+
   continueGame(slot){
     const sv=Save.load(slot);
     if(!sv) return;
@@ -1278,17 +1329,27 @@ const App={
   },
 
   // ── settings ───────────────────────────────────────────────────
-  openSettings(){
+  openSettings(newGame=false){
     this._settingsFrom=document.querySelector('.screen.active')?.id||'s-title';
+    this._settingsNewGame=newGame;
     this.renderSettings();
+    document.getElementById('settings-newgame-btn').style.display=newGame?'block':'none';
+    const closeBtn=document.querySelector('#s-settings .btn-gray');
+    if(closeBtn) closeBtn.style.display=newGame?'none':'flex';
     this.showScreen('s-settings');
   },
   closeSettings(){
     Save.save();
     this.showScreen(this._settingsFrom);
   },
+  settingsToPartySelect(){
+    this.loadPartySelect();
+    this.showScreen('s-party-select');
+  },
   renderSettings(){
     const s=G.settings;
+    const lbl=document.getElementById('settings-player-label');
+    if(lbl) lbl.textContent=G.playerName?`👤 ${G.playerName} 的設定`:'';
     document.querySelectorAll('.setting-opt').forEach(b=>{
       const k=b.dataset.k, v=b.dataset.v;
       if(!k) return;
@@ -1324,6 +1385,8 @@ const App={
   // ── name ───────────────────────────────────────────────────────
   goName(slot){
     G.currentSlot=slot||G.currentSlot||1;
+    // reset settings to defaults for fresh slot
+    G.settings={grade:'grade3',timerSec:15,difficulty:'normal',ttsEnabled:false,bgmEnabled:true};
     BGM.sfx('select');
     document.getElementById('name-input').value='';
     this.showScreen('s-name');
@@ -1338,8 +1401,8 @@ const App={
     }
     BGM.sfx('select');
     G.playerName=v;
-    this.loadPartySelect();
-    this.showScreen('s-party-select');
+    // go to settings first so new user picks their grade/difficulty
+    this.openSettings(true);
   },
 
   // ── party select ───────────────────────────────────────────────
