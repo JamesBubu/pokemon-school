@@ -313,6 +313,53 @@
     .bc-num-hint{position:absolute;bottom:4px;right:6px;
       font-size:11px;color:#aaa;font-family:monospace}
 
+    /* ── BIGGER SPRITES ── */
+    .enemy-sprite{width:clamp(150px,26vw,290px)!important;height:clamp(150px,26vw,290px)!important}
+    .player-sprite{width:clamp(155px,27vw,300px)!important;height:clamp(155px,27vw,300px)!important;
+      bottom:clamp(48px,7.5vh,100px)!important}
+
+    /* ── BATTLE INTRO ── */
+    #battle-intro{position:absolute;top:0;left:0;width:100%;height:100%;
+      background:linear-gradient(170deg,#0f3460,#1a1a2e);
+      z-index:350;display:none;flex-direction:column;
+      align-items:center;justify-content:center}
+    #battle-intro.active{display:flex}
+    .bi-arena{display:flex;align-items:center;justify-content:center;
+      gap:clamp(16px,4vw,50px);width:100%;padding:0 5vw}
+    .bi-side{display:flex;flex-direction:column;align-items:center;gap:10px}
+    .bi-side.left{animation:biSlideL .5s ease both}
+    .bi-side.right{animation:biSlideR .5s ease .1s both}
+    @keyframes biSlideL{from{transform:translateX(-140px);opacity:0}to{transform:translateX(0);opacity:1}}
+    @keyframes biSlideR{from{transform:translateX(140px);opacity:0}to{transform:translateX(0);opacity:1}}
+    .bi-sprite{width:clamp(110px,20vw,200px);image-rendering:pixelated}
+    .bi-name{font-size:clamp(15px,2.2vw,26px);font-weight:700;color:#fff;
+      text-shadow:2px 2px 0 #000;background:rgba(0,0,0,.55);
+      padding:5px 16px;border-radius:16px}
+    .bi-vs{font-size:clamp(64px,13vw,120px);font-weight:900;color:#FFD700;
+      text-shadow:5px 5px 0 #FF6600;flex-shrink:0;
+      animation:biVS .5s cubic-bezier(.34,1.56,.64,1) .4s both}
+    @keyframes biVS{from{transform:scale(0) rotate(-25deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+    .bi-flash{position:absolute;top:0;left:0;width:100%;height:100%;
+      background:#fff;opacity:0;pointer-events:none;
+      animation:biFlashAnim .4s ease 1.45s both}
+    @keyframes biFlashAnim{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+
+    /* ── WIN / LOSE FLASH ── */
+    #battle-flash{position:absolute;top:0;left:0;width:100%;height:100%;
+      z-index:260;pointer-events:none;display:none}
+    @keyframes flashWin{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+    @keyframes flashLose{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+
+    /* ── EVO PROGRESS INFO ── */
+    .evo-info-lbl{font-size:clamp(9px,1.1vw,12px);font-weight:700;margin-top:2px;min-height:14px}
+
+    /* ── PARTY SELECT SEARCH ── */
+    .ps-search{width:min(98%,380px);padding:clamp(7px,1.1vh,11px) 14px;
+      font-size:clamp(14px,1.8vw,18px);border:2px solid #ccc;border-radius:22px;
+      outline:none;font-family:inherit;margin-bottom:6px}
+    .ps-search:focus{border-color:#4488FF}
+    .pc-evo{font-size:clamp(8px,.9vw,11px);color:#888;margin-top:2px}
+
     /* ── EVOLUTION ── */
     #s-evo{background:radial-gradient(ellipse at center,#fffde7 0%,#fff9c4 60%,#fff3e0 100%);
       padding:clamp(14px,2.5vh,28px);gap:clamp(8px,1.4vh,15px)}
@@ -527,6 +574,7 @@
     <div style="font-size:clamp(32px,5.5vw,66px)">🌟</div>
     <h2>選擇你的三隻夥伴！</h2>
     <p>從下方選3隻寶可夢組成你的隊伍</p>
+    <input class="ps-search" id="ps-search" type="text" placeholder="🔍 搜尋寶可夢名稱或編號..." autocomplete="off">
     <div class="ps-counter">已選：<span id="ps-count">0</span> / 3</div>
     <div class="poke-grid" id="party-grid"></div>
     <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">
@@ -568,6 +616,7 @@
         <div class="hp-row"><span>HP</span><span id="p-hp-text">—/—</span></div>
         <div class="hp-bar"><div class="hp-fill" id="p-hp-fill" style="width:100%"></div></div>
         <div class="xp-bar"><div class="xp-fill" id="p-xp-fill" style="width:0%"></div></div>
+        <div class="evo-info-lbl" id="p-evo-info"></div>
       </div>
     </div>
 
@@ -662,8 +711,12 @@
     </button>
     <div style="font-size:clamp(11px,1.4vw,15px);color:rgba(255,255,255,.7);margin-top:4px"
          id="v-heal-msg"></div>
-    <button class="btn btn-gray" onclick="App.goHome()"
+    <button class="btn btn-blue" onclick="App.swapParty()"
             style="margin-top:8px;font-size:clamp(13px,1.6vw,17px)">
+      🔄 換陣容
+    </button>
+    <button class="btn btn-gray" onclick="App.goHome()"
+            style="margin-top:6px;font-size:clamp(13px,1.6vw,17px)">
       🏠 回首頁 <span class="kb-hint">H</span>
     </button>
   </div>
@@ -681,6 +734,25 @@
     <button class="btn btn-gray" onclick="App.showTitleScreen()"
             style="margin-top:8px;font-size:clamp(13px,1.6vw,17px)">回首頁</button>
   </div>
+
+  <!-- ══ BATTLE INTRO OVERLAY ══ -->
+  <div id="battle-intro">
+    <div class="bi-arena">
+      <div class="bi-side left">
+        <img id="bi-p-sprite" class="bi-sprite" src="" alt="player">
+        <div class="bi-name" id="bi-pname"></div>
+      </div>
+      <div class="bi-vs">VS</div>
+      <div class="bi-side right">
+        <img id="bi-e-sprite" class="bi-sprite" src="" alt="enemy">
+        <div class="bi-name" id="bi-ename"></div>
+      </div>
+    </div>
+    <div class="bi-flash"></div>
+  </div>
+
+  <!-- ══ BATTLE FLASH ══ -->
+  <div id="battle-flash"></div>
 
 </div><!-- #game -->
 
@@ -1147,27 +1219,69 @@ const QB={
 // ================================================================
 const ZH={
   1:'妙蛙種子',2:'妙蛙草',3:'妙蛙花',4:'小火龍',5:'火恐龍',6:'噴火龍',
-  7:'傑尼龜',8:'卡咪龜',9:'水箭龜',10:'綠毛蟲',13:'獨角蟲',16:'波波',
-  19:'小拉達',21:'嘟嘟',23:'阿柔尾',25:'皮卡丘',27:'穿山王',35:'皮皮',
-  37:'六尾',39:'胖丁',41:'超音蝠',43:'走路草',46:'派拉斯',48:'球球',
-  50:'地鼠',52:'喵喵',54:'可達鴨',56:'猴怪',58:'卡蒂狗',60:'蚊香蝌蚪',
-  63:'凱西',66:'腕力',69:'喇叭芽',72:'水母',74:'小拳石',79:'呆呆獸',
-  81:'小磁怪',84:'多多',86:'靈靈',88:'臭泥',90:'大舌貝',92:'鬼斯',
-  96:'引夢貘',98:'大鉗蟹',100:'霹靂電球',102:'蛋蛋',104:'可拉可拉',
-  109:'毒毒',111:'鐵甲犀牛',113:'吉利蛋',116:'海馬',118:'金魚王',
-  120:'星形寶石',129:'鯉魚王',133:'伊布',143:'卡比獸',147:'迷你龍',
+  7:'傑尼龜',8:'卡咪龜',9:'水箭龜',10:'綠毛蟲',11:'鐵甲蛹',12:'巴大蝶',
+  13:'獨角蟲',14:'鐵殼蛹',15:'大針蜂',16:'波波',17:'比比鳥',18:'大比鳥',
+  19:'小拉達',20:'拉達',21:'嘟嘟',22:'大嘟嘟',23:'阿柔尾',24:'大阿柔',
+  25:'皮卡丘',26:'雷丘',27:'穿山鼠',28:'穿山王',29:'尼多蘭',30:'尼多娜',
+  31:'尼多后',32:'尼多朗',33:'尼多力諾',34:'尼多王',35:'皮皮',36:'胖可丁',
+  37:'六尾',38:'九尾',39:'胖丁',40:'胖胖丁',41:'超音蝠',42:'大嘴蝠',
+  43:'走路草',44:'臭臭花',45:'霸王花',46:'派拉斯',47:'派拉斯特',48:'球球',
+  49:'毒粉蛾',50:'地鼠',51:'三地鼠',52:'喵喵',53:'貓老大',54:'可達鴨',
+  55:'哥達鴨',56:'猴怪',57:'大猩怪',58:'卡蒂狗',59:'風速狗',60:'蚊香蝌蚪',
+  61:'蚊香君',62:'蚊香泳士',63:'凱西',64:'勇基拉',65:'胡地',66:'腕力',
+  67:'豪臂力',68:'怪力',69:'喇叭芽',70:'口呆花',71:'大食花',72:'水母',
+  73:'毒刺水母',74:'小拳石',75:'隆隆石',76:'隆隆岩',77:'小火馬',78:'烈焰馬',
+  79:'呆呆獸',80:'呆殼獸',81:'小磁怪',82:'三合一磁怪',83:'大蔥鴨',84:'多多',
+  85:'大大嘴鳥',86:'靈靈',87:'白海獅',88:'臭泥',89:'臭臭泥',90:'大舌貝',
+  91:'刺甲貝',92:'鬼斯',93:'鬼斯通',94:'耿鬼',95:'大岩蛇',96:'引夢貘',
+  97:'夢食貘',98:'大鉗蟹',99:'巨鉗蟹',100:'霹靂電球',101:'頑皮雷彈',
+  102:'蛋蛋',103:'椰蛋樹',104:'可拉可拉',105:'嘎啦嘎啦',106:'飛腿郎',
+  107:'快拳郎',108:'舌舔獸',109:'毒毒',110:'毒氣彈',111:'鐵甲犀牛',
+  112:'獨角犀牛',113:'吉利蛋',114:'蔓藤怪',115:'袋獸',116:'海馬',
+  117:'刺龍王',118:'金魚王',119:'墨海馬',120:'星形寶石',121:'風速貝',
+  122:'魔牆人偶',123:'飛天螳螂',124:'迷唇娃',125:'電擊獸',126:'鴨嘴火獸',
+  127:'鉗子草',128:'肯泰羅',129:'鯉魚王',130:'暴鯉龍',131:'乘龍',
+  132:'百變怪',133:'伊布',134:'水伊布',135:'雷伊布',136:'火伊布',
+  137:'多邦',138:'菊石獸',139:'多刺菊石獸',140:'化石盔',141:'鐮刀盔',
+  142:'化石翼龍',143:'卡比獸',144:'急凍鳥',145:'閃電鳥',146:'火焰鳥',
+  147:'迷你龍',148:'哈克龍',149:'快龍',150:'超夢',151:'夢幻',
 };
-// 24 curated recognizable Pokemon for kids party select
-const CURATED=[1,4,7,25,39,52,133,143,58,63,79,129,35,37,54,41,43,50,86,92,96,116,120,147];
+// All Gen 1 Pokémon (1-151) available for party select
+const CURATED=Array.from({length:151},(_,i)=>i+1);
 const WILD=[
   10,13,16,19,21,23,25,27,35,37,39,41,43,46,48,50,52,54,56,58,
   60,63,66,69,72,74,79,81,84,86,88,90,92,96,98,100,102,109,111,
   113,116,118,120,129,133,143,147,
 ];
 const EVO={
-  1:{lv:3,to:2},2:{lv:6,to:3},
-  4:{lv:3,to:5},5:{lv:6,to:6},
-  7:{lv:3,to:8},8:{lv:6,to:9},
+  1:{lv:16,to:2},2:{lv:32,to:3},
+  4:{lv:16,to:5},5:{lv:36,to:6},
+  7:{lv:16,to:8},8:{lv:36,to:9},
+  10:{lv:7,to:11},11:{lv:10,to:12},
+  13:{lv:7,to:14},14:{lv:10,to:15},
+  16:{lv:18,to:17},17:{lv:36,to:18},
+  19:{lv:20,to:20},21:{lv:20,to:22},
+  23:{lv:22,to:24},27:{lv:22,to:28},
+  29:{lv:16,to:30},30:{lv:36,to:31},
+  32:{lv:16,to:33},33:{lv:36,to:34},
+  41:{lv:22,to:42},43:{lv:21,to:44},44:{lv:36,to:45},
+  46:{lv:24,to:47},48:{lv:31,to:49},
+  50:{lv:26,to:51},52:{lv:28,to:53},
+  54:{lv:33,to:55},56:{lv:28,to:57},
+  60:{lv:25,to:61},61:{lv:36,to:62},
+  63:{lv:16,to:64},64:{lv:36,to:65},
+  66:{lv:28,to:67},67:{lv:36,to:68},
+  69:{lv:21,to:70},70:{lv:36,to:71},
+  72:{lv:30,to:73},74:{lv:25,to:75},75:{lv:36,to:76},
+  77:{lv:40,to:78},79:{lv:37,to:80},
+  81:{lv:30,to:82},84:{lv:31,to:85},
+  86:{lv:34,to:87},88:{lv:38,to:89},
+  90:{lv:30,to:91},92:{lv:25,to:93},93:{lv:36,to:94},
+  96:{lv:26,to:97},98:{lv:28,to:99},
+  100:{lv:30,to:101},104:{lv:28,to:105},
+  109:{lv:35,to:110},111:{lv:42,to:112},
+  116:{lv:32,to:117},118:{lv:33,to:119},
+  129:{lv:20,to:130},147:{lv:30,to:148},148:{lv:55,to:149},
 };
 const SP =id=>`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
 const SPB=id=>`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${id}.png`;
@@ -1443,18 +1557,40 @@ const App={
   },
 
   // ── party select ───────────────────────────────────────────────
-  loadPartySelect(){
-    const grid=document.getElementById('party-grid');
-    grid.innerHTML=CURATED.map(id=>`
-      <div class="party-card" id="pc-${id}" onclick="App.togglePartySelect(${id})">
+  loadPartySelect(swapMode=false){
+    G._partySwapMode=swapMode;
+    G.selectedStarters=swapMode?G.party.map(p=>p.id):[];
+    const search=document.getElementById('ps-search');
+    if(search){ search.value=''; search.oninput=e=>this._renderPartyGrid(e.target.value); }
+    this._renderPartyGrid('');
+    document.getElementById('ps-count').textContent=G.selectedStarters.length;
+    document.getElementById('ps-confirm-btn').disabled=G.selectedStarters.length<3;
+    // update title for swap mode
+    const h2=document.querySelector('#s-party-select h2');
+    if(h2) h2.textContent=swapMode?'選擇新的三隻夥伴':'選擇你的三隻夥伴！';
+  },
+
+  _renderPartyGrid(filter){
+    const q=(filter||'').toLowerCase();
+    const list=q?CURATED.filter(id=>{
+      const n=ZH[id]||''; return n.includes(q)||String(id).includes(q);
+    }):CURATED;
+    document.getElementById('party-grid').innerHTML=list.map(id=>{
+      const sel=G.selectedStarters.includes(id);
+      const evo=EVO[id]?`<div class="pc-evo">→${ZH[EVO[id].to]||'#'+EVO[id].to} Lv.${EVO[id].lv}</div>`:'';
+      return`<div class="party-card${sel?' selected':''}" id="pc-${id}" onclick="App.togglePartySelect(${id})">
         <img src="${SP(id)}" alt="${ZH[id]||'#'+id}" loading="lazy">
         <div class="pc-name">${ZH[id]||'#'+id}</div>
+        ${evo}
         <div class="pc-check">✓</div>
-      </div>
-    `).join('');
-    G.selectedStarters=[];
-    document.getElementById('ps-count').textContent='0';
-    document.getElementById('ps-confirm-btn').disabled=true;
+      </div>`;
+    }).join('');
+  },
+
+  swapParty(){
+    Save.save();
+    this.loadPartySelect(true);
+    this.showScreen('s-party-select');
   },
   togglePartySelect(id){
     const idx=G.selectedStarters.indexOf(id);
@@ -1476,16 +1612,22 @@ const App={
   async confirmParty(){
     if(G.selectedStarters.length<3) return;
     BGM.sfx('select');
-    this.showLoad('召喚夥伴中...');
+    this.showLoad('準備中...');
+    const prev=G._partySwapMode?[...G.party]:[];
     G.party=[];
     for(const id of G.selectedStarters){
+      const existing=prev.find(p=>p.id===id);
+      if(existing){ G.party.push(existing); continue; }
       const d=await this.fetchPoke(id);
       G.party.push({...d, lv:1, xp:0, xpNeeded:3,
         maxHP:G.calcHP(d,1), hp:G.calcHP(d,1)});
     }
-    G.wins=0; G.correct=0; G.wrong=0; G.revives=3;
+    if(!G._partySwapMode){
+      G.wins=0; G.correct=0; G.wrong=0; G.revives=3;
+      G.usedQ=Save.freshUsedQ();
+    }
+    G._partySwapMode=false;
     G.activeIdx=0;
-    G.usedQ=Save.freshUsedQ();
     this.hideLoad();
     BGM.start();
     Save.save();
@@ -1587,6 +1729,16 @@ const App={
     G.phase='busy';
     this.hideLoad();
 
+    // ── VS intro animation ──
+    document.getElementById('bi-p-sprite').src=p.spriteB||p.sprite;
+    document.getElementById('bi-pname').textContent=p.name;
+    document.getElementById('bi-e-sprite').src=G.enemy.sprite;
+    document.getElementById('bi-ename').textContent=G.enemy.name;
+    const intro=document.getElementById('battle-intro');
+    intro.classList.add('active');
+    await new Promise(r=>setTimeout(r,1900));
+    intro.classList.remove('active');
+
     this.showScreen('s-battle');
     document.getElementById('st-name').textContent=G.playerName;
     document.getElementById('st-wins').textContent=G.wins;
@@ -1630,6 +1782,15 @@ const App={
     this._hpc('p-hp-fill',pp2);
     const xp=p?Math.min(100,(p.xp/p.xpNeeded)*100):0;
     document.getElementById('p-xp-fill').style.width=xp+'%';
+    const evoEl=document.getElementById('p-evo-info');
+    if(evoEl&&p){
+      const ev=EVO[p.id];
+      if(ev){
+        const lvLeft=Math.max(0,ev.lv-p.lv);
+        evoEl.textContent=lvLeft===0?`✨ 達到進化條件！`:`→${ZH[ev.to]||'#'+ev.to} 還差 ${lvLeft} 級`;
+        evoEl.style.color=lvLeft<=2?'#FF6600':'#888';
+      } else { evoEl.textContent=''; }
+    }
 
     // party strip in status bar
     document.getElementById('party-strip').innerHTML=G.party.map((pm,i)=>{
@@ -1757,17 +1918,33 @@ const App={
           ()=>setTimeout(()=>this.showBattleChoose('pre-battle'),300));
         this.showScreen('s-battle');
       } else {
+        this._battleFlash('lose');
         document.getElementById('go-score').textContent=`最終 ${G.wins} 連勝`;
         document.getElementById('go-stats').textContent=
           `答對 ${G.correct} 題 ／ 答錯 ${G.wrong} 題`;
-        this.showScreen('s-gameover');
+        setTimeout(()=>this.showScreen('s-gameover'),500);
       }
     }
+  },
+
+  _battleFlash(type){
+    const el=document.getElementById('battle-flash');
+    el.style.background=type==='win'
+      ?'radial-gradient(circle,rgba(255,215,0,.7),rgba(255,165,0,.3))'
+      :'rgba(220,0,0,.45)';
+    el.style.animation='none';
+    el.style.display='block';
+    el.style.opacity='0';
+    // force reflow then animate
+    void el.offsetWidth;
+    el.style.animation=`${type==='win'?'flashWin':'flashLose'} .9s ease forwards`;
+    setTimeout(()=>{ el.style.display='none'; el.style.animation=''; },950);
   },
 
   // ── enemy fainted / victory ───────────────────────────────────
   enemyFainted(){
     BGM.sfx('victory');
+    this._battleFlash('win');
     G.wins++;
     document.getElementById('st-wins').textContent=G.wins;
     const ep=document.getElementById('e-sprite');
@@ -1971,11 +2148,16 @@ const App={
   },
 
   replayTTS(){
-    const t=document.getElementById('q-text')?.textContent;
-    if(t) TTS.say(t);
-    // animate button
+    const t=document.getElementById('q-text')?.textContent?.trim();
+    if(!t||!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t.replace(/<[^>]+>/g,''));
+    u.lang='zh-TW'; u.rate=.9; u.pitch=1.1;
+    const v=TTS.voices.find(x=>x.lang==='zh-TW')||TTS.voices.find(x=>x.lang.startsWith('zh'));
+    if(v) u.voice=v;
+    window.speechSynthesis.speak(u);
     const btn=document.querySelector('.q-tts-btn');
-    if(btn){ btn.style.transform='scale(1.25)'; setTimeout(()=>btn.style.transform='',200); }
+    if(btn){ btn.style.transform='scale(1.3)'; setTimeout(()=>btn.style.transform='',250); }
   },
 
   _qTimeout(){
