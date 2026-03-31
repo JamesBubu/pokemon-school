@@ -1899,8 +1899,6 @@ const App={
     if(srcEl){
       if(q.source&&q.source!=='自製'){
         srcEl.innerHTML=`出處：<a href="https://www.junyiacademy.org" target="_blank" rel="noopener">${q.source}</a>`;
-      } else if(q.source==='自製'){
-        srcEl.textContent='出處：自製題目';
       } else {
         srcEl.textContent='';
       }
