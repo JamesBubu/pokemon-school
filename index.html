@@ -808,47 +808,62 @@ const BGM = (() => {
     return ctx;
   };
 
-  // ── Piano: sine + 5 harmonics (bright, full-bodied) ──────────
+  // ── Piano: sine harmonics + inharmonicity (natural, not electronic) ──
   const piano=(freq,beats,vol,t,bpm)=>{
     if(!freq||!vol) return;
     const c=getCtx(),d=beats*(60/bpm);
-    // harmonic series: 1x 100%, 2x 18%, 3x 10%, 4x 6%, 5x 4%, 6x 2%
-    [[1,1.0],[2,.18],[3,.10],[4,.06],[5,.04],[6,.02]].forEach(([n,vm])=>{
+    const B=.0004; // piano inharmonicity coefficient
+    [[1,1.0],[2,.20],[3,.12],[4,.07],[5,.04],[6,.02]].forEach(([n,vm])=>{
+      const o=c.createOscillator(),g=c.createGain();
+      o.type='sine'; o.frequency.value=freq*n*Math.sqrt(1+B*n*n);
+      o.connect(g); g.connect(masterGain); g.connect(reverbSend);
+      const v=vol*vm;
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(v,t+.010);
+      g.gain.exponentialRampToValueAtTime(Math.max(v*.28,.0001),t+Math.min(d*.45,.30));
+      g.gain.linearRampToValueAtTime(.0001,t+d*.97);
+      o.start(t); o.stop(t+d+.05);
+    });
+  };
+
+  // ── Marimba: sine + fast-decaying harmonics (warm, wooden, cheerful) ──
+  const marimba=(freq,beats,vol,t,bpm)=>{
+    if(!freq||!vol) return;
+    const c=getCtx(),d=beats*(60/bpm);
+    // fast harmonic decay gives the wooden "thunk" of a marimba
+    [[1,1.0,.15],[2,.32,.025],[3,.18,.016],[4,.08,.011]].forEach(([n,vm,decT])=>{
       const o=c.createOscillator(),g=c.createGain();
       o.type='sine'; o.frequency.value=freq*n;
       o.connect(g); g.connect(masterGain); g.connect(reverbSend);
       const v=vol*vm;
       g.gain.setValueAtTime(0,t);
-      g.gain.linearRampToValueAtTime(v,t+.012);
-      g.gain.exponentialRampToValueAtTime(Math.max(v*.3,.0001),t+Math.min(d*.5,.35));
-      g.gain.linearRampToValueAtTime(.0001,t+d*.98);
+      g.gain.linearRampToValueAtTime(v,t+.005); // sharp attack
+      g.gain.exponentialRampToValueAtTime(Math.max(v*.008,.0001),t+decT);
+      g.gain.linearRampToValueAtTime(.0001,t+Math.min(d*.92,.8));
       o.start(t); o.stop(t+d+.05);
     });
   };
 
-  // ── Synth lead: sawtooth + filter sweep (punchy, distinctive) ─
-  const lead=(freq,beats,vol,t,bpm)=>{
+  // ── Strings: sine harmonics + vibrato (orchestral, cinematic) ──
+  const strings=(freq,beats,vol,t,bpm)=>{
     if(!freq||!vol) return;
     const c=getCtx(),d=beats*(60/bpm);
-    const o=c.createOscillator(),flt=c.createBiquadFilter(),g=c.createGain();
-    o.type='sawtooth'; o.frequency.value=freq;
-    flt.type='lowpass'; flt.frequency.setValueAtTime(freq*8,t);
-    flt.frequency.exponentialRampToValueAtTime(freq*2.5,t+d*.6);
-    flt.Q.value=3.5;
-    o.connect(flt); flt.connect(g); g.connect(masterGain); g.connect(reverbSend);
-    g.gain.setValueAtTime(0,t);
-    g.gain.linearRampToValueAtTime(vol*.9,t+.018);
-    g.gain.setValueAtTime(vol*.9,t+d*.7);
-    g.gain.linearRampToValueAtTime(.0001,t+d*.98);
-    o.start(t); o.stop(t+d+.04);
-    // subtle octave below at low vol
-    const o2=c.createOscillator(),g2=c.createGain();
-    o2.type='triangle'; o2.frequency.value=freq*.5;
-    o2.connect(g2); g2.connect(masterGain);
-    g2.gain.setValueAtTime(0,t);
-    g2.gain.linearRampToValueAtTime(vol*.22,t+.025);
-    g2.gain.linearRampToValueAtTime(.0001,t+d*.9);
-    o2.start(t); o2.stop(t+d+.04);
+    [[1,1.0,0],[2,.34,4],[3,.20,-3],[4,.11,2],[5,.06,-1]].forEach(([n,vm,det])=>{
+      const o=c.createOscillator(),g=c.createGain();
+      o.type='sine'; o.frequency.value=freq*n; o.detune.value=det;
+      // vibrato LFO
+      const lfo=c.createOscillator(),lg=c.createGain();
+      lfo.frequency.value=5.2; lg.gain.value=freq*n*.006;
+      lfo.connect(lg); lg.connect(o.frequency);
+      o.connect(g); g.connect(masterGain); g.connect(reverbSend);
+      const v=vol*vm*.26;
+      g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(v,t+.08); // slow string attack
+      g.gain.setValueAtTime(v*.88,t+d*.78);
+      g.gain.linearRampToValueAtTime(.0001,t+d*.97);
+      o.start(t); o.stop(t+d+.06);
+      lfo.start(t); lfo.stop(t+d+.06);
+    });
   };
 
   // ── Bass: sine punch ───────────────────────────────────────────
@@ -919,8 +934,8 @@ const BGM = (() => {
   // drum: [fn, duration_beats, volume]   fn=kick/snare/hihat/null
   const TRACKS={
 
-    // ── PARTY ── 100 BPM, C major, bright piano, no drums ────
-    party:{bpm:100, fn:piano, bfn:bass, dfn:null,
+    // ── PARTY ── 100 BPM, C major, marimba (warm wooden) ────
+    party:{bpm:100, fn:marimba, bfn:bass, dfn:null,
       melody:[
         // A section – cheerful ascending motif
         [523,.5,.18],[659,.5,.18],[784,1,.20],[880,.5,.19],[784,.5,.17],
@@ -950,8 +965,8 @@ const BGM = (() => {
       drum:[],
     },
 
-    // ── BATTLE ── 152 BPM, A minor, sawtooth lead + DRUMS ────
-    battle:{bpm:152, fn:lead, bfn:bass, dfn:null,
+    // ── BATTLE ── 152 BPM, A minor, strings (cinematic) + DRUMS ────
+    battle:{bpm:152, fn:strings, bfn:bass, dfn:null,
       melody:[
         // driving riff
         [880,.5,.22],[880,.25,.20],[0,.25,0],[1047,.5,.24],[880,.5,.22],
@@ -1084,27 +1099,109 @@ const BGM = (() => {
     },
     sfx(type){
       const c=getCtx(),mg=c.createGain();
-      mg.gain.value=.42; mg.connect(c.destination);
-      const plays={
-        attack  :[[440,.10,'sine'],[330,.15,'sine',.08]],
-        hit     :[[200,.09,'triangle'],[150,.16,'triangle',.07]],
-        correct :[[523,.11,'sine'],[659,.11,'sine',.12],[784,.26,'sine',.24]],
-        wrong   :[[240,.22,'triangle'],[175,.34,'triangle',.22]],
-        victory :[[659,.11,'sine'],[659,.11,'sine',.14],[784,.18,'sine',.28],[1047,.42,'sine',.52]],
-        evolution:Array.from({length:20},(_,i)=>[180+i*44,.11,'sine',i*.08]),
-        levelup :[[523,.11,'sine'],[659,.11,'sine',.12],[784,.11,'sine',.25],[1047,.38,'sine',.38]],
-        appear  :[[280,.07,'sine'],[380,.07,'sine',.08],[330,.20,'sine',.15]],
-        select  :[[480,.08,'sine']],
-      };
-      (plays[type]||[]).forEach(([freq,dur,wt,delay=0])=>{
+      mg.gain.value=muted?0:.52; mg.connect(c.destination);
+      const now=c.currentTime;
+
+      // helper: bell-like sine tone
+      const bell=(freq,dur,del,vol)=>{
         const o=c.createOscillator(),g=c.createGain();
+        o.type='sine'; o.frequency.value=freq;
         o.connect(g); g.connect(mg);
-        o.type=wt; o.frequency.value=freq;
-        const t=c.currentTime+delay;
-        g.gain.setValueAtTime(.85,t);
-        g.gain.exponentialRampToValueAtTime(.001,t+dur+.01);
-        o.start(t); o.stop(t+dur+.05);
-      });
+        const t=now+del;
+        g.gain.setValueAtTime(0,t);
+        g.gain.linearRampToValueAtTime(vol,t+.007);
+        g.gain.exponentialRampToValueAtTime(.001,t+dur);
+        o.start(t); o.stop(t+dur+.02);
+      };
+      // helper: pitch-sliding sine
+      const slide=(f0,f1,dur,del,vol)=>{
+        const o=c.createOscillator(),g=c.createGain();
+        o.type='sine';
+        o.frequency.setValueAtTime(f0,now+del);
+        o.frequency.exponentialRampToValueAtTime(f1,now+del+dur);
+        o.connect(g); g.connect(mg);
+        g.gain.setValueAtTime(vol,now+del);
+        g.gain.exponentialRampToValueAtTime(.001,now+del+dur);
+        o.start(now+del); o.stop(now+del+dur+.02);
+      };
+      // helper: noise burst (impact texture)
+      const noisy=(dur,del,vol,hp=400,lp=8000)=>{
+        const len=Math.ceil(c.sampleRate*dur);
+        const buf=c.createBuffer(1,len,c.sampleRate);
+        const d=buf.getChannelData(0);
+        for(let i=0;i<len;i++) d[i]=(Math.random()*2-1);
+        const src=c.createBufferSource();
+        const hpf=c.createBiquadFilter(),lpf=c.createBiquadFilter(),gn=c.createGain();
+        src.buffer=buf;
+        hpf.type='highpass'; hpf.frequency.value=hp;
+        lpf.type='lowpass'; lpf.frequency.value=lp;
+        src.connect(hpf); hpf.connect(lpf); lpf.connect(gn); gn.connect(mg);
+        const t=now+del;
+        gn.gain.setValueAtTime(vol,t);
+        gn.gain.exponentialRampToValueAtTime(.001,t+dur*.9);
+        src.start(t); src.stop(t+dur);
+      };
+
+      switch(type){
+        case 'select':
+          // Crisp UI click: quick high blip
+          bell(1400,.06,0,.55);
+          bell(1800,.04,.04,.28);
+          break;
+        case 'correct':
+          // Happy bell chime: C-E-G-C arpeggio
+          bell(1047,.40,0,.70);
+          bell(1319,.36,.11,.65);
+          bell(1568,.50,.22,.72);
+          bell(2093,.65,.33,.50);
+          noisy(.04,0,.08,3000,12000); // sparkle texture
+          break;
+        case 'wrong':
+          // Impact thud + buzzer
+          slide(220,90,.28,0,.80);
+          slide(180,75,.22,.06,.55);
+          noisy(.10,0,.30,200,1200);
+          break;
+        case 'attack':
+          // Sword whoosh: noise sweep + tone snap
+          noisy(.09,0,.35,800,6000);
+          slide(600,280,.12,.04,.45);
+          break;
+        case 'hit':
+          // Punch: tonal thump + crunch
+          slide(320,70,.18,0,.80);
+          noisy(.06,0,.40,300,2500);
+          bell(480,.08,.03,.30);
+          break;
+        case 'appear':
+          // Magical sparkle: ascending shimmer
+          [900,1100,1350,1650,2000,2400].forEach((f,i)=>{
+            bell(f,.18,i*.055,.55);
+          });
+          noisy(.12,0,.12,4000,16000);
+          break;
+        case 'levelup':
+          // Power-up scale: ascending bells
+          [523,659,784,1047,1319,1568,2093].forEach((f,i)=>{
+            bell(f,.22,i*.075,.65);
+          });
+          noisy(.08,.3,.15,3000,14000);
+          break;
+        case 'victory':
+          // Short triumphant fanfare chord
+          [523,659,784].forEach((f,i)=>bell(f,.18,i*.05,.50));
+          bell(1047,.60,.20,.72);
+          bell(1319,.55,.32,.58);
+          noisy(.06,.18,.18,2500,10000);
+          break;
+        case 'evolution':
+          // Rising sparkle cascade
+          Array.from({length:18},(_,i)=>200+i*68).forEach((f,i)=>{
+            bell(f,.16,i*.07,.58);
+          });
+          noisy(.15,.8,.20,3500,16000);
+          break;
+      }
     },
   };
 })();
@@ -1290,18 +1387,35 @@ const TTS={
   voices:[],
   init(){
     if(!('speechSynthesis' in window))return;
-    const load=()=>{this.voices=window.speechSynthesis.getVoices();};
+    const load=()=>{
+      const vs=window.speechSynthesis.getVoices();
+      if(vs.length) this.voices=vs;
+    };
     load();
     window.speechSynthesis.onvoiceschanged=load;
+    // Some browsers (Chrome on macOS) need a user-gesture to populate voices
+    setTimeout(load,300);
+    setTimeout(load,1000);
+  },
+  _pickVoice(){
+    const vs=window.speechSynthesis.getVoices();
+    if(vs.length) this.voices=vs; // always refresh
+    return this.voices.find(x=>x.lang==='zh-TW')
+        || this.voices.find(x=>x.lang==='zh_TW')
+        || this.voices.find(x=>x.lang.startsWith('zh'));
   },
   say(text){
     if(!G.settings.ttsEnabled||!('speechSynthesis' in window))return;
     window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g,''));
-    u.lang='zh-TW'; u.rate=.9; u.pitch=1.1;
-    const v=this.voices.find(x=>x.lang==='zh-TW')||this.voices.find(x=>x.lang.startsWith('zh'));
-    if(v)u.voice=v;
-    window.speechSynthesis.speak(u);
+    const speak=()=>{
+      const u=new SpeechSynthesisUtterance(text.replace(/<[^>]+>/g,''));
+      u.lang='zh-TW'; u.rate=.9; u.pitch=1.1;
+      const v=this._pickVoice();
+      if(v) u.voice=v;
+      window.speechSynthesis.speak(u);
+    };
+    // Chrome bug: speak() right after cancel() sometimes silently fails
+    setTimeout(speak,50);
   },
   cancel(){if('speechSynthesis' in window)window.speechSynthesis.cancel();},
 };
@@ -2386,13 +2500,17 @@ const App={
 
   replayTTS(){
     const t=document.getElementById('q-text')?.textContent?.trim();
-    if(!t||!('speechSynthesis' in window)) return;
+    if(!t) return;
+    // force TTS even if ttsEnabled is off (user pressed button explicitly)
+    if(!('speechSynthesis' in window)) return;
     window.speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(t.replace(/<[^>]+>/g,''));
-    u.lang='zh-TW'; u.rate=.9; u.pitch=1.1;
-    const v=TTS.voices.find(x=>x.lang==='zh-TW')||TTS.voices.find(x=>x.lang.startsWith('zh'));
-    if(v) u.voice=v;
-    window.speechSynthesis.speak(u);
+    setTimeout(()=>{
+      const u=new SpeechSynthesisUtterance(t.replace(/<[^>]+>/g,''));
+      u.lang='zh-TW'; u.rate=.9; u.pitch=1.1;
+      const v=TTS._pickVoice();
+      if(v) u.voice=v;
+      window.speechSynthesis.speak(u);
+    },50);
     const btn=document.querySelector('.q-tts-btn');
     if(btn){ btn.style.transform='scale(1.3)'; setTimeout(()=>btn.style.transform='',250); }
   },
